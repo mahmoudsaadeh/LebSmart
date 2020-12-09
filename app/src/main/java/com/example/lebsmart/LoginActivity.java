@@ -1,50 +1,66 @@
 package com.example.lebsmart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class LoginActivity extends AppCompatActivity {
 
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
-    TextView signUpLink;
-    TextView resetPass;
-
-
-    public void login(View view) {
-        Toast.makeText(this, "Login!", Toast.LENGTH_SHORT).show();
-    }
+    float alpha = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signUpLink = (TextView) findViewById(R.id.signUpLink);
-        resetPass = (TextView) findViewById(R.id.resetPasswordTV);
+        tabLayout = findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.view_pager);
 
+        tabLayout.addTab(tabLayout.newTab().setText("Login"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        signUpLink.setOnClickListener(new View.OnClickListener() {
+        final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
+        //Log.i("tabcount", "" + tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.setTranslationY(300);
+        tabLayout.setAlpha(alpha);
+        tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(intent);
+            public void onTabSelected(TabLayout.Tab tab) {
+                //Toast.makeText(LoginActivity.this, "Test", Toast.LENGTH_SHORT).show();
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-
-        resetPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 }

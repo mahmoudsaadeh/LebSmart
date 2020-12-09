@@ -4,79 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/constraint_layout_1"
     tools:context=".LoginActivity">
 
-    <LinearLayout
-        android:layout_width="418dp"
-        android:layout_height="607dp"
-        android:orientation="vertical"
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/backgroundIV"
+        android:src="@drawable/login_background"
+        app:layout_constraintHeight_percent=".27"
+        android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Smart City" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/constraint_layout_2"
+        android:background="@drawable/login_shape"
+        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="210dp"
-            android:layout_height="167dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="41dp"
-            android:layout_marginBottom="25dp"
-            android:contentDescription="TODO"
-            app:srcCompat="@drawable/logo_bg_removed" />
-
-        <EditText
-            android:id="@+id/loginEmailEditText"
-            android:layout_width="290dp"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="11dp"
-            android:hint="Email Address"
-            android:includeFontPadding="true"
-            android:inputType="textEmailAddress" />
+            android:layout_marginTop="49dp"
+            app:layout_constraintBottom_toTopOf="@+id/view_pager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="74dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent=".7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 
-
-        <EditText
-            android:id="@+id/loginPasswordEditText"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:hint="Password"
-            android:inputType="textPassword" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="110dp"
-            android:layout_height="39dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
-            android:onClick="login"
-            android:text="Login" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/logo4"
+        app:layout_constraintBottom_toTopOf="@+id/constraint_layout_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundIV"
+        app:layout_constraintVertical_bias=".3" />
 
-        <TextView
-            android:id="@+id/signUpLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="8dp"
-            android:text="Don't have an account? Sign up here." />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to LebSmart"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias=".2"
+        app:layout_constraintBottom_toTopOf="@+id/constraint_layout_2"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundIV"
+        app:layout_constraintStart_toStartOf="@+id/backgroundIV"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-
-        <TextView
-            android:id="@+id/resetPasswordTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="97dp"
-            android:text="Forgot your password? Reset here." />
-
-
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
