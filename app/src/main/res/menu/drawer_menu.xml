@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:shownIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/apartments"
+            android:icon="@drawable/ic_apartments"
+            android:title="Apartments for Sale/Rent" />
+        <item
+            android:id="@+id/covid_19"
+            android:icon="@drawable/ic_covid_19"
+            android:title="COVID-19" />
+        <item
+            android:id="@+id/elec_water_src"
+            android:icon="@drawable/ic_elec_water_src"
+            android:title="Electricity/Water source" />
+        <item
+            android:id="@+id/meetings"
+            android:icon="@drawable/ic_meetings"
+            android:title="Scheduled Meetings" />
+        <item
+            android:id="@+id/problems"
+            android:icon="@drawable/ic_problems"
+            android:title="Report a Problem" />
+        <item
+            android:id="@+id/theft"
+            android:icon="@drawable/ic_theft"
+            android:title="Report Theft" />
+        <item
+            android:id="@+id/service_providers"
+            android:icon="@drawable/ic_service_providers"
+            android:title="Best Service Providers" />
+        <item
+            android:id="@+id/committee_decisions"
+            android:icon="@drawable/ic_committee_decisions"
+            android:title="Committee Decisions" />
+        <item
+            android:id="@+id/lost_found_announcements"
+            android:icon="@drawable/ic_lost_found_announcement"
+            android:title="Lost/Found Announcements" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/ic_feedback"
+                android:title="Feedback" />
+        </menu>
+    </item>
+
+</menu>

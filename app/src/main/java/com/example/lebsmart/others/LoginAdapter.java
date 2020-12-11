@@ -1,12 +1,14 @@
-package com.example.lebsmart;
+package com.example.lebsmart.others;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.lebsmart.fragments.LoginTabFragment;
+import com.example.lebsmart.fragments.SignUpTabFragment;
 
 public class LoginAdapter extends FragmentPagerAdapter {
 
