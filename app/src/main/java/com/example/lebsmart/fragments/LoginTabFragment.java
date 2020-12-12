@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.activities.BuildingsListActivity;
 import com.example.lebsmart.activities.LoginActivity;
 import com.example.lebsmart.activities.MainScreenActivity;
 import com.example.lebsmart.activities.SplashScreenActivity;
@@ -75,7 +76,12 @@ public class LoginTabFragment extends Fragment {
                             public void run() {
                                 progressButton.resetDesign("Login");
 
-                                Intent intent = new Intent(getActivity(), MainScreenActivity.class);
+                                /*Intent intent = new Intent(getActivity(), MainScreenActivity.class);
+                                startActivity(intent);*/
+
+                                //in case the user/resident already chose a building
+                                //redirect directly to main screen
+                                Intent intent = new Intent(getActivity(), BuildingsListActivity.class);
                                 startActivity(intent);
 
                             }
