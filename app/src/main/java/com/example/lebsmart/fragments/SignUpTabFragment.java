@@ -36,9 +36,9 @@ public class SignUpTabFragment extends Fragment {
         email = root.findViewById(R.id.emailSignUp);
         password = root.findViewById(R.id.passwordSignUp);
         confirmPassword = root.findViewById(R.id.confirmPassword);
-        //loginButton = root.findViewById(R.id.loginButton);
         view = root.findViewById(R.id.includeSignUp);
 
+        //causing problems
         /*email.setTranslationX(800);
         password.setTranslationX(800);
         loginButton.setTranslationX(800);*/
@@ -46,7 +46,7 @@ public class SignUpTabFragment extends Fragment {
         progressButton = new ProgressButton(getContext(), view);
         progressButton.resetDesign("Sign Up");
 
-        email.setAlpha(alpha);
+        /*email.setAlpha(alpha);
         password.setAlpha(alpha);
         confirmPassword.setAlpha(alpha);
         view.setAlpha(alpha);
@@ -54,7 +54,7 @@ public class SignUpTabFragment extends Fragment {
         email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
         password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
         confirmPassword.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
-        view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();
+        view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();*/
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

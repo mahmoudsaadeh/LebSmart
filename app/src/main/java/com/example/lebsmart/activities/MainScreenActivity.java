@@ -52,8 +52,8 @@ public class MainScreenActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new ApartmentsFragment()).commit();
                         break;
-                    case R.id.share:
-                        Toast.makeText(MainScreenActivity.this, "Share", Toast.LENGTH_SHORT).show();
+                    case R.id.rateUs:
+                        Toast.makeText(MainScreenActivity.this, "Rate us", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.feedback:
                         Toast.makeText(MainScreenActivity.this, "Give Feedback", Toast.LENGTH_SHORT).show();

@@ -4,71 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signUpCL"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="11dp">
+    android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:id="@+id/signUpLL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <EditText
-            android:id="@+id/emailSignUp"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/edit_text_design"
-            android:hint="Email Address"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="11dp"
-            android:paddingTop="6dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="6dp" />
-
-        <EditText
-            android:id="@+id/passwordSignUp"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="17dp"
-            android:background="@drawable/edit_text_design"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="11dp"
-            android:paddingTop="6dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="6dp" />
-
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="77dp"
-            android:background="@drawable/edit_text_design"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:paddingLeft="11dp"
-            android:paddingTop="6dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="6dp" />
-
-        <include
-            layout="@layout/progress_button_layout"
+        <LinearLayout
+            android:id="@+id/signUpLL"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/includeSignUp"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center|top"
+            android:orientation="vertical"
+            android:paddingTop="21dp"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="310dp">
 
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/usernameSignUp"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_design"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:paddingLeft="11dp"
+                android:paddingTop="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+            <EditText
+                android:id="@+id/phoneNumberSignUp"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_design"
+                android:ems="10"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:paddingLeft="11dp"
+                android:paddingTop="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+            <EditText
+                android:id="@+id/emailSignUp"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/edit_text_design"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="11dp"
+                android:paddingTop="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+            <EditText
+                android:id="@+id/passwordSignUp"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="17dp"
+                android:background="@drawable/edit_text_design"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="11dp"
+                android:paddingTop="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+            <EditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/edit_text_design"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="11dp"
+                android:paddingTop="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupSignUp"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="27dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioButtonCommittee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Committee member" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNormalResident"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Normal resident" />
+
+            </RadioGroup>
+
+
+            <include
+                android:id="@+id/includeSignUp"
+                layout="@layout/progress_button_layout"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

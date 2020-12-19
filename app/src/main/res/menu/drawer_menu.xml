@@ -27,7 +27,7 @@
         <item
             android:id="@+id/theft"
             android:icon="@drawable/ic_theft"
-            android:title="Report Theft" />
+            android:title="Report/Check Theft" />
         <item
             android:id="@+id/service_providers"
             android:icon="@drawable/ic_service_providers"
@@ -35,23 +35,67 @@
         <item
             android:id="@+id/committee_decisions"
             android:icon="@drawable/ic_committee_decisions"
-            android:title="Committee Decisions" />
+            android:title="Committee Decisions/Reminders" />
         <item
             android:id="@+id/lost_found_announcements"
             android:icon="@drawable/ic_lost_found_announcement"
             android:title="Lost/Found Announcements" />
     </group>
 
+<!--
+    <item android:title="Profile" android:checkable="true">
+        <menu>
+            <item
+                android:id="@+id/login"
+                android:icon="@drawable/ic_login"
+                android:title="Login" />
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/ic_profile"
+                android:title="Profile" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+    -->
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile"
+                    android:icon="@drawable/ic_profile"
+                    android:title="Edit Profile" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+
+
     <item android:title="Communicate">
         <menu>
+            <!--
             <item
                 android:id="@+id/share"
                 android:icon="@drawable/ic_share"
                 android:title="Share" />
+             -->
+            <!-- add "Rate us" option" with the ability to write a review-->
+            <item
+                android:id="@+id/rateUs"
+                android:icon="@drawable/ic_rate_us"
+                android:title="Rate Us" />
+            <!-- Ask user to fill a survey so that we know his feedback: by answering some mcq questions -->
             <item
                 android:id="@+id/feedback"
                 android:icon="@drawable/ic_feedback"
-                android:title="Feedback" />
+                android:title="Feedback Survey" />
         </menu>
     </item>
 
