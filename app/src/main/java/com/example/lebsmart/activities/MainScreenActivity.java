@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.lebsmart.R;
-import com.example.lebsmart.fragments.ApartmentsFragment;
+import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
 import com.example.lebsmart.fragments.MeetingsFragment;
 import com.example.lebsmart.fragments.TheftFragment;
 import com.google.android.material.navigation.NavigationView;

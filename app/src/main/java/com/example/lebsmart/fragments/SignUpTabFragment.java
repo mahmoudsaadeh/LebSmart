@@ -62,6 +62,8 @@ public class SignUpTabFragment extends Fragment {
 
                 progressButton.buttonActivated();
 
+                view.setEnabled(false);
+
                 //replace it with onSuccess method of database
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -76,10 +78,18 @@ public class SignUpTabFragment extends Fragment {
                             public void run() {
                                 progressButton.resetDesign("Sign Up");
                             }
-                        }, 3000);
+                        }, 1777);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.setEnabled(true);
+                            }
+                        }, 3751);
+
 
                     }
-                }, 3000);
+                }, 2100);
 
 
 

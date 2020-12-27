@@ -62,6 +62,8 @@ public class LoginTabFragment extends Fragment {
                 final ProgressButton progressButton = new ProgressButton(getContext(), view);
                 progressButton.buttonActivated();
 
+                view.setEnabled(false);
+
                 //replace it with onSuccess method of database
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -85,10 +87,18 @@ public class LoginTabFragment extends Fragment {
                                 startActivity(intent);
 
                             }
-                        }, 3000);
+                        }, 1777);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.setEnabled(true);
+                            }
+                        }, 3751);
+
 
                     }
-                }, 3000);
+                }, 2100);
 
 
 
