@@ -1,17 +1,18 @@
-package com.example.lebsmart.ReportCheckTheftFragments;
+package com.example.lebsmart.ReportProblemsFragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.lebsmart.MeetingsFragments.CheckMeetingsFragment;
+import com.example.lebsmart.MeetingsFragments.ScheduleMeetingFragment;
 
-public class PagerAdapterThefts extends FragmentPagerAdapter {
+public class PagerAdapterProblems extends FragmentPagerAdapter {
 
     private int numOfTabs;
 
-
-    public PagerAdapterThefts(FragmentManager fm, int numOfTabs) {
+    public PagerAdapterProblems(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }
@@ -19,22 +20,18 @@ public class PagerAdapterThefts extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
-                return new ReportTheftFragment();
+                return new ReportProblemFragment();
             case 1:
-                return new CheckTheftsFragment();
+                return new CheckProblemsFragment();
             default:
                 return null;
         }
-
     }
 
     @Override
     public int getCount() {
         return numOfTabs;
     }
-
 }
-
