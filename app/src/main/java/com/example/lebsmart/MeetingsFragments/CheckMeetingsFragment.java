@@ -1,4 +1,4 @@
-package com.example.lebsmart;
+package com.example.lebsmart.MeetingsFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lebsmart.MeetingRVA;
-import com.example.lebsmart.Meetings;
 import com.example.lebsmart.R;
 
 import java.util.ArrayList;

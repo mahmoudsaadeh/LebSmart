@@ -1,4 +1,4 @@
-package com.example.lebsmart.fragments;
+package com.example.lebsmart.RandomFragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

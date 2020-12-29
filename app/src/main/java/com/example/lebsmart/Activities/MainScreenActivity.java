@@ -1,4 +1,4 @@
-package com.example.lebsmart.activities;
+package com.example.lebsmart.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
-import com.example.lebsmart.MeetingsFragment;
 import com.example.lebsmart.ReportCheckTheftFragments.TheftFragment;
+import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainScreenActivity extends AppCompatActivity {

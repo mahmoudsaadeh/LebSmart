@@ -1,6 +1,5 @@
-package com.example.lebsmart.fragments;
+package com.example.lebsmart.RandomFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,54 +11,55 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.lebsmart.activities.BuildingsListActivity;
-import com.example.lebsmart.activities.LoginActivity;
-import com.example.lebsmart.activities.MainScreenActivity;
-import com.example.lebsmart.activities.SplashScreenActivity;
-import com.example.lebsmart.others.ProgressButton;
+import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
 
-public class LoginTabFragment extends Fragment {
+public class SignUpTabFragment extends Fragment {
 
-    EditText email;
-    EditText password;
-    //Button loginButton;
+    private EditText email;
+    private EditText password;
+    private EditText confirmPassword;
 
     float alpha = 0;
 
     View view;
 
+    ProgressButton progressButton;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //Log.i("login", "created");
-        final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
-        email = root.findViewById(R.id.emailLogin);
-        password = root.findViewById(R.id.passwordLogin);
-        //loginButton = root.findViewById(R.id.loginButton);
-        view = root.findViewById(R.id.progressButtonInclude);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signup_fragment, container, false);
 
+        email = root.findViewById(R.id.emailSignUp);
+        password = root.findViewById(R.id.passwordSignUp);
+        confirmPassword = root.findViewById(R.id.confirmPassword);
+        view = root.findViewById(R.id.includeSignUp);
+
+        //causing problems
         /*email.setTranslationX(800);
         password.setTranslationX(800);
         loginButton.setTranslationX(800);*/
 
-        email.setAlpha(alpha);
+        progressButton = new ProgressButton(getContext(), view);
+        progressButton.resetDesign("Sign Up");
+
+        /*email.setAlpha(alpha);
         password.setAlpha(alpha);
-        //loginButton.setAlpha(alpha);
+        confirmPassword.setAlpha(alpha);
         view.setAlpha(alpha);
 
         email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
         password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        //loginButton.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
-        view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
+        confirmPassword.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
+        view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();*/
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressButton progressButton = new ProgressButton(getContext(), view);
+
                 progressButton.buttonActivated();
 
                 view.setEnabled(false);
@@ -76,16 +76,7 @@ public class LoginTabFragment extends Fragment {
                         handler1.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                progressButton.resetDesign("Login");
-
-                                /*Intent intent = new Intent(getActivity(), MainScreenActivity.class);
-                                startActivity(intent);*/
-
-                                //in case the user/resident already chose a building
-                                //redirect directly to main screen
-                                Intent intent = new Intent(getActivity(), BuildingsListActivity.class);
-                                startActivity(intent);
-
+                                progressButton.resetDesign("Sign Up");
                             }
                         }, 1777);
 
@@ -109,4 +100,5 @@ public class LoginTabFragment extends Fragment {
 
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
+
 }

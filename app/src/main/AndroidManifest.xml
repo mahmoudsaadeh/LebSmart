@@ -19,12 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.BuildingInfoActivity" />
-        <activity android:name=".activities.AddBuildingActivity" />
-        <activity android:name=".activities.BuildingsListActivity" />
-        <activity android:name=".activities.MainScreenActivity" />
+        <activity android:name=".Activities.BuildingInfoActivity" />
+        <activity android:name=".Activities.AddBuildingActivity" />
+        <activity android:name=".Activities.BuildingsListActivity" />
+        <activity android:name=".Activities.MainScreenActivity" />
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".Activities.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

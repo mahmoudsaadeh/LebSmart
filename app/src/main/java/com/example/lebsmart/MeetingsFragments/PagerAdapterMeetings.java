@@ -1,4 +1,4 @@
-package com.example.lebsmart;
+package com.example.lebsmart.MeetingsFragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

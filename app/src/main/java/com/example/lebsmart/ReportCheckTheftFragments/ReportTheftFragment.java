@@ -2,7 +2,6 @@ package com.example.lebsmart.ReportCheckTheftFragments;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.app.Notification;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +28,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lebsmart.R;
-import com.example.lebsmart.fragments.DatePickerFragment;
-import com.example.lebsmart.fragments.TimePickerFragment;
+import com.example.lebsmart.RandomFragments.DatePickerFragment;
+import com.example.lebsmart.RandomFragments.TimePickerFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;

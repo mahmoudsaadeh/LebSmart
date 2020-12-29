@@ -1,10 +1,9 @@
-package com.example.lebsmart.activities;
+package com.example.lebsmart.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.lebsmart.R;

@@ -1,4 +1,4 @@
-package com.example.lebsmart;
+package com.example.lebsmart.MeetingsFragments;
 
 public class Meetings {
 

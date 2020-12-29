@@ -1,11 +1,11 @@
-package com.example.lebsmart.activities;
+package com.example.lebsmart.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.lebsmart.others.LoginAdapter;
+import com.example.lebsmart.Others.LoginAdapter;
 import com.example.lebsmart.R;
 import com.google.android.material.tabs.TabLayout;
 

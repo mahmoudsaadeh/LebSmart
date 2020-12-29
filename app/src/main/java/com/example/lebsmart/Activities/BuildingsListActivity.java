@@ -1,4 +1,4 @@
-package com.example.lebsmart.activities;
+package com.example.lebsmart.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

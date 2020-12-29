@@ -1,4 +1,4 @@
-package com.example.lebsmart;
+package com.example.lebsmart.MeetingsFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.lebsmart.R;
-import com.example.lebsmart.ReportCheckTheftFragments.PagerAdapterThefts;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 

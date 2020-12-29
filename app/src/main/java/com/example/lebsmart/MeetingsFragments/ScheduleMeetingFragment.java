@@ -1,4 +1,4 @@
-package com.example.lebsmart;
+package com.example.lebsmart.MeetingsFragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -16,8 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.example.lebsmart.fragments.DatePickerFragment;
-import com.example.lebsmart.fragments.TimePickerFragment;
+import com.example.lebsmart.R;
+import com.example.lebsmart.RandomFragments.DatePickerFragment;
+import com.example.lebsmart.RandomFragments.TimePickerFragment;
 
 import java.text.DateFormat;
 import java.util.Calendar;

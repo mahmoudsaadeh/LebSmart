@@ -1,4 +1,4 @@
-package com.example.lebsmart.others;
+package com.example.lebsmart.Others;
 
 import android.content.Context;
 import android.view.View;
