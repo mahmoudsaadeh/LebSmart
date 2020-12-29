@@ -27,7 +27,7 @@
         <item
             android:id="@+id/theft"
             android:icon="@drawable/ic_theft"
-            android:title="Report/Check Theft" />
+            android:title="Theft Report/Check" />
         <item
             android:id="@+id/service_providers"
             android:icon="@drawable/ic_service_providers"

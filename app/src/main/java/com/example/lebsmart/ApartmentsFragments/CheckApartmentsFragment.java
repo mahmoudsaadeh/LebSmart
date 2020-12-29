@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lebsmart.R;
-import com.example.lebsmart.others.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 public class CheckApartmentsFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerViewAdapter recyclerViewAdapter;
+    ApartmentsRecyclerViewAdapter apartmentsRecyclerViewAdapter;
 
     ViewGroup root;
 
@@ -46,11 +45,11 @@ public class CheckApartmentsFragment extends Fragment {
         list.add(new Apartment("sale", "200$", "300m^2", "qwer", "78741258", "1st"));
 
         recyclerView = root.findViewById(R.id.recyclerView);
-        recyclerViewAdapter = new RecyclerViewAdapter(list);
+        apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setAdapter(apartmentsRecyclerViewAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);

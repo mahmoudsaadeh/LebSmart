@@ -1,19 +1,16 @@
-package com.example.lebsmart.others;
+package com.example.lebsmart;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.lebsmart.ApartmentsFragments.AddApartmentFragment;
-import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapterMeetings extends FragmentPagerAdapter {
 
     private int numOfTabs;
 
-
-    public PagerAdapter(FragmentManager fm, int numOfTabs) {
+    public PagerAdapterMeetings(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }
@@ -24,9 +21,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return new CheckApartmentsFragment();
+                return new CheckMeetingsFragment();
             case 1:
-                return new AddApartmentFragment();
+                return new ScheduleMeetingFragment();
             default:
                 return null;
         }

@@ -1,4 +1,4 @@
-package com.example.lebsmart.ApartmentsFragments;
+package com.example.lebsmart.ReportCheckTheftFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,18 +15,19 @@ import com.example.lebsmart.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class ApartmentsFragment extends Fragment {
+public class TheftFragment extends Fragment {
 
     ViewGroup root;
 
-    TabLayout tabLayoutApartments;
+    TabLayout tabLayoutThefts;
 
     TabItem tabCheck;
-    TabItem tabAdd;
+    TabItem tabReport;
 
-    ViewPager viewPagerApartments;
+    ViewPager viewPagerThefts;
 
     PagerAdapter pagerAdapter;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,21 +38,21 @@ public class ApartmentsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        root = (ViewGroup) inflater.inflate(R.layout.apartments_fragment, container, false);
+        root = (ViewGroup) inflater.inflate(R.layout.thefts_fragment, container, false);
 
-        tabLayoutApartments = root.findViewById(R.id.tabLayoutApartments);
-        tabCheck = root.findViewById(R.id.checkApartments);
-        tabAdd = root.findViewById(R.id.addApartments);
-        viewPagerApartments = root.findViewById(R.id.viewPagerApartments);
+        tabLayoutThefts = root.findViewById(R.id.tabLayoutTheft);
+        tabCheck = root.findViewById(R.id.checkThefts);
+        tabReport = root.findViewById(R.id.reportTheft);
+        viewPagerThefts = root.findViewById(R.id.viewPagerThefts);
 
-        pagerAdapter = new PagerAdapterApartments(getChildFragmentManager(), tabLayoutApartments.getTabCount());
+        pagerAdapter = new PagerAdapterThefts(getChildFragmentManager(), tabLayoutThefts.getTabCount());
 
-        viewPagerApartments.setAdapter(pagerAdapter);
+        viewPagerThefts.setAdapter(pagerAdapter);
 
-        tabLayoutApartments.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayoutThefts.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPagerApartments.setCurrentItem(tab.getPosition());
+                viewPagerThefts.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -65,8 +66,8 @@ public class ApartmentsFragment extends Fragment {
             }
         });
 
-        return root;
 
+        return root;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

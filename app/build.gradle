@@ -40,4 +40,8 @@ dependencies {
     // used to add TabLayout
     implementation 'com.google.android.material:material:1.2.1'
 
+    // for maps and location
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
 }

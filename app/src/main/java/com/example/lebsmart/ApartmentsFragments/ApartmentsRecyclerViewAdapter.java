@@ -1,27 +1,24 @@
-package com.example.lebsmart.others;
+package com.example.lebsmart.ApartmentsFragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lebsmart.ApartmentsFragments.Apartment;
 import com.example.lebsmart.R;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<ApartmentsRecyclerViewAdapter.ViewHolder> {
 
 
     List<Apartment> list;
 
-    public RecyclerViewAdapter(List<Apartment> list) {
+    public ApartmentsRecyclerViewAdapter(List<Apartment> list) {
         this.list = list;
     }
 
@@ -30,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.rv_row_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.apartments_rv_row_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -107,6 +104,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Toast.makeText(v.getContext(), "" + list.get(getAdapterPosition()).getPrice(), Toast.LENGTH_SHORT).show();
         }*/
 
-    }
+    }// end class ViewHolder
 
 }

@@ -1,4 +1,4 @@
-package com.example.lebsmart.fragments;
+package com.example.lebsmart.EWSourcesFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.R;
 
-public class TheftFragment extends Fragment {
+public class EWSources extends Fragment {
+
+    ViewGroup root;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.theft_report_fragment, container, false);
+        root = (ViewGroup) inflater.inflate(R.layout.electricity_water_sources, container, false);
 
+        return root;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+
 }
