@@ -1,4 +1,4 @@
-package com.example.lebsmart.ReportCheckTheftFragments;
+package com.example.lebsmart.TheftsFragments;
 
 public class Thefts {
 

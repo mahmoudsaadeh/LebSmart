@@ -1,4 +1,4 @@
-package com.example.lebsmart.ReportCheckTheftFragments;
+package com.example.lebsmart.TheftsFragments;
 
 import android.Manifest;
 import android.app.DatePickerDialog;

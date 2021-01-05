@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.lebsmart.EWSourcesFragments.EWSources;
+import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncement;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
-import com.example.lebsmart.ReportCheckTheftFragments.TheftFragment;
+import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
+import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,6 +58,14 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.elec_water_src:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new EWSources()).commit();
+                        break;
+                    case R.id.lost_found_announcements:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new LostFoundAnnouncement()).commit();
+                        break;
+                    case R.id.problems:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ProblemsFragment()).commit();
                         break;
                     case R.id.rateUs:
                         Toast.makeText(MainScreenActivity.this, "Rate us", Toast.LENGTH_SHORT).show();

@@ -21,9 +21,22 @@ android {
     }
     sourceSets {
         main {
-            res {
-                srcDirs 'src/main/res', 'src/main/res/2', 'src/main/res/activities', 'src/main/res/fragments'
-            }
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/Activities',
+                            'src/main/res/layouts/Apartments',
+                            'src/main/res/layouts/CommitteeDR',
+                            'src/main/res/layouts/Designs',
+                            'src/main/res/layouts/EWSources',
+                            'src/main/res/layouts/LFAnnouncements',
+                            'src/main/res/layouts/Meetings',
+                            'src/main/res/layouts/Problems',
+                            'src/main/res/layouts/Random',
+                            'src/main/res/layouts/ServiceProviders',
+                            'src/main/res/layouts/Thefts',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
         }
     }
 }
