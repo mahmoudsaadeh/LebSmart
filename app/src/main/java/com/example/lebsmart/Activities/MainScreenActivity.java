@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
 import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncement;
 import com.example.lebsmart.R;
@@ -66,6 +67,10 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.problems:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new ProblemsFragment()).commit();
+                        break;
+                    case R.id.service_providers:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new BSPFragment()).commit();
                         break;
                     case R.id.rateUs:
                         Toast.makeText(MainScreenActivity.this, "Rate us", Toast.LENGTH_SHORT).show();
