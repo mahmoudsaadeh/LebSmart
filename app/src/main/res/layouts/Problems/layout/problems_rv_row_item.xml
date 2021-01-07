@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
+
+
+    <!--Electricity Section-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:padding="5dp">
+
+            <!--
+            <TextView
+                android:id="@+id/problemType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D67777"
+                android:paddingLeft="7dp"
+                android:text="Electricity Problems - 5 reports"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+                -->
+
+            <TextView
+                android:id="@+id/reportNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:background="#009688"
+                android:paddingLeft="7dp"
+                android:text="Report 1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TableLayout
+                android:id="@+id/problemsExpandableLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="7dp"
+                android:background="#8BC34A"
+                android:shrinkColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reportNumber">
+
+                <TableRow
+                    android:id="@+id/row1Problems"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/problemDescriptionTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/problemDescriptionContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Problem description ..."
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row2Problems"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportDateContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Sunday, feb 11th , 2020"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row3Problems"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportedByProblem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reported by: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportedByProblemContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="2aa doonnoooo"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+<!--
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/problemTypeWater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D67777"
+                android:paddingLeft="7dp"
+                android:text="Water Problems - 7 reports"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/reportNumberWater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="1dp"
+                android:background="#009688"
+                android:paddingLeft="7dp"
+                android:text="Report 1"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/problemTypeWater" />
+
+
+            <TableLayout
+                android:id="@+id/problemsExpandableLayoutWater"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="7dp"
+                android:background="#8BC34A"
+                android:shrinkColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reportNumberWater">
+
+                <TableRow
+                    android:id="@+id/row1ProblemsWater"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/problemDescriptionTVWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/problemDescriptionContentWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Water problem description ..."
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row2ProblemsWater"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportDateWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportDateContentWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Sunday, feb 11th , 2020"
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row3ProblemsWater"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportedByProblemWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reported by: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportedByProblemContentWater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="2aa doonnoooo"
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/problemTypeBS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D67777"
+                android:paddingLeft="7dp"
+                android:text="Building Services Problems - 2 reports"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/reportNumberBS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="1dp"
+                android:background="#009688"
+                android:paddingLeft="7dp"
+                android:text="Report 1"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/problemTypeBS" />
+
+
+            <TableLayout
+                android:id="@+id/problemsExpandableLayoutBS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="7dp"
+                android:background="#8BC34A"
+                android:shrinkColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reportNumberBS">
+
+                <TableRow
+                    android:id="@+id/row1ProblemsBS"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/problemDescriptionTVBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/problemDescriptionContentBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Building service problem description ..."
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row2ProblemsBS"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportDateBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportDateContentBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Sunday, feb 11th , 2020"
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row3ProblemsBS"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportedByProblemBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reported by: "
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportedByProblemContentBS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="2aa doonnoooo"
+                        android:textColor="#009688"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    -->
+
+</LinearLayout>

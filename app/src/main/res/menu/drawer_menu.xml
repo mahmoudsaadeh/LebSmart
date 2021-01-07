@@ -35,7 +35,7 @@
         <item
             android:id="@+id/committee_decisions"
             android:icon="@drawable/ic_committee_decisions"
-            android:title="Committee Decisions/Reminders" />
+            android:title="Committee Announcements" />
         <item
             android:id="@+id/lost_found_announcements"
             android:icon="@drawable/ic_lost_found_announcement"

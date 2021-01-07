@@ -7,14 +7,24 @@ public class Problem {
     String problemReportedBy;
     String problemReportDate;
 
+    boolean expanded;
+
     public Problem(String problemType, String problemDescription, String problemReportedBy, String problemReportDate) {
         this.problemType = problemType;
         this.problemDescription = problemDescription;
         this.problemReportedBy = problemReportedBy;
         this.problemReportDate = problemReportDate;
+
+        this.expanded = false;
     }
 
+    public boolean isExpanded() {
+        return expanded;
+    }
 
+    public void setExpanded(boolean expandedProblem) {
+        this.expanded = expandedProblem;
+    }
 
     public String getProblemType() {
         return problemType;

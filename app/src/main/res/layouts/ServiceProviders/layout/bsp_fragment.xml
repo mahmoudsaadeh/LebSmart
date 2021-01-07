@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutTheft"
+        android:id="@+id/tabLayoutBSP"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -21,30 +19,26 @@
         app:tabTextColor="#000000">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/reportTheft"
+            android:id="@+id/checkSPTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Report Theft" />
+            android:text="Check SPs" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/checkThefts"
+            android:id="@+id/addSPTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Check Thefts" />
+            android:text="Add a SP" />
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerThefts"
+        android:id="@+id/viewPagerBSP"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayoutTheft" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tabLayoutBSP" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
