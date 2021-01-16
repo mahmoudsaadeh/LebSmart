@@ -40,9 +40,9 @@ public class CheckApartmentsFragment extends Fragment {
 
         list = new ArrayList<>();
         list.add(new Apartment("rent", "500$", "100m^2", "Zohoor", "78421354", "2nd"));
-        list.add(new Apartment("sale", "700$", "200m^2", "bbA", "26626267", "3rd"));
-        list.add(new Apartment("rent", "900$", "400m^2", "kkk", "784212424", "7th"));
-        list.add(new Apartment("sale", "200$", "300m^2", "qwer", "78741258", "1st"));
+        list.add(new Apartment("sale", "700$", "200m^2", "Al Burj Al Abiad", "26626267", "3rd"));
+        list.add(new Apartment("rent", "900$", "400m^2", "Tubbara", "784212424", "7th"));
+        list.add(new Apartment("sale", "200$", "300m^2", "Al Bahij", "78741258", "1st"));
 
         recyclerView = root.findViewById(R.id.recyclerView);
         apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list);

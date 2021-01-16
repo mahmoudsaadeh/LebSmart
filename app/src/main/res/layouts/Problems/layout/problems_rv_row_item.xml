@@ -16,8 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:padding="5dp">
+            android:background="?attr/selectableItemBackground">
 
             <!--
             <TextView
@@ -38,11 +37,12 @@
                 android:id="@+id/reportNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#009688"
                 android:paddingLeft="7dp"
                 android:text="Report 1"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +53,8 @@
                 android:id="@+id/problemsExpandableLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="7dp"
-                android:background="#8BC34A"
+                android:layout_marginStart="1dp"
+                android:background="#E0E4DB"
                 android:shrinkColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,8 +70,9 @@
                         android:id="@+id/problemDescriptionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
                         android:text="Description: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -83,7 +82,7 @@
                         android:padding="5dp"
                         android:text="Problem description ..."
                         android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textSize="21sp" />
 
                 </TableRow>
 
@@ -97,8 +96,9 @@
                         android:id="@+id/reportDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
                         android:text="Date: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -108,7 +108,7 @@
                         android:padding="5dp"
                         android:text="Sunday, feb 11th , 2020"
                         android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textSize="21sp" />
 
                 </TableRow>
 
@@ -122,8 +122,9 @@
                         android:id="@+id/reportedByProblem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
                         android:text="Reported by: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -133,7 +134,7 @@
                         android:padding="5dp"
                         android:text="2aa doonnoooo"
                         android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textSize="21sp" />
 
                 </TableRow>
 

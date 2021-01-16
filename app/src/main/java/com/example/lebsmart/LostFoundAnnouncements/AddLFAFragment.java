@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.R;
 
-public class LostFoundAnnouncement extends Fragment {
+public class AddLFAFragment extends Fragment {
 
     ViewGroup root;
 
@@ -19,8 +19,9 @@ public class LostFoundAnnouncement extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        root = (ViewGroup) inflater.inflate(R.layout.lost_found_announcements_fragment, container, false);
+        root = (ViewGroup) inflater.inflate(R.layout.add_lfa_fragment, container, false);
 
         return root;
     }
+
 }
