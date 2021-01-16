@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
-import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncement;
+import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncementFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
@@ -63,7 +63,7 @@ public class MainScreenActivity extends AppCompatActivity {
                         break;
                     case R.id.lost_found_announcements:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new LostFoundAnnouncement()).commit();
+                                new LostFoundAnnouncementFragment()).commit();
                         break;
                     case R.id.problems:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

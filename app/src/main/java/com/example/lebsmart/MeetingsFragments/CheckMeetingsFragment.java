@@ -37,11 +37,11 @@ public class CheckMeetingsFragment extends Fragment {
         root = (ViewGroup) inflater.inflate(R.layout.check_meetings_fragment, container, false);
 
         meetings = new ArrayList<>();
-        meetings.add(new Meetings("11:22", "25-5-2015", "zohoor building", "an alien", "mafiye ellak1", "description heree!!"));
-        meetings.add(new Meetings("1:55", "25-5-2015", "zohoor building", "an alien", "mafiye ellak2", "description heree!!"));
-        meetings.add(new Meetings("4:51", "25-5-2015", "zohoor building", "an alien", "mafiye ellak3", "description heree!!"));
-        meetings.add(new Meetings("2:55", "25-5-2015", "zohoor building", "an alien", "mafiye ellak4", "description heree!!"));
-        meetings.add(new Meetings("8:02", "25-5-2015", "zohoor building", "an alien", "mafiye ellak5", "description heree!!"));
+        meetings.add(new Meetings("11:22", "25-5-2015", "zohoor building", "an alien", "Meeting Y", "description heree!!"));
+        meetings.add(new Meetings("1:55", "25-5-2015", "zohoor building", "an alien", "Meeting X", "description heree!!"));
+        meetings.add(new Meetings("4:51", "25-5-2015", "zohoor building", "an alien", "Meeting Z", "description heree!!"));
+        meetings.add(new Meetings("2:55", "25-5-2015", "zohoor building", "an alien", "Meeting N", "description heree!!"));
+        meetings.add(new Meetings("8:02", "25-5-2015", "zohoor building", "an alien", "Meeting K", "description heree!!"));
 
 
         recyclerViewMeetings = root.findViewById(R.id.meetingsRecyclerView);
