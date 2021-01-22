@@ -3,6 +3,7 @@ package com.example.lebsmart.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.lebsmart.Others.LoginAdapter;
@@ -15,6 +16,8 @@ public class LoginActivity extends AppCompatActivity {
     ViewPager viewPager;
 
     float alpha = 0;
+
+    public static SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

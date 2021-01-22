@@ -1,30 +1,58 @@
 package com.example.lebsmart.RandomFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.Activities.BuildingsListActivity;
 import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpTabFragment extends Fragment {
 
-    private EditText email;
-    private EditText password;
+    EditText email;
+    EditText password;
     private EditText confirmPassword;
+    private EditText usernameSignUp;
+    private EditText phoneNumberSignUp;
+    private RadioGroup radioGroupSignUp;
+    private RadioButton radioButtonCommittee;
+    private RadioButton radioButtonNormalResident;
+    public static TextView selectABuildingTV;
+
+    String personTypeString = "";
+    //public static String buildingChosen;
 
     float alpha = 0;
 
     View view;
 
     ProgressButton progressButton;
+
+    FirebaseAuth mAuth;
+
+    public static final int PERSON_TYPE_NOT_SELECTED = -1;
+
+    public static int BUILDING_LIST_REQUEST_CODE = 1;
 
     @Nullable
     @Override
@@ -33,28 +61,35 @@ public class SignUpTabFragment extends Fragment {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signup_fragment, container, false);
 
+        usernameSignUp = root.findViewById(R.id.usernameSignUp);
+        phoneNumberSignUp = root.findViewById(R.id.phoneNumberSignUp);
         email = root.findViewById(R.id.emailSignUp);
         password = root.findViewById(R.id.passwordSignUp);
         confirmPassword = root.findViewById(R.id.confirmPassword);
+        radioGroupSignUp = root.findViewById(R.id.radioGroupSignUp);
+        radioButtonCommittee = root.findViewById(R.id.radioButtonCommittee);
+        radioButtonNormalResident = root.findViewById(R.id.radioButtonNormalResident);
+        selectABuildingTV = root.findViewById(R.id.selectABuildingTV);
         view = root.findViewById(R.id.includeSignUp);
 
-        //causing problems
-        /*email.setTranslationX(800);
-        password.setTranslationX(800);
-        loginButton.setTranslationX(800);*/
+        selectABuildingTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BuildingsListActivity.class);
+                //startActivity(intent);
+                startActivityForResult(intent, BUILDING_LIST_REQUEST_CODE);
+            }
+        });
+
+        /*if (getArguments() != null) {
+            buildingChosen = getArguments().getString("bN");
+            selectABuildingTV.setText(buildingChosen);
+        }*/
+
+        mAuth = FirebaseAuth.getInstance();
 
         progressButton = new ProgressButton(getContext(), view);
         progressButton.resetDesign("Sign Up");
-
-        /*email.setAlpha(alpha);
-        password.setAlpha(alpha);
-        confirmPassword.setAlpha(alpha);
-        view.setAlpha(alpha);
-
-        email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        confirmPassword.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
-        view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(800).start();*/
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +100,7 @@ public class SignUpTabFragment extends Fragment {
                 view.setEnabled(false);
 
                 //replace it with onSuccess method of database
-                Handler handler = new Handler();
+                /*Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -89,16 +124,161 @@ public class SignUpTabFragment extends Fragment {
 
 
                     }
-                }, 2100);
+                }, 2100);*/
 
-
+                signUp();
 
             }
         });
 
         return root;
 
-        //return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public void signUp () {
+        final String username = usernameSignUp.getText().toString();
+        final String phone = phoneNumberSignUp.getText().toString().trim();
+        final String mail = email.getText().toString().trim();
+        final String passwordd = password.getText().toString().trim();
+        String confirmPass = confirmPassword.getText().toString().trim();
+        final String selectABuilding = selectABuildingTV.getText().toString();
+        int personType = radioGroupSignUp.getCheckedRadioButtonId();
+
+
+        if(username.isEmpty()) {
+            CommonMethods.warning(usernameSignUp, "Username is required!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if (phone.isEmpty()) {
+            CommonMethods.warning(phoneNumberSignUp, "Phone number is required!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.checkIfEmpty(mail)) {
+            CommonMethods.warning(email, "Email is required!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.isNotAnEmail(mail)) {
+            CommonMethods.warning(email, "Please provide a correct email address!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.checkIfEmpty(passwordd)) {
+            CommonMethods.warning(password, "Password is required!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.checkIfPassLengthNotValid(passwordd)) {
+            CommonMethods.warning(password, "Minimum password length is 6 characters!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.checkIfEmpty(confirmPass)) {
+            CommonMethods.warning(confirmPassword, "You need to confirm your password before you proceed!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+        else if(!CommonMethods.checkIfConfirmPassMatchesPass(confirmPass, passwordd)) {
+            CommonMethods.warning(confirmPassword, "Your passwords do not match! Please recheck.");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if (selectABuilding.isEmpty() || selectABuilding.equals("Select a Building")) {
+            Toast.makeText(getActivity(), "Please select a building before you proceed!", Toast.LENGTH_SHORT).show();
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(personType == PERSON_TYPE_NOT_SELECTED) {
+            Toast.makeText(getActivity(), "You should choose a 'user type' before you continue!", Toast.LENGTH_SHORT).show();
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+        else {
+            setPersonType(personType);
+        }
+
+
+        mAuth.createUserWithEmailAndPassword(mail, passwordd)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.i("mail", mail);
+                Log.i("pass", passwordd);
+                Log.i("task", task.toString());
+
+                if (task.isSuccessful()) {
+                    // add chosen building
+                    User newUser = new User(username, phone, mail, personTypeString, selectABuilding);
+
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //Toast.makeText(getActivity(), "Sign up Successful!", Toast.LENGTH_SHORT).show();
+                                progressButton.buttonFinished();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressButton.resetDesign("Sign Up");
+                                        view.setEnabled(true);
+                                    }
+                                }, 1777);
+                            }
+                            else {
+                                Toast.makeText(getActivity(), "Failed to sign up, please try again.", Toast.LENGTH_SHORT).show();
+                                progressButton.resetDesign("Sign Up");
+                                view.setEnabled(true);
+                            }
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(getActivity(), "Account already exists! Please try again with a different email address.", Toast.LENGTH_SHORT).show();
+                    progressButton.resetDesign("Sign Up");
+                    view.setEnabled(true);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("failed", e.getMessage() + "");
+            }
+        });
+
+    } // end sign up  method
+
+
+    public void setPersonType(int personType) {
+        if(personType == R.id.radioButtonNormalResident) {
+            personTypeString = radioButtonNormalResident.getText().toString();
+            //Log.d("radiobtnn:", radioButtonStudent.getText().toString());
+        }
+        else if(personType == R.id.radioButtonCommittee) {
+            personTypeString = radioButtonCommittee.getText().toString();
+            //Log.d("radiobtnn:", radioButtonTeacher.getText().toString());
+        }
     }
 
 }

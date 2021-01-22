@@ -7,20 +7,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.lebsmart.About.PrivacyPolicyFragment;
+import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
 import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncementFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
+import com.example.lebsmart.About.RateUsFragment;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
 import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -78,10 +83,32 @@ public class MainScreenActivity extends AppCompatActivity {
                                 new CommitteeDRsFragment()).commit();
                         break;
                     case R.id.rateUs:
-                        Toast.makeText(MainScreenActivity.this, "Rate us", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainScreenActivity.this, "Rate us", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new RateUsFragment()).commit();
                         break;
                     case R.id.feedback:
                         Toast.makeText(MainScreenActivity.this, "Give Feedback", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.privacyPolicy:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new PrivacyPolicyFragment()).commit();
+                        break;
+                    case R.id.termsNConditions:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new TermsNConditionsFragment()).commit();
+                        break;
+                    case R.id.logout:
+                        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                            FirebaseAuth.getInstance().signOut();
+                            LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
+                            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+                            finish();
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(MainScreenActivity.this, "You're already logged out!", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
 

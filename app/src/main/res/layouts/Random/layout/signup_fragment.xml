@@ -50,8 +50,9 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/edit_text_design"
                 android:ems="10"
-                android:hint="Phone number"
+                android:hint="8-digit phone number"
                 android:inputType="phone"
+                android:maxLength="8"
                 android:paddingLeft="11dp"
                 android:paddingTop="6dp"
                 android:paddingRight="6dp"
@@ -98,6 +99,17 @@
                 android:paddingTop="6dp"
                 android:paddingRight="6dp"
                 android:paddingBottom="6dp" />
+
+            <TextView
+                android:id="@+id/selectABuildingTV"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="17dp"
+                android:text="Select a Building"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
             <RadioGroup
                 android:id="@+id/radioGroupSignUp"
