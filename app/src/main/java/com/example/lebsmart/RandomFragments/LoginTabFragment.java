@@ -1,20 +1,33 @@
 package com.example.lebsmart.RandomFragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.Activities.BuildingsListActivity;
+import com.example.lebsmart.Activities.LoginActivity;
+import com.example.lebsmart.Activities.MainScreenActivity;
 import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class LoginTabFragment extends Fragment {
 
@@ -26,43 +39,50 @@ public class LoginTabFragment extends Fragment {
 
     View view;
 
+    ProgressButton progressButton;
+
+    FirebaseAuth mAuth;
+
+    //public static SharedPreferences sp;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //Log.i("login", "created");
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
         email = root.findViewById(R.id.emailLogin);
         password = root.findViewById(R.id.passwordLogin);
-        //loginButton = root.findViewById(R.id.loginButton);
         view = root.findViewById(R.id.progressButtonInclude);
-
-        /*email.setTranslationX(800);
-        password.setTranslationX(800);
-        loginButton.setTranslationX(800);*/
 
         email.setAlpha(alpha);
         password.setAlpha(alpha);
-        //loginButton.setAlpha(alpha);
         view.setAlpha(alpha);
 
         email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
         password.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        //loginButton.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
         view.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+        LoginActivity.sp = this.getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        if(LoginActivity.sp.getBoolean("loggedin",false)){
+            goToMainActivity();
+        }
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressButton progressButton = new ProgressButton(getContext(), view);
+                progressButton = new ProgressButton(getContext(), view);
                 progressButton.buttonActivated();
 
                 view.setEnabled(false);
 
+                login();
+
                 //replace it with onSuccess method of database
-                Handler handler = new Handler();
+                /*Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -75,8 +95,8 @@ public class LoginTabFragment extends Fragment {
                             public void run() {
                                 progressButton.resetDesign("Login");
 
-                                /*Intent intent = new Intent(getActivity(), MainScreenActivity.class);
-                                startActivity(intent);*/
+                                //Intent intent = new Intent(getActivity(), MainScreenActivity.class);
+                                //startActivity(intent);
 
                                 //in case the user/resident already chose a building
                                 //redirect directly to main screen
@@ -95,7 +115,7 @@ public class LoginTabFragment extends Fragment {
 
 
                     }
-                }, 2100);
+                }, 2100);*/
 
 
 
@@ -104,6 +124,80 @@ public class LoginTabFragment extends Fragment {
 
         return root;
 
-        //return super.onCreateView(inflater, container, savedInstanceState);
+    } // end onCreateView
+
+    public void login() {
+        String email2 = CommonMethods.getEmail(email);
+        String pass = CommonMethods.getPassword(password);
+
+        if(CommonMethods.checkIfEmpty(email2)) {
+            CommonMethods.warning(email, "Email is required!");
+            progressButton.resetDesign("Login");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.isNotAnEmail(email2)) {
+            //username.setError("Please enter a valid email!");
+            CommonMethods.warning(email, "Please provide a correct email address!");
+            progressButton.resetDesign("Login");
+            view.setEnabled(true);
+            return;
+        }
+
+        if(CommonMethods.checkIfEmpty(pass)) {
+            //password.setError("Password is required!");
+            CommonMethods.warning(password, "Password is required!");
+            progressButton.resetDesign("Login");
+            view.setEnabled(true);
+            return;
+        }
+
+        //not necessary
+        if(CommonMethods.checkIfPassLengthNotValid(pass)) {
+            //password.setError("Minimum password length is 6 characters!");
+            CommonMethods.warning(password, "Minimum password length is 6 characters!");
+            progressButton.resetDesign("Login");
+            view.setEnabled(true);
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email2, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    assert user != null;
+                    //if (user.isEmailVerified()) {
+                        progressButton.buttonFinished();
+
+                        // add the option where the user should choose a building when signing up
+                        // he can add only one additional building in case he didn't find his
+                        //
+
+                    goToMainActivity();
+                    LoginActivity.sp.edit().putBoolean("loggedin",true).apply();
+                    //}
+                    /*else {
+                        user.sendEmailVerification();
+                        Toast.makeText(getActivity(), "Please check your email to verify your account.", Toast.LENGTH_SHORT).show();
+                    }*/
+                }
+                else {
+                    Toast.makeText(getActivity(), "Failed to login! Please check your credentials.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        progressButton.resetDesign("Login");
+        view.setEnabled(true);
+
+    } // end login method
+
+    public void goToMainActivity() {
+        Intent intent = new Intent(getActivity(), MainScreenActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
+
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:paddingStart="5dp"
+    android:paddingTop="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="11dp">
+
+    <ImageView
+        android:id="@+id/crossImage"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_gravity="end"
+        app:srcCompat="@drawable/x_icon" />
+
+    <ImageView
+        android:id="@+id/checkImage"
+        android:layout_width="277dp"
+        android:layout_height="277dp"
+        android:layout_marginStart="21dp"
+        android:src="@drawable/check_icon" />
+
+    <TextView
+        android:id="@+id/thankYouTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="7dp"
+        android:text="Thank You!"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/submissionSuccessfulTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="Your submission has been received."
+        android:textAlignment="center"
+        android:textColor="#1E5E91"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+
+</LinearLayout>
