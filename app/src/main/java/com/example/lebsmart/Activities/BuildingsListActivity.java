@@ -19,7 +19,7 @@ public class BuildingsListActivity extends AppCompatActivity {
     ArrayList<String> buildingsArrayList = new ArrayList<>();
 
     ListView listView;
-    TextView addBuilding;
+    //TextView addBuilding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,14 @@ public class BuildingsListActivity extends AppCompatActivity {
             }
         });
 
-        addBuilding = findViewById(R.id.addBuildingTV);
+        /*addBuilding = findViewById(R.id.addBuildingTV);
         addBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BuildingsListActivity.this, AddBuildingActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 }

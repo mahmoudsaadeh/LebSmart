@@ -1,8 +1,10 @@
 package com.example.lebsmart.RandomFragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +49,8 @@ public class LoginTabFragment extends Fragment {
 
     //public static SharedPreferences sp;
 
+    FloatingActionButton floatingActionButton;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class LoginTabFragment extends Fragment {
         email = root.findViewById(R.id.emailLogin);
         password = root.findViewById(R.id.passwordLogin);
         view = root.findViewById(R.id.progressButtonInclude);
+        floatingActionButton = root.findViewById(R.id.floatingActionButton);
 
         email.setAlpha(alpha);
         password.setAlpha(alpha);
@@ -70,6 +77,34 @@ public class LoginTabFragment extends Fragment {
         if(LoginActivity.sp.getBoolean("loggedin",false)){
             goToMainActivity();
         }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.contact_us_dialog, null);
+
+                builder.setView(view);
+
+                //ImageView check = view.findViewById(R.id.checkImage);
+                //Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+
+                final AlertDialog dialog = builder.create();
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                ImageView cross = view.findViewById(R.id.crossImage2);
+                cross.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                //builder.setView(view);
+                dialog.show();
+            }
+        });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

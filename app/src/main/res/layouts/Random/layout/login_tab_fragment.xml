@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loginCL"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/loginLL"
@@ -86,67 +84,23 @@
                 tools:ignore="InvalidId" />
 
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="141dp"
+                android:layout_marginEnd="17dp"
+                android:backgroundTint="#2196F3"
+                android:elevation="5dp"
+                android:src="@drawable/ic_contact_mail"
+                android:tint="#000000"
+                app:fabSize="normal" />
+
         </LinearLayout>
-
-        <!--
-        <EditText
-            android:id="@+id/emailLogin"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="210dp"
-            android:layout_marginEnd="61dp"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/passwordLogin"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="61dp"
-            android:layout_marginBottom="27dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
-
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="161dp"
-            android:layout_marginTop="172dp"
-            android:layout_marginEnd="162dp"
-            android:layout_marginBottom="150dp"
-            android:text="login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
-
-        <TextView
-            android:id="@+id/forgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="236dp"
-            android:layout_marginTop="27dp"
-            android:layout_marginEnd="61dp"
-            android:text="Forgot Password?"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordLogin" />
-    -->
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
 
