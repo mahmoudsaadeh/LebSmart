@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/editProfileTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="92dp"
+        android:text="Edit Your Profile"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileTV">
+
+        <EditText
+            android:id="@+id/usernameEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/phoneEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/emailEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/passwordEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/confirmPasswordEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="51dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <Button
+            android:id="@+id/editProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:background="@drawable/rounded_corners"
+            android:padding="11dp"
+            android:text="Edit Profile"
+            android:textSize="18sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

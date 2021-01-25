@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.lebsmart.About.EditProfileFragment;
 import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
@@ -109,6 +110,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(MainScreenActivity.this, "You're already logged out!", Toast.LENGTH_SHORT).show();
                         }
+                        break;
+                    case R.id.profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new EditProfileFragment()).commit();
                         break;
                 }
 

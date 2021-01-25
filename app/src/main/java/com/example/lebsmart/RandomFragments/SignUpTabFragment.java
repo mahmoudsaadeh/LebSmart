@@ -32,7 +32,7 @@ public class SignUpTabFragment extends Fragment {
     EditText email;
     EditText password;
     private EditText confirmPassword;
-    private EditText usernameSignUp;
+    private EditText fullNameSignUp;
     private EditText phoneNumberSignUp;
     private RadioGroup radioGroupSignUp;
     private RadioButton radioButtonCommittee;
@@ -61,7 +61,7 @@ public class SignUpTabFragment extends Fragment {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signup_fragment, container, false);
 
-        usernameSignUp = root.findViewById(R.id.usernameSignUp);
+        fullNameSignUp = root.findViewById(R.id.fullNameSignUp);
         phoneNumberSignUp = root.findViewById(R.id.phoneNumberSignUp);
         email = root.findViewById(R.id.emailSignUp);
         password = root.findViewById(R.id.passwordSignUp);
@@ -136,7 +136,7 @@ public class SignUpTabFragment extends Fragment {
     }
 
     public void signUp () {
-        final String username = usernameSignUp.getText().toString();
+        final String fullName = fullNameSignUp.getText().toString();
         final String phone = phoneNumberSignUp.getText().toString().trim();
         final String mail = email.getText().toString().trim();
         final String passwordd = password.getText().toString().trim();
@@ -145,8 +145,8 @@ public class SignUpTabFragment extends Fragment {
         int personType = radioGroupSignUp.getCheckedRadioButtonId();
 
 
-        if(username.isEmpty()) {
-            CommonMethods.warning(usernameSignUp, "Username is required!");
+        if(fullName.isEmpty()) {
+            CommonMethods.warning(fullNameSignUp, "Username is required!");
             progressButton.resetDesign("Sign Up");
             view.setEnabled(true);
             return;
@@ -228,7 +228,7 @@ public class SignUpTabFragment extends Fragment {
 
                 if (task.isSuccessful()) {
                     // add chosen building
-                    User newUser = new User(username, phone, mail, personTypeString, selectABuilding);
+                    User newUser = new User(fullName, phone, mail, personTypeString, selectABuilding);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

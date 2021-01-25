@@ -2,14 +2,14 @@ package com.example.lebsmart.RandomFragments;
 
 public class User {
 
-    String username;
+    String fullName;
     String phone;
     String email;
     String userType;
     String buildingChosen;
 
-    public User(String username, String phone, String email, String userType, String buildingC) {
-        this.username = username;
+    public User(String fullName1, String phone, String email, String userType, String buildingC) {
+        this.fullName = fullName1;
         this.phone = phone;
         this.email = email;
         this.userType = userType;
@@ -24,12 +24,12 @@ public class User {
         this.buildingChosen = building;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFullName(String fullname) {
+        this.fullName = fullname;
     }
 
     public String getPhone() {
