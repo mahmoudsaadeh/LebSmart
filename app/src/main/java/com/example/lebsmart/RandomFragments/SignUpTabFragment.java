@@ -18,8 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.Activities.BuildingsListActivity;
+import com.example.lebsmart.Database.FirebaseDatabaseMethods;
 import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
+import com.example.lebsmart.TheftsFragments.Thefts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -53,6 +55,16 @@ public class SignUpTabFragment extends Fragment {
     public static final int PERSON_TYPE_NOT_SELECTED = -1;
 
     public static int BUILDING_LIST_REQUEST_CODE = 1;
+
+
+    String fullName;
+    String phone;
+    String mail ;
+    String passwordd ;
+    String confirmPass;
+    String selectABuilding;
+    int personType;
+
 
     @Nullable
     @Override
@@ -136,13 +148,13 @@ public class SignUpTabFragment extends Fragment {
     }
 
     public void signUp () {
-        final String fullName = fullNameSignUp.getText().toString();
-        final String phone = phoneNumberSignUp.getText().toString().trim();
-        final String mail = email.getText().toString().trim();
-        final String passwordd = password.getText().toString().trim();
-        String confirmPass = confirmPassword.getText().toString().trim();
-        final String selectABuilding = selectABuildingTV.getText().toString();
-        int personType = radioGroupSignUp.getCheckedRadioButtonId();
+        fullName = fullNameSignUp.getText().toString();
+        phone = phoneNumberSignUp.getText().toString().trim();
+        mail = email.getText().toString().trim();
+        passwordd = password.getText().toString().trim();
+        confirmPass = confirmPassword.getText().toString().trim();
+        selectABuilding = selectABuildingTV.getText().toString();
+        personType = radioGroupSignUp.getCheckedRadioButtonId();
 
 
         if(fullName.isEmpty()) {
@@ -157,6 +169,23 @@ public class SignUpTabFragment extends Fragment {
             progressButton.resetDesign("Sign Up");
             view.setEnabled(true);
             return;
+        }
+        else if (phone.length() < 8) {
+            CommonMethods.warning(phoneNumberSignUp, "Phone number should be of 8 numbers!");
+            progressButton.resetDesign("Sign Up");
+            view.setEnabled(true);
+            return;
+        }
+        else {
+            char[] phoneArray = phone.toCharArray();
+            String areaCode = String.valueOf(phoneArray[0]) + "" + String.valueOf(phoneArray[1]);
+            Log.i("areacode", areaCode);
+            String number = "";
+            for (int i=2; i<phoneArray.length; i++) {
+                number = number + phoneArray[i];
+            }
+            Log.i("num", number);
+            phone = areaCode + "-" + number;
         }
 
         if(CommonMethods.checkIfEmpty(mail)) {
@@ -216,6 +245,10 @@ public class SignUpTabFragment extends Fragment {
         else {
             setPersonType(personType);
         }
+
+        /*String[] children = {"User", "Building"};
+        Thefts thefts = new Thefts("me", "title", "date", "time","msg", "loc");
+        FirebaseDatabaseMethods.insertToDB(children, thefts);*/
 
 
         mAuth.createUserWithEmailAndPassword(mail, passwordd)

@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.R;
+import com.example.lebsmart.RandomFragments.CommonMethods;
 
 public class AddBSPFragment extends Fragment {
 
@@ -62,21 +63,21 @@ public class AddBSPFragment extends Fragment {
         addBspLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
         spRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
         addSPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -85,7 +86,7 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.VISIBLE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -93,7 +94,7 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.GONE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -101,7 +102,7 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.GONE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -109,7 +110,7 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.GONE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -117,7 +118,7 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.GONE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
@@ -125,19 +126,13 @@ public class AddBSPFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 otherET.setVisibility(View.GONE);
-                hideSoftKeyboard(getActivity());
+                CommonMethods.hideSoftKeyboard(getActivity());
             }
         });
 
         return root;
     }
 
-    public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
-    }
+
 
 }

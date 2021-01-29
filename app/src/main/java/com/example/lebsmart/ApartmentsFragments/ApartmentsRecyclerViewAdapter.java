@@ -3,6 +3,7 @@ package com.example.lebsmart.ApartmentsFragments;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,11 @@ public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<Apartmen
 
 
     List<Apartment> list;
+    int currentUserPositionInList;
 
-    public ApartmentsRecyclerViewAdapter(List<Apartment> list) {
+    public ApartmentsRecyclerViewAdapter(List<Apartment> list, int currentUserPositionInList) {
         this.list = list;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -41,7 +44,11 @@ public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<Apartmen
         holder.priceContent.setText(list.get(position).getPrice());
         holder.areaContent.setText(list.get(position).getArea());
         holder.phoneContent.setText(list.get(position).getPhoneNumber());
-        holder.floorContent.setText(list.get(position).getFloor());
+        holder.ownerNameContent.setText(list.get(position).getOwnerName());
+
+        if (position == currentUserPositionInList) {
+            holder.expandCloseBN.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
 
         boolean isExpanded = list.get(position).isExpanded();
         holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -60,9 +67,9 @@ public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<Apartmen
         TextView priceContent;
         TextView areaContent;
         TextView phoneContent;
-        TextView floorContent;
+        TextView ownerNameContent;
 
-        ConstraintLayout expandableLayout;
+        TableLayout expandableLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,7 +79,7 @@ public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<Apartmen
             priceContent = itemView.findViewById(R.id.priceContent);
             areaContent = itemView.findViewById(R.id.areaContent);
             phoneContent = itemView.findViewById(R.id.phoneContent);
-            floorContent = itemView.findViewById(R.id.floorContent);
+            ownerNameContent = itemView.findViewById(R.id.ownerNameContent);
 
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 

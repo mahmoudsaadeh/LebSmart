@@ -9,10 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lebsmart.ApartmentsFragments.Apartment;
 import com.example.lebsmart.R;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +59,49 @@ public class CheckMeetingsFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
         recyclerViewMeetings.addItemDecoration(dividerItemDecoration);
 
+
+        /*ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewMeetings);*/
+
         return root;
     }
+
+    /*Meetings deletedMeeting = null;
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            // used for rearranging items inside the RV only
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            final int position = viewHolder.getAdapterPosition();
+
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                    deletedMeeting = meetings.get(position); // used for undo action
+
+                    meetings.remove(position);
+                    meetingRVA.notifyItemRemoved(position);
+
+                    Snackbar.make(recyclerViewMeetings, "Meeting deleted!", Snackbar.LENGTH_LONG)
+                            .setAction("Undo", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    meetings.add(position, deletedMeeting);
+                                    meetingRVA.notifyItemInserted(position);
+                                }
+                            }).show();
+
+                    break;
+                case ItemTouchHelper.RIGHT:
+                    break;
+            }
+        }
+    };*/
+
 }

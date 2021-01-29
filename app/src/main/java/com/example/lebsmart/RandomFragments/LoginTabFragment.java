@@ -231,6 +231,7 @@ public class LoginTabFragment extends Fragment {
 
     public void goToMainActivity() {
         Intent intent = new Intent(getActivity(), MainScreenActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         getActivity().finish();
     }

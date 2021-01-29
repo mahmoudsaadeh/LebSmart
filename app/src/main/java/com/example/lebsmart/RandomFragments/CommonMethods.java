@@ -1,9 +1,15 @@
 package com.example.lebsmart.RandomFragments;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.util.Log;
 import android.util.Patterns;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.lebsmart.R;
 
 
 public class CommonMethods {
@@ -43,5 +49,42 @@ public class CommonMethods {
         return confPass.equals(pass);
     }
 
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public static void displayLoadingScreen(ProgressDialog progressDialog) {
+        Log.i("loadingScreenShow1", "entered");
+        if (!progressDialog.isShowing()) {
+            Log.i("loadingScreenShow2", "entered");
+            try {
+                progressDialog.show();
+                progressDialog.setCanceledOnTouchOutside(false);
+
+                progressDialog.setContentView(R.layout.loading_screen);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void dismissLoadingScreen (ProgressDialog progressDialog) {
+        try {
+            if ((progressDialog != null) && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (final Exception e) {
+            // Handle or log or ignore
+            e.printStackTrace();
+        }
+    }
 
 }
