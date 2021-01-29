@@ -238,7 +238,7 @@ public class CheckApartmentsFragment extends Fragment {
     }
 
     public void setApartmentRV() {
-        Log.i("setRv", "entered");
+        Log.i("setApartmentRv", "entered");
         recyclerView = root.findViewById(R.id.recyclerView);
         apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list, currentUserPositionInList);
 
@@ -323,7 +323,7 @@ public class CheckApartmentsFragment extends Fragment {
 
     }
 
-    boolean approved = false;
+    //boolean approved = false;
 
     /*public AlertDialog approveDeletionAlert() {
 

@@ -1,5 +1,8 @@
 package com.example.lebsmart.MeetingsFragments;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lebsmart.R;
@@ -16,9 +21,11 @@ import java.util.List;
 public class MeetingRVA extends RecyclerView.Adapter<MeetingRVA.ViewHolder> {
 
     List<Meetings> meetings;
+    int currentUserPositionInList;
 
-    public MeetingRVA(List<Meetings> meetings1) {
+    public MeetingRVA(List<Meetings> meetings1, int currentUserPositionInList) {
         this.meetings = meetings1;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -45,6 +52,10 @@ public class MeetingRVA extends RecyclerView.Adapter<MeetingRVA.ViewHolder> {
         holder.meetingPlaceContent.setText(meetings.get(position).getMeetingPlace());
         holder.scheduledByContent.setText(meetings.get(position).getScheduledBy());
         holder.meetingDescriptionContent.setText(meetings.get(position).getMeetingDescription());
+
+        if (position == currentUserPositionInList) {
+            holder.expandCloseMeetingTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
 
         boolean isExpanded = meetings.get(position).isExpanded();
         holder.meetingsExpandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);

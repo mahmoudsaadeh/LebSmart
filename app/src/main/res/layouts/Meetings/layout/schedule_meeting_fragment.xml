@@ -31,8 +31,7 @@
                 android:layout_marginTop="31dp"
                 android:ems="10"
                 android:hint="Title..."
-                android:inputType="textPersonName"
-                android:textColor="#9A9999" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/meetingDescriptionET"

@@ -22,9 +22,9 @@ public class PagerAdapterProblems extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ReportProblemFragment();
-            case 1:
                 return new CheckProblemsFragment();
+            case 1:
+                return new ReportProblemFragment();
             default:
                 return null;
         }

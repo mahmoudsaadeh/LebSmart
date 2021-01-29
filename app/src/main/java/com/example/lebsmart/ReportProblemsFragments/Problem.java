@@ -4,8 +4,8 @@ public class Problem {
 
     String problemType;//category
     String problemDescription;
-    String problemReportedBy;
-    String problemReportDate;
+    String problemReportedBy; // get current user
+    String problemReportDate; // get current date
 
     boolean expanded;
 

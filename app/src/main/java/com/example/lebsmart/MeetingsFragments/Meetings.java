@@ -5,19 +5,20 @@ public class Meetings {
     String meetingTime;
     String meetingDate;
     String meetingPlace;
-    String scheduledBy;
+    String scheduledBy; // get current user, save the meeting by his ID (as a child)
     String meetingTitle;
     String meetingDescription;
 
     boolean expanded;
 
-    public Meetings(String meetingTime, String meetingDate, String meetingPlace, String scheduledBy, String meetingTitle, String meetingDescription) {
+    public Meetings(String meetingTime, String meetingDate, String meetingPlace, String meetingTitle, String meetingDescription, String scheduledBy) {
         this.meetingTime = meetingTime;
         this.meetingDate = meetingDate;
         this.meetingPlace = meetingPlace;
         this.scheduledBy = scheduledBy;
         this.meetingTitle = meetingTitle;
         this.meetingDescription = meetingDescription;
+
         this.expanded = false;
     }
 
@@ -27,6 +28,14 @@ public class Meetings {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
+    }
+
+    public String getScheduledBy() {
+        return scheduledBy;
+    }
+
+    public void setScheduledBy(String scheduledBy) {
+        this.scheduledBy = scheduledBy;
     }
 
     public String getMeetingDescription() {
@@ -67,14 +76,6 @@ public class Meetings {
 
     public void setMeetingPlace(String meetingPlace) {
         this.meetingPlace = meetingPlace;
-    }
-
-    public String getScheduledBy() {
-        return scheduledBy;
-    }
-
-    public void setScheduledBy(String scheduledBy) {
-        this.scheduledBy = scheduledBy;
     }
 
 }

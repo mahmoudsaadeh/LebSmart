@@ -9,6 +9,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lebsmart.R;
@@ -63,7 +64,7 @@ public class BSPsRVA extends RecyclerView.Adapter<BSPsRVA.ViewHolder> {
         RatingBar bspRatingBar;
 
         TableLayout bspExpandableLayout;
-        LinearLayout bspExpand;
+        ConstraintLayout bspExpand;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

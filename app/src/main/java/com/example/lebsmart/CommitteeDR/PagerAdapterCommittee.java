@@ -19,9 +19,9 @@ public class PagerAdapterCommittee extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new AddCommitteeDRFragment();
-            case 1:
                 return new CheckCommitteeDRFragment();
+            case 1:
+                return new AddCommitteeDRFragment();
             default:
                 return null;
         }
