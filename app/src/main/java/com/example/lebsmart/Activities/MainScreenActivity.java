@@ -9,23 +9,29 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.lebsmart.About.EditProfileFragment;
 import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
+import com.example.lebsmart.Database.FirebaseDatabaseMethods;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
 import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncementFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
 import com.example.lebsmart.About.RateUsFragment;
+import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
 import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -35,10 +41,18 @@ public class MainScreenActivity extends AppCompatActivity {
 
     NavigationView navigationView;
 
+    /*public static String currentUser;
+    public static DataSnapshot userInfo;
+    public static String[] children;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        /*currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        children = new String[]{currentUser};
+        userInfo = FirebaseDatabaseMethods.retrieveDataFromDB(children, "Users", getApplicationContext());*/
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +74,7 @@ public class MainScreenActivity extends AppCompatActivity {
                         break;
                     case R.id.apartments:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new ApartmentsFragment()).commit();
+                                new ApartmentsFragment(), "Apartments").commit();
                         break;
                     case R.id.elec_water_src:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -103,12 +117,20 @@ public class MainScreenActivity extends AppCompatActivity {
                             FirebaseAuth.getInstance().signOut();
                             LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
                             Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
-                            finish();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            //finishAffinity();
+
                             startActivity(intent);
+                            //finish();
+                            //finishAndRemoveTask();
                         }
                         else {
                             Toast.makeText(MainScreenActivity.this, "You're already logged out!", Toast.LENGTH_SHORT).show();
                         }
+                        break;
+                    case R.id.profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new EditProfileFragment()).commit();
                         break;
                 }
 

@@ -73,7 +73,10 @@
                 android:padding="5dp"
                 android:text="Aramoun, Mount Lebanon"
                 android:textAlignment="textEnd"
-                android:textSize="18sp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#FF0404"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/occupiedApartments"
@@ -117,8 +120,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="41dp"
+                android:background="@drawable/rounded_corners_only"
                 android:onClick="chooseBuilding"
-                android:text="Choose Building" />
+                android:padding="11dp"
+                android:text="Choose Building"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
 
         </LinearLayout>

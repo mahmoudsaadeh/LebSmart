@@ -21,9 +21,10 @@
                 android:id="@+id/expandCloseBN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:background="#E0E4DB"
                 android:paddingLeft="11dp"
                 android:paddingTop="7dp"
+                android:paddingEnd="7dp"
                 android:text="Building Name"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -31,141 +32,136 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TableLayout
                 android:id="@+id/expandableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="17dp"
-                android:layout_marginBottom="17dp"
-                android:background="#FFFFFF"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expandCloseBN">
 
-                <TextView
-                    android:id="@+id/state"
-                    android:layout_width="wrap_content"
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="11dp"
-                    android:text="State: "
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="11dp">
 
-                <TextView
-                    android:id="@+id/stateContent"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="State: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/stateContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rent / Sale"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="Rent / Sale"
-                    android:textColor="#009688"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/state"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="11dp">
 
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Area: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/areaContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Y m^2"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Price:"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/state" />
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="11dp">
 
-                <TextView
-                    android:id="@+id/priceContent"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price: "
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/priceContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$50000"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:text="$ X"
-                    android:textColor="#009688"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/price"
-                    app:layout_constraintTop_toBottomOf="@+id/stateContent" />
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="11dp">
 
-                <TextView
-                    android:id="@+id/area"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/ownerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Owner's name: "
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ownerNameContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mahmoud Saadeh"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Area: "
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/price" />
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="11dp">
 
-                <TextView
-                    android:id="@+id/areaContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Y m^2"
-                    android:textColor="#009688"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/area"
-                    app:layout_constraintTop_toBottomOf="@+id/priceContent" />
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Owner's phone:"
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
 
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="77dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Phone:"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintStart_toEndOf="@+id/priceContent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/phoneContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="78-888741"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phoneContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="21dp"
-                    android:text="78-888741"
-                    android:textColor="#009688"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/phone"
-                    app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/floor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Floor: "
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/areaContent"
-                    app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-                <TextView
-                    android:id="@+id/floorContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:text="2nd"
-                    android:textColor="#009688"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/floor"
-                    app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </TableLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -8,21 +8,31 @@ public class Apartment {
     String area;
     String building;
     String phoneNumber;
-    String floor; // take from user after he chooses a building, display a drop-down that shows the available
+    //String floor; // take from user after he chooses a building, display a drop-down that shows the available
                     //number of floors within the building only
+    String ownerName;
 
     boolean expanded;
 
-    public Apartment(String state, String price, String area, String building, String phoneNumber, String floor) {
+    public Apartment(String state, String price, String area, String building, String phoneNumber, String ownerName1) {
         this.state = state;
         this.price = price;
         this.area = area;
         this.building = building;
         this.phoneNumber = phoneNumber;
-        this.floor = floor;
+        //this.floor = floor;
+        this.ownerName = ownerName1;
+
         this.expanded = false;
     }
 
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public boolean isExpanded() {
         return expanded;
@@ -32,13 +42,13 @@ public class Apartment {
         this.expanded = expanded;
     }
 
-    public String getFloor() {
+    /*public String getFloor() {
         return floor;
     }
 
     public void setFloor(String floor) {
         this.floor = floor;
-    }
+    }*/
 
     public String getState() {
         return state;

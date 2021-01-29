@@ -1,150 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signUpCL"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/signUpLL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="17dp">
 
 
-        <LinearLayout
-            android:id="@+id/signUpLL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|top"
-            android:orientation="vertical"
-            android:paddingTop="21dp"
-            tools:layout_editor_absoluteX="133dp"
-            tools:layout_editor_absoluteY="310dp">
+        <EditText
+            android:id="@+id/fullNameSignUp"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
 
+        <EditText
+            android:id="@+id/phoneNumberSignUp"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="8-digit phone number"
+            android:inputType="phone"
+            android:maxLength="8"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
 
-            <EditText
-                android:id="@+id/usernameSignUp"
-                android:layout_width="290dp"
+        <EditText
+            android:id="@+id/emailSignUp"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
+
+        <EditText
+            android:id="@+id/passwordSignUp"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/edit_text_design"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:id="@+id/selectABuildingTV"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:text="Select a Building"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupSignUp"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="27dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioButtonCommittee"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/edit_text_design"
-                android:ems="10"
-                android:hint="Username"
-                android:inputType="textPersonName"
-                android:paddingLeft="11dp"
-                android:paddingTop="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp" />
+                android:text="Committee member" />
 
-            <EditText
-                android:id="@+id/phoneNumberSignUp"
-                android:layout_width="290dp"
+            <RadioButton
+                android:id="@+id/radioButtonNormalResident"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/edit_text_design"
-                android:ems="10"
-                android:hint="8-digit phone number"
-                android:inputType="phone"
-                android:maxLength="8"
-                android:paddingLeft="11dp"
-                android:paddingTop="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp" />
+                android:text="Normal resident" />
 
-            <EditText
-                android:id="@+id/emailSignUp"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/edit_text_design"
-                android:hint="Email Address"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="11dp"
-                android:paddingTop="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp" />
-
-            <EditText
-                android:id="@+id/passwordSignUp"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="17dp"
-                android:background="@drawable/edit_text_design"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingLeft="11dp"
-                android:paddingTop="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp" />
-
-            <EditText
-                android:id="@+id/confirmPassword"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="21dp"
-                android:background="@drawable/edit_text_design"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
-                android:paddingLeft="11dp"
-                android:paddingTop="6dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="6dp" />
-
-            <TextView
-                android:id="@+id/selectABuildingTV"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="17dp"
-                android:text="Select a Building"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="italic" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupSignUp"
-                android:layout_width="205dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="27dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radioButtonCommittee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Committee member" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonNormalResident"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Normal resident" />
-
-            </RadioGroup>
+        </RadioGroup>
 
 
-            <include
-                android:id="@+id/includeSignUp"
-                layout="@layout/progress_button_layout"
-                android:layout_width="177dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+        <include
+            android:id="@+id/includeSignUp"
+            layout="@layout/progress_button_layout"
+            android:layout_width="177dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="77dp" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
