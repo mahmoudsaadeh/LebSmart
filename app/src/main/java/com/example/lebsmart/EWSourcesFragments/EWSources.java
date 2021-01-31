@@ -21,6 +21,9 @@ public class EWSources extends Fragment {
 
         root = (ViewGroup) inflater.inflate(R.layout.electricity_water_sources, container, false);
 
+        // make a refresh in the page instead of buttons
+        // sources should load directly once the fragment is selected from the drawer
+
         return root;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }

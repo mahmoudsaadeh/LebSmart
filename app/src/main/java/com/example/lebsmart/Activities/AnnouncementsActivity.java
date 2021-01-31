@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.lebsmart.BestServiceProviders.BSP;
-import com.example.lebsmart.BestServiceProviders.BSPsRVA;
 import com.example.lebsmart.CommitteeDR.CommitteeDR;
 import com.example.lebsmart.CommitteeDR.CommitteeRVA;
 import com.example.lebsmart.R;

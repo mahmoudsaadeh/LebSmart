@@ -127,6 +127,31 @@
                 </TableRow>
 
                 <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/bspAddedBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:text="Added By: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/bspAddedByContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Someone"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
                     android:id="@+id/row3BSP"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -163,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Rating: "
+                        android:text="Overall rating:"
                         android:textSize="18sp"
                         android:textStyle="bold|italic" />
 
@@ -176,16 +201,15 @@
                     android:layout_marginBottom="5dp"
                     android:gravity="center">
 
-                    <RatingBar
-                        android:id="@+id/bspRatingBar"
-                        style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                    <TextView
+                        android:id="@+id/overallRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:isIndicator="true"
-                        android:max="5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:visibility="visible" />
+                        android:text="Overall rating here"
+                        android:textAlignment="center"
+                        android:textColor="#2196F3"
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
 
                 </TableRow>
 
@@ -200,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Rate the SP: "
+                        android:text="Your rating:"
                         android:textSize="18sp"
                         android:textStyle="bold|italic" />
 
@@ -221,6 +245,7 @@
                         android:max="5"
                         android:numStars="5"
                         android:rating="0"
+                        android:stepSize="1"
                         android:visibility="visible" />
 
                 </TableRow>

@@ -74,7 +74,7 @@ public class CheckApartmentsFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
 
-        Log.i("test1", "pass");
+        //Log.i("test1", "pass");
 
         // add person name and building name as well
         list = new ArrayList<>();
@@ -162,10 +162,10 @@ public class CheckApartmentsFragment extends Fragment {
                 if (!snapshot.hasChildren()) {
                     return;
                 }
-                Log.i("1", "1");
+                //Log.i("1", "1");
                 int x = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Log.i("snapshot", dataSnapshot.getValue().toString());
+                    //Log.i("snapshot", dataSnapshot.getValue().toString());
                     users.add(dataSnapshot.getKey());
                     //Log.i("key", dataSnapshot.getKey());
                     state.add(dataSnapshot.child("state").getValue().toString());
@@ -177,7 +177,7 @@ public class CheckApartmentsFragment extends Fragment {
                     }
                     x++;
                 }
-                Log.i("2", "2");
+                //Log.i("2", "2");
                 //CommonMethods.dismissLoadingScreen(progressDialog);
                 databaseReference.removeEventListener(this);
             }
@@ -189,7 +189,7 @@ public class CheckApartmentsFragment extends Fragment {
             }
         });
 
-        Log.i("3", "3");
+        //Log.i("3", "3");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -210,8 +210,8 @@ public class CheckApartmentsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
 
-                Log.i("snp1", snapshot.getValue().toString());
-                Log.i("userz", users.toString());
+                //Log.i("snp1", snapshot.getValue().toString());
+                //Log.i("userz", users.toString());
                 /*Log.i("snp2", snapshot.child(users.get(i)).getValue().toString());
                 Log.i("snp3", snapshot.child(users.get(i)).child("buildingChosen").getValue().toString());*/
 
@@ -219,7 +219,7 @@ public class CheckApartmentsFragment extends Fragment {
                     building.add(snapshot.child(users.get(i)).child("buildingChosen").getValue().toString());
                     ownerPhone.add(snapshot.child(users.get(i)).child("phone").getValue().toString());
                     ownerName.add(snapshot.child(users.get(i)).child("fullName").getValue().toString());
-                    Log.i("building" + i, building.get(i));
+                    //Log.i("building" + i, building.get(i));
                 }
                 for (int j=0; j<users.size(); j++) {
                     list.add(new Apartment(state.get(j), price.get(j), area.get(j), building.get(j), ownerPhone.get(j), ownerName.get(j)));
@@ -238,7 +238,7 @@ public class CheckApartmentsFragment extends Fragment {
     }
 
     public void setApartmentRV() {
-        Log.i("setApartmentRv", "entered");
+        //Log.i("setApartmentRv", "entered");
         recyclerView = root.findViewById(R.id.recyclerView);
         apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list, currentUserPositionInList);
 

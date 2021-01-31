@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.lebsmart.R;
 
+import java.util.Objects;
+
 
 public class CommonMethods {
 
@@ -55,13 +57,13 @@ public class CommonMethods {
                 (InputMethodManager) activity.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
+                Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
     }
 
     public static void displayLoadingScreen(ProgressDialog progressDialog) {
-        Log.i("loadingScreenShow1", "entered");
+        //Log.i("loadingScreenShow1", "entered");
         if (!progressDialog.isShowing()) {
-            Log.i("loadingScreenShow2", "entered");
+            //Log.i("loadingScreenShow2", "entered");
             try {
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
