@@ -2,6 +2,7 @@ package com.example.lebsmart.TheftsFragments;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.lebsmart.R;
+import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.RandomFragments.DatePickerFragment;
 import com.example.lebsmart.RandomFragments.TimePickerFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -38,12 +41,17 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ReportTheftFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -61,6 +69,13 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
 
     double lat, lon;
 
+    Button reportTheftButton;
+    EditText theftTitle, theftMessage;
+
+    ProgressDialog progressDialog;
+
+    String title, description, date, time, location;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,6 +85,10 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
         showDate = root.findViewById(R.id.theftDateTV);
         showTime = root.findViewById(R.id.theftTimeTV);
         theftLocation = root.findViewById(R.id.theftLocationTV);
+
+        theftTitle = root.findViewById(R.id.theftTitle);
+        theftMessage = root.findViewById(R.id.theftMessage);
+        reportTheftButton = root.findViewById(R.id.reportTheftButton);
 
         setDate = root.findViewById(R.id.setTheftDate);
         setTime = root.findViewById(R.id.setTheftTime);
@@ -117,12 +136,82 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
             }
         });
 
+        reportTheftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reportTheft();
+            }
+        });
+
+        progressDialog = new ProgressDialog(getActivity());
 
         return root;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
 
+    public void reportTheft () {
+
+        title = theftTitle.getText().toString();
+        description = theftMessage.getText().toString();
+
+        date = showDate.getText().toString();
+        time = showTime.getText().toString();
+        location = theftLocation.getText().toString();
+
+        if (title.isEmpty()) {
+            CommonMethods.warning(theftTitle, "Title is required!");
+            return;
+        }
+
+        if (description.isEmpty()) {
+            CommonMethods.warning(theftTitle, "Description is required!");
+            return;
+        }
+
+        if (date.isEmpty() || date.equals("Theft Date")) {
+            Toast.makeText(getActivity(), "Date is required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (time.isEmpty() || time.equals("Theft Time")) {
+            Toast.makeText(getActivity(), "Time is required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (location.isEmpty() || location.equals("Theft Location")) {
+            Toast.makeText(getActivity(), "Location is required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        CommonMethods.displayLoadingScreen(progressDialog);
+        TheftsAdd theftsAdd = new TheftsAdd(title, date, time, description, location);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Thefts");
+        reference = reference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        reference.setValue(theftsAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    //Log.i("theftReport", "success");
+                    Toast.makeText(getActivity(), "Theft reported successfully!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
+                else {
+                    //Log.i("theftReport", "failed");
+                    Toast.makeText(getActivity(), "Failed to report the theft! Please try again.", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                CommonMethods.dismissLoadingScreen(progressDialog);
+            }
+        });
+
+    }
 
 
     @Override

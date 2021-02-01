@@ -67,6 +67,8 @@ public class CheckApartmentsFragment extends Fragment {
 
     int currentUserPositionInList = -1;
 
+    public static boolean checkIfCM; // for committee fragment
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -209,6 +211,11 @@ public class CheckApartmentsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                checkIfCM = false;
+                if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("userType").getValue().equals("Committee member")) {
+                    checkIfCM = true;
+                }
 
                 //Log.i("snp1", snapshot.getValue().toString());
                 //Log.i("userz", users.toString());
@@ -358,6 +365,54 @@ public class CheckApartmentsFragment extends Fragment {
 
 
         return dialog;
+
+    }*/
+
+
+    // check if the signed in user is a committee member
+
+    /*public void checkIfCommittee () {
+        //Log.i("test", "3");
+        checkIfCM = false;
+
+        //CommonMethods.displayLoadingScreen(progressDialog);
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Log.i("test", "db");
+                //Log.i("test", "" + snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userType"));
+                if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("userType").getValue().equals("Committee member")) {
+                    checkIfCM = true;
+                    //Log.i("test", "dbIf");
+                    //Log.i("test", "" + snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userType"));
+                }
+                //CommonMethods.dismissLoadingScreen(progressDialog);
+                reference.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("dbError", error.getMessage());
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("test", "4");
+                if (checkIfCM) {
+                    setFragmentCommittee();
+                    Log.i("committee", "yes");
+                }
+                else {
+                    Log.i("committee", "no");
+                    setFragmentNotCommittee();
+                }
+            }
+        }, 2111);
 
     }*/
 

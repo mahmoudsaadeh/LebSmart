@@ -78,7 +78,7 @@ public class ReportProblemFragment extends Fragment {
 
         problemType = problemsRadioGroup.getCheckedRadioButtonId();
         description = problemDescriptionET.getText().toString();
-        reportDate = getCurrentDate();
+        reportDate = CommonMethods.getCurrentDate();
 
         if (problemType == NO_RADIO_BUTTON_SELECTED) {
             Toast.makeText(getActivity(), "You should select a problem type before you proceed!", Toast.LENGTH_SHORT).show();
@@ -134,11 +134,5 @@ public class ReportProblemFragment extends Fragment {
 
     }
 
-
-    public String getCurrentDate () {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        return formatter.format(date);
-    }
 
 }

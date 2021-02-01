@@ -6,18 +6,29 @@ public class CommitteeDR {
     String announcementDescription;
     String announcementType; // decision or reminder, use radio group
     String announcementDate; // get current date
+    String addedBy;
 
     //String voteChoice; // with or against
 
     boolean expanded;
 
-    public CommitteeDR(String announcementTitle, String announcementDescription, String announcementType, String announcementDate) {
+    public CommitteeDR(String announcementTitle, String announcementDescription, String announcementType,
+                       String announcementDate, String addedBy) {
         this.announcementTitle = announcementTitle;
         this.announcementDescription = announcementDescription;
         this.announcementType = announcementType;
         this.announcementDate = announcementDate;
+        this.addedBy = addedBy;
         //this.voteChoice = voteChoice;
         this.expanded = false;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 
     public boolean isExpanded() {

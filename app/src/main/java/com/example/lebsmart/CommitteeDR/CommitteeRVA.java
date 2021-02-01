@@ -16,9 +16,11 @@ import java.util.List;
 public class CommitteeRVA extends RecyclerView.Adapter<CommitteeRVA.ViewHolder> {
 
     List<CommitteeDR> committeeDRS;
+    int currentUserPositionInList;
 
-    public CommitteeRVA(List<CommitteeDR> committeeDRList) {
+    public CommitteeRVA(List<CommitteeDR> committeeDRList, int currentUserPositionInList) {
         this.committeeDRS = committeeDRList;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -36,6 +38,11 @@ public class CommitteeRVA extends RecyclerView.Adapter<CommitteeRVA.ViewHolder> 
         holder.announcementTitleTV.setText(committeeDRS.get(position).getAnnouncementTitle());
         holder.announcementDateCommitteeContent.setText(committeeDRS.get(position).getAnnouncementDate());
         holder.announcementDescriptionCommitteeContent.setText(committeeDRS.get(position).getAnnouncementDescription());
+        holder.addedByCommitteeContent.setText(committeeDRS.get(position).getAddedBy());
+
+        if (position == currentUserPositionInList) {
+            holder.announcementTitleTV.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
 
         boolean isExpanded = committeeDRS.get(position).isExpanded();
         holder.committeeExpandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -51,6 +58,7 @@ public class CommitteeRVA extends RecyclerView.Adapter<CommitteeRVA.ViewHolder> 
         TextView announcementTitleTV;
         TextView announcementDateCommitteeContent;
         TextView announcementDescriptionCommitteeContent;
+        TextView addedByCommitteeContent;
 
         TableLayout committeeExpandableLayout;
         LinearLayout committeeExpand;
@@ -61,6 +69,7 @@ public class CommitteeRVA extends RecyclerView.Adapter<CommitteeRVA.ViewHolder> 
             announcementTitleTV = itemView.findViewById(R.id.announcementTitleTV);
             announcementDateCommitteeContent = itemView.findViewById(R.id.announcementDateCommitteeContent);
             announcementDescriptionCommitteeContent = itemView.findViewById(R.id.announcementDescriptionCommitteeContent);
+            addedByCommitteeContent = itemView.findViewById(R.id.addedByCommitteeContent);
 
             committeeExpandableLayout = itemView.findViewById(R.id.committeeExpandableLayout);
             committeeExpand = itemView.findViewById(R.id.committeeExpand);

@@ -115,7 +115,7 @@ public class ProblemsActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.hasChildren()) {
+                if (!snapshot.exists()) {
                     return;
                 }
                 int x = 0;

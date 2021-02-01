@@ -1,6 +1,7 @@
 package com.example.lebsmart.RandomFragments;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.lebsmart.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -87,6 +90,12 @@ public class CommonMethods {
             // Handle or log or ignore
             e.printStackTrace();
         }
+    }
+
+    public static String getCurrentDate () {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return formatter.format(date);
     }
 
 }
