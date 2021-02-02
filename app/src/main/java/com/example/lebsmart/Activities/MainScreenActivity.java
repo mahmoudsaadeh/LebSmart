@@ -21,6 +21,7 @@ import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
 import com.example.lebsmart.Database.FirebaseDatabaseMethods;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
+import com.example.lebsmart.FireDetection.FireDetectionFragment;
 import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncementFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
@@ -131,6 +132,10 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new EditProfileFragment()).commit();
+                        break;
+                    case R.id.fire_detection:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FireDetectionFragment()).commit();
                         break;
                 }
 

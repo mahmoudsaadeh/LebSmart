@@ -17,9 +17,11 @@ import java.util.List;
 public class LFAsRVA extends RecyclerView.Adapter<LFAsRVA.ViewHolder> {
 
     List<LFA> lfaList;
+    int currentUserPositionInList;
 
-    public LFAsRVA(List<LFA> lfas) {
+    public LFAsRVA(List<LFA> lfas, int currentUserPositionInList) {
         this.lfaList = lfas;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -39,8 +41,13 @@ public class LFAsRVA extends RecyclerView.Adapter<LFAsRVA.ViewHolder> {
         holder.announcementDescriptionLFAContent.setText(lfaList.get(position).getDescriptionLFA());
 
         //get data from the stored ID
-        holder.foundWithLFAContent.setText(lfaList.get(position).getAddedByLFA());
+        holder.foundWithLFAContent.setText(lfaList.get(position).getFoundByLFA());
         //holder.phoneLFAContent.setText(lfaList.get(position).get());
+        holder.founderBuildingLFAContent.setText(lfaList.get(position).getFoundersBuilding());
+
+        if (position == currentUserPositionInList) {
+            holder.lfaTitleTV.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
 
         boolean isExpanded = lfaList.get(position).isExpanded();
         holder.lfaExpandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -58,7 +65,7 @@ public class LFAsRVA extends RecyclerView.Adapter<LFAsRVA.ViewHolder> {
         TextView announcementDateLFAContent;
         TextView announcementDescriptionLFAContent;
         TextView foundWithLFAContent;
-        TextView phoneLFAContent;
+        TextView founderBuildingLFAContent;
 
         TableLayout lfaExpandableLayout;
         LinearLayout lfaExpand;
@@ -70,7 +77,7 @@ public class LFAsRVA extends RecyclerView.Adapter<LFAsRVA.ViewHolder> {
             announcementDateLFAContent = itemView.findViewById(R.id.announcementDateLFAContent);
             announcementDescriptionLFAContent = itemView.findViewById(R.id.announcementDescriptionLFAContent);
             foundWithLFAContent = itemView.findViewById(R.id.foundWithLFAContent);
-            phoneLFAContent = itemView.findViewById(R.id.phoneLFAContent);
+            founderBuildingLFAContent = itemView.findViewById(R.id.founderBuildingLFAContent);
 
             lfaExpandableLayout = itemView.findViewById(R.id.lfaExpandableLayout);
             lfaExpand = itemView.findViewById(R.id.lfaExpand);

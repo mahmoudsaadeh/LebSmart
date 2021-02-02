@@ -5,18 +5,36 @@ public class LFA {
     String titleLFA;
     String dateFoundLFA;
     String descriptionLFA;
-    String addedByLFA; // get current user ID
+    String foundByLFA;
+    String foundersBuilding;
 
     boolean expanded;
 
-    public LFA(String titleLFA, String dateFoundLFA, String descriptionLFA, String addedByLFA) {
+    public LFA(String titleLFA, String dateFoundLFA, String descriptionLFA, String foundByLFA, String foundersBuilding) {
         this.titleLFA = titleLFA;
         this.dateFoundLFA = dateFoundLFA;
         this.descriptionLFA = descriptionLFA;
-        this.addedByLFA = addedByLFA;
+        this.foundByLFA = foundByLFA;
+        this.foundersBuilding = foundersBuilding;
+
         this.expanded = false;
     }
 
+    public String getFoundByLFA() {
+        return foundByLFA;
+    }
+
+    public void setFoundByLFA(String foundByLFA) {
+        this.foundByLFA = foundByLFA;
+    }
+
+    public String getFoundersBuilding() {
+        return foundersBuilding;
+    }
+
+    public void setFoundersBuilding(String foundersBuilding) {
+        this.foundersBuilding = foundersBuilding;
+    }
 
     public boolean isExpanded() {
         return expanded;
@@ -51,11 +69,11 @@ public class LFA {
         this.descriptionLFA = descriptionLFA;
     }
 
-    public String getAddedByLFA() {
-        return addedByLFA;
+    public String getfoundByLFA() {
+        return foundByLFA;
     }
 
-    public void setAddedByLFA(String addedByLFA) {
-        this.addedByLFA = addedByLFA;
+    public void setfoundByLFA(String foundByLFA) {
+        this.foundByLFA = foundByLFA;
     }
 }

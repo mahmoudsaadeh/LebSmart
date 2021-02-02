@@ -40,6 +40,11 @@
             android:id="@+id/lost_found_announcements"
             android:icon="@drawable/ic_lost_found_announcement"
             android:title="Lost/Found Announcements" />
+        <item
+            android:id="@+id/fire_detection"
+            android:icon="@drawable/ic_fire"
+            android:title="Fire Detection" />
+
     </group>
 
 <!--
