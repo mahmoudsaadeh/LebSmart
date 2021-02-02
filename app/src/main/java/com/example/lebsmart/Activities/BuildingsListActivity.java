@@ -2,6 +2,7 @@ package com.example.lebsmart.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,12 +20,15 @@ public class BuildingsListActivity extends AppCompatActivity {
     ArrayList<String> buildingsArrayList = new ArrayList<>();
 
     ListView listView;
-    //TextView addBuilding;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buildings_list);
+
+        progressDialog = new ProgressDialog(BuildingsListActivity.this);
 
         for(int i = 0; i <= 11; i++){
             buildingsArrayList.add("Building " + i);
@@ -46,14 +50,7 @@ public class BuildingsListActivity extends AppCompatActivity {
             }
         });
 
-        /*addBuilding = findViewById(R.id.addBuildingTV);
-        addBuilding.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(BuildingsListActivity.this, AddBuildingActivity.class);
-                startActivity(intent);
-            }
-        });*/
+
 
     }
 }

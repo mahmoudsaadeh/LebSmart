@@ -27,6 +27,7 @@ import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
 import com.example.lebsmart.About.RateUsFragment;
 import com.example.lebsmart.RandomFragments.CommonMethods;
+import com.example.lebsmart.RandomFragments.MyProfileFragment;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
 import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
@@ -136,6 +137,10 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.fire_detection:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new FireDetectionFragment()).commit();
+                        break;
+                    case R.id.my_profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new MyProfileFragment()).commit();
                         break;
                 }
 

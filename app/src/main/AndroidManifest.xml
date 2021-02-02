@@ -21,7 +21,6 @@
         <activity android:name=".Activities.BSPsActivity" />
         <activity android:name=".Activities.ProblemsActivity" />
         <activity android:name=".Activities.BuildingInfoActivity" />
-        <activity android:name=".Activities.AddBuildingActivity" />
         <activity android:name=".Activities.BuildingsListActivity" />
         <activity android:name=".Activities.MainScreenActivity" />
         <activity
