@@ -123,13 +123,13 @@ public class AddBuildingFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Log.i("add building part 1", "Building added successfully!");
-                    //Toast.makeText(getActivity(), "Building added successfully!", Toast.LENGTH_SHORT).show();
-                    //CommonMethods.dismissLoadingScreen(progressDialog);
+                    Toast.makeText(getActivity(), "Building added successfully!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
                 else {
-                    //Toast.makeText(getActivity(), "Failed to add building! Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Failed to add building! Please try again.", Toast.LENGTH_SHORT).show();
                     Log.i("add building part 1", "Failed to add building! Please try again.");
-                    //CommonMethods.dismissLoadingScreen(progressDialog);
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -140,15 +140,16 @@ public class AddBuildingFragment extends Fragment {
             }
         });
 
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 addBuildingToListOfBuildings();
             }
-        }, 1777);
+        }, 1777);*/
 
     }
 
+    // apply this in sign up
     public void addBuildingToListOfBuildings () {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Buildings");
         reference = reference.child(bName).child("Resident ID");

@@ -150,6 +150,7 @@ public class CheckLFAFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(getActivity(), "No announcements to display!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
         }, 4100);

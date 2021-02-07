@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.lebsmart.About.EditProfileFragment;
+import com.example.lebsmart.About.ListOfResidentsFragment;
 import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
@@ -105,9 +106,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new RateUsFragment()).commit();
                         break;
+                        /*
                     case R.id.feedback:
                         Toast.makeText(MainScreenActivity.this, "Give Feedback", Toast.LENGTH_SHORT).show();
-                        break;
+                        break;*/
                     case R.id.privacyPolicy:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new PrivacyPolicyFragment()).commit();
@@ -147,6 +149,10 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.add_building:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new AddBuildingFragment()).commit();
+                        break;
+                    case R.id.residentsList:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ListOfResidentsFragment()).commit();
                         break;
                 }
 

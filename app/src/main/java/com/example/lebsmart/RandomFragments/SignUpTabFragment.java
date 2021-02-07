@@ -27,7 +27,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUpTabFragment extends Fragment {
 
@@ -64,6 +68,8 @@ public class SignUpTabFragment extends Fragment {
     String confirmPass;
     String selectABuilding;
     int personType;
+
+    User newUser;
 
 
     @Nullable
@@ -179,12 +185,12 @@ public class SignUpTabFragment extends Fragment {
         else {
             char[] phoneArray = phone.toCharArray();
             String areaCode = String.valueOf(phoneArray[0]) + "" + String.valueOf(phoneArray[1]);
-            Log.i("areacode", areaCode);
+            //Log.i("areacode", areaCode);
             String number = "";
             for (int i=2; i<phoneArray.length; i++) {
                 number = number + phoneArray[i];
             }
-            Log.i("num", number);
+            //Log.i("num", number);
             phone = areaCode + "-" + number;
         }
 
@@ -246,61 +252,86 @@ public class SignUpTabFragment extends Fragment {
             setPersonType(personType);
         }
 
-        /*String[] children = {"User", "Building"};
-        Thefts thefts = new Thefts("me", "title", "date", "time","msg", "loc");
-        FirebaseDatabaseMethods.insertToDB(children, thefts);*/
 
+
+        if (personTypeString.equals("Committee member")) {
+            Log.i("1", "entered");
+            checkNumberOfCommitteeMembers();
+        }
+        else {
+            Log.i("2", "entered");
+            signUserUp();
+        }
+
+
+    } // end sign up  method
+
+
+    public void signUserUp () {
+
+        Log.i("signuserup", "entered");
 
         mAuth.createUserWithEmailAndPassword(mail, passwordd)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.i("mail", mail);
-                Log.i("pass", passwordd);
-                Log.i("task", task.toString());
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        /*Log.i("mail", mail);
+                        Log.i("pass", passwordd);
+                        Log.i("task", task.toString());*/
 
-                if (task.isSuccessful()) {
-                    // add chosen building
-                    User newUser = new User(fullName, phone, mail, personTypeString, selectABuilding);
+                        if (task.isSuccessful()) {
+                            // add chosen building
+                            Log.i("signuserup", "task 1 success");
 
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getActivity(), "Sign up Successful!", Toast.LENGTH_SHORT).show();
-                                progressButton.buttonFinished();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
+                            newUser = new User(fullName, phone, mail, personTypeString, selectABuilding);
+
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //Toast.makeText(getActivity(), "Sign up Successful!", Toast.LENGTH_SHORT).show();
+                                        Log.i("signuserup", "task 2 success");
+
+                                        progressButton.buttonFinished();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressButton.resetDesign("Sign Up");
+                                                view.setEnabled(true);
+                                            }
+                                        }, 1777);
+
+                                        addResidentToAssociatedBuilding();
+
+                                    }
+                                    else {
+                                        Toast.makeText(getActivity(), "Failed to sign up, please try again.", Toast.LENGTH_SHORT).show();
                                         progressButton.resetDesign("Sign Up");
                                         view.setEnabled(true);
                                     }
-                                }, 1777);
-                            }
-                            else {
-                                Toast.makeText(getActivity(), "Failed to sign up, please try again.", Toast.LENGTH_SHORT).show();
-                                progressButton.resetDesign("Sign Up");
-                                view.setEnabled(true);
-                            }
+                                }
+                            });
+
+
+
                         }
-                    });
-                }
-                else {
-                    Toast.makeText(getActivity(), "Account already exists! Please try again with a different email address.", Toast.LENGTH_SHORT).show();
-                    progressButton.resetDesign("Sign Up");
-                    view.setEnabled(true);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                        else {
+                            Log.i("signuserup", "task 1 failed");
+                            Toast.makeText(getActivity(), "Account already exists! Please try again with a different email address.", Toast.LENGTH_SHORT).show();
+                            progressButton.resetDesign("Sign Up");
+                            view.setEnabled(true);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.i("failed", e.getMessage() + "");
             }
         });
 
-    } // end sign up  method
+    }
 
 
     public void setPersonType(int personType) {
@@ -312,6 +343,72 @@ public class SignUpTabFragment extends Fragment {
             personTypeString = radioButtonCommittee.getText().toString();
             //Log.d("radiobtnn:", radioButtonTeacher.getText().toString());
         }
+    }
+
+
+
+    public void addResidentToAssociatedBuilding () {
+
+        Log.i("addResidentToAssociatedBuilding", "entered");
+
+        FirebaseDatabase.getInstance().getReference("Buildings")
+                .child(selectABuilding).child(personTypeString)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.i("adding resident to associated building", "success");
+                    Toast.makeText(getActivity(), "Resident added to associated building successfully!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Log.i("adding resident to associated building", "failed");
+                    Toast.makeText(getActivity(), "Failed to add resident to associated building!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    // should be less than 3 to add new one
+    public void checkNumberOfCommitteeMembers () {
+
+        Log.i("checkNumberOfCommitteeMembers", "entered");
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Buildings");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(selectABuilding).exists()) {
+                    Log.i("checkNumberOfCommitteeMembers", "if1 entered");
+                    Log.i("childrenCount committee", String.valueOf(snapshot.child(selectABuilding).child(personTypeString).getChildrenCount()));
+                    if (snapshot.child(selectABuilding).child(personTypeString).getChildrenCount() < 3) {
+                        Log.i("checkNumberOfCommitteeMembers", "if2 entered");
+                        signUserUp();
+                    }
+                    else {
+                        Log.i("checkNumberOfCommitteeMembers", "else2 entered");
+                        Toast.makeText(getActivity(), "Only 3 committee members are allowed per building! You can register as a normal resident instead.", Toast.LENGTH_LONG).show();
+                        progressButton.resetDesign("Sign Up");
+                        view.setEnabled(true);
+                    }
+                }
+                else {
+                    Log.i("checkNumberOfCommitteeMembers", "else1 entered");
+                    signUserUp();
+                }
+
+                reference.removeEventListener(this);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error", error.getMessage());
+                //CommonMethods.dismissLoadingScreen(progressDialog);
+            }
+        });
+
     }
 
 }

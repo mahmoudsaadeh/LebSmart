@@ -76,7 +76,7 @@ public class BuildingsListActivity extends AppCompatActivity {
 
         buildingsAvailable = true;
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Buildings");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("BuildingInfo");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -120,6 +120,6 @@ public class BuildingsListActivity extends AppCompatActivity {
             }
         }, 2777);
 
-    }
+    } // end method
 
 }

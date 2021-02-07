@@ -100,11 +100,16 @@
                     android:id="@+id/rateUs"
                     android:icon="@drawable/ic_rate_us"
                     android:title="Rate Us" />
+                <item
+                    android:id="@+id/residentsList"
+                    android:icon="@drawable/ic_list"
+                    android:title="List of Residents in your Building" />
                 <!-- Ask user to fill a survey so that we know his feedback: by answering some mcq questions -->
+                <!--
                 <item
                     android:id="@+id/feedback"
                     android:icon="@drawable/ic_feedback"
-                    android:title="Feedback Survey" />
+                    android:title="Feedback Survey" />-->
                 <item
                     android:id="@+id/privacyPolicy"
                     android:icon="@drawable/privacy_policy_icon"
