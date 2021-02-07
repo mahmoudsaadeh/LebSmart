@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/buildingNameAB"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Building Name"
+            android:inputType="textPersonName"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/numberOfFloorsAB"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Number of Floors"
+            android:inputType="number"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/latitudeET"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Latitude"
+            android:inputType="numberDecimal"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/longitudeET"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Longitude"
+            android:inputType="numberDecimal"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/totalApartments"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Total number of apartments"
+            android:inputType="number"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/occupiedApartmentsET"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Occupied apartments"
+            android:inputType="number"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
+            android:id="@+id/endemicBuildingET"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="31dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Endemic building (yes/no)"
+            android:inputType="textPersonName"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <Button
+            android:id="@+id/addBuildingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corners_only"
+            android:padding="11dp"
+            android:text="Add Building"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,12 @@
             android:id="@+id/fire_detection"
             android:icon="@drawable/ic_fire"
             android:title="Fire Detection" />
+        <item
+            android:id="@+id/add_building"
+            android:icon="@drawable/ic_add_building"
+            android:title="Add Building"
+            android:visible="false"/>
+
 
     </group>
 

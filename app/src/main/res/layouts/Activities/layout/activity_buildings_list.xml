@@ -28,13 +28,14 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
-            <ListView
-                android:id="@+id/buildingsListView"
-                android:layout_width="match_parent"
-                android:layout_height="763dp"
-                android:layout_margin="7dp" >
+        <ListView
+            android:id="@+id/buildingsListView"
+            android:layout_width="match_parent"
+            android:layout_height="763dp"
+            android:layout_margin="4dp"
+            android:visibility="visible">
 
-            </ListView>
+        </ListView>
     </LinearLayout>
 
     </ScrollView>
