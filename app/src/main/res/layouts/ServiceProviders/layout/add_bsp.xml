@@ -44,7 +44,7 @@
             android:ems="10"
             android:hint="Phone"
             android:inputType="number"
-            android:maxLength="14" />
+            android:maxLength="8" />
 
         <EditText
             android:id="@+id/spPlaceOfResidenceET"
@@ -145,10 +145,10 @@
             android:layout_marginBottom="31dp"
             android:max="5"
             android:numStars="5"
-            android:rating="3.5"
+            android:rating="0"
             android:scaleX="1"
             android:scaleY="1"
-            android:stepSize=".5"
+            android:stepSize="1"
             android:visibility="visible" />
 
         <Button

@@ -19,16 +19,16 @@
         app:tabTextColor="#000000">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/addCommitteeTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add a D/R" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/checkCommitteeTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Check Ds/Rs" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/addCommitteeTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add a D/R" />
 
     </com.google.android.material.tabs.TabLayout>
 

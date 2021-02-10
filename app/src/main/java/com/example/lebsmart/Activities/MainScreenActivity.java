@@ -10,22 +10,27 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.lebsmart.About.EditProfileFragment;
+import com.example.lebsmart.About.ListOfResidentsFragment;
 import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
 import com.example.lebsmart.Database.FirebaseDatabaseMethods;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
+import com.example.lebsmart.FireDetection.FireDetectionFragment;
 import com.example.lebsmart.LostFoundAnnouncements.LostFoundAnnouncementFragment;
+import com.example.lebsmart.Others.AddBuildingFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
 import com.example.lebsmart.About.RateUsFragment;
 import com.example.lebsmart.RandomFragments.CommonMethods;
+import com.example.lebsmart.RandomFragments.MyProfileFragment;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
 import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
@@ -41,18 +46,10 @@ public class MainScreenActivity extends AppCompatActivity {
 
     NavigationView navigationView;
 
-    /*public static String currentUser;
-    public static DataSnapshot userInfo;
-    public static String[] children;*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
-        /*currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        children = new String[]{currentUser};
-        userInfo = FirebaseDatabaseMethods.retrieveDataFromDB(children, "Users", getApplicationContext());*/
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +57,14 @@ public class MainScreenActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
 
         navigationView = findViewById(R.id.navigation_view);
+
+        // if the signed in user is the developers account, show the add building item in drawer menu
+        // else, it is kept hidden
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("w1bTnJ8UP5PJyxpy4WaLF76oz9y2")) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.add_building).setVisible(true);
+        }
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -101,9 +106,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new RateUsFragment()).commit();
                         break;
+                        /*
                     case R.id.feedback:
                         Toast.makeText(MainScreenActivity.this, "Give Feedback", Toast.LENGTH_SHORT).show();
-                        break;
+                        break;*/
                     case R.id.privacyPolicy:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new PrivacyPolicyFragment()).commit();
@@ -131,6 +137,22 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new EditProfileFragment()).commit();
+                        break;
+                    case R.id.fire_detection:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FireDetectionFragment()).commit();
+                        break;
+                    case R.id.my_profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new MyProfileFragment()).commit();
+                        break;
+                    case R.id.add_building:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new AddBuildingFragment()).commit();
+                        break;
+                    case R.id.residentsList:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ListOfResidentsFragment()).commit();
                         break;
                 }
 

@@ -21,16 +21,16 @@
         app:tabTextColor="#000000">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/reportTheft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Report Theft" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/checkThefts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Check Thefts" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/reportTheft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Report Theft" />
 
     </com.google.android.material.tabs.TabLayout>
 

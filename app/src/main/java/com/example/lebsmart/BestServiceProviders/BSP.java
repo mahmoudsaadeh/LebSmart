@@ -5,18 +5,29 @@ public class BSP {
     String spName;
     String spPhone;
     String spJob;
-    String spRating;
+    String spRating;// overall rating
     String spPlaceOfResidence;
+    String addedBy;
 
     boolean expanded;
 
-    public BSP(String spName, String spPhone, String spJob, String spRating, String spPlaceOfResidence) {
+    public BSP(String spName, String spPhone, String spJob, String spRating, String spPlaceOfResidence, String addedBy) {
         this.spName = spName;
         this.spPhone = spPhone;
         this.spJob = spJob;
         this.spRating = spRating;
         this.spPlaceOfResidence = spPlaceOfResidence;
+        this.addedBy = addedBy;
+
         this.expanded = false;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 
     public boolean isExpanded() {

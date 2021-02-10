@@ -18,43 +18,50 @@
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackground">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bspExpand"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:orientation="horizontal"
+                android:paddingStart="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="5dp"
+                android:shrinkColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/spName"
-                    android:layout_width="219dp"
-                    android:layout_height="32.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:background="#009688"
-                    android:paddingStart="4dp"
                     android:text="SP Name"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/spPhone"
-                    android:layout_width="145dp"
-                    android:layout_height="32.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="2dp"
                     android:background="#009688"
-                    android:drawableEnd="@drawable/ic_drop_down"
-                    android:gravity="center"
                     android:text="+961-76-888777"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/ic_drop_down"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <TableLayout
@@ -120,6 +127,31 @@
                 </TableRow>
 
                 <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/bspAddedBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:text="Added By: "
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/bspAddedByContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Someone"
+                        android:textColor="#009688"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
                     android:id="@+id/row3BSP"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -156,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Rating: "
+                        android:text="Overall rating:"
                         android:textSize="18sp"
                         android:textStyle="bold|italic" />
 
@@ -169,16 +201,15 @@
                     android:layout_marginBottom="5dp"
                     android:gravity="center">
 
-                    <RatingBar
-                        android:id="@+id/bspRatingBar"
-                        style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                    <TextView
+                        android:id="@+id/overallRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:isIndicator="true"
-                        android:max="5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:visibility="visible" />
+                        android:text="Overall rating here"
+                        android:textAlignment="center"
+                        android:textColor="#2196F3"
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic" />
 
                 </TableRow>
 
@@ -193,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Rate the SP: "
+                        android:text="Your rating:"
                         android:textSize="18sp"
                         android:textStyle="bold|italic" />
 
@@ -214,6 +245,7 @@
                         android:max="5"
                         android:numStars="5"
                         android:rating="0"
+                        android:stepSize="1"
                         android:visibility="visible" />
 
                 </TableRow>

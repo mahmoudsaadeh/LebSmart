@@ -17,7 +17,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     Animation topAnim, bottomAnim;
     ImageView splashScreenLogo;
 
-    private static int SPLASH_SCREEN = 2900;
+    private static int SPLASH_SCREEN = 2711;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

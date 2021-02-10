@@ -35,10 +35,6 @@ public class CheckProblemsFragment extends Fragment {
 
     //List<Problem> problems;
 
-    public CheckProblemsFragment () {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

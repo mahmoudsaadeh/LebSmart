@@ -14,15 +14,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:padding="5dp">
+            android:background="?attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/meetingTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#9A2016"
-                android:paddingLeft="7dp"
+                android:background="#8BC34A"
+                android:paddingStart="7dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="7dp"
+                android:paddingBottom="5dp"
                 android:text="Meeting Title"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"

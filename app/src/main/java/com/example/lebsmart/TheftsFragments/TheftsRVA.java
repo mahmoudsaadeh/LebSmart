@@ -15,9 +15,11 @@ import java.util.List;
 public class TheftsRVA extends RecyclerView.Adapter<TheftsRVA.ViewHolderT> {
 
     List<Thefts> thefts;
+    int currentUserPositionInList;
 
-    public TheftsRVA (List<Thefts> list) {
+    public TheftsRVA (List<Thefts> list, int currentUserPositionInList) {
         this.thefts = list;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -38,6 +40,10 @@ public class TheftsRVA extends RecyclerView.Adapter<TheftsRVA.ViewHolderT> {
         holder.timeContent.setText(thefts.get(position).getTime());
         holder.messageContent.setText(thefts.get(position).getMessage());
         holder.locationContent.setText(thefts.get(position).getLocation());
+
+        if (position == currentUserPositionInList) {
+            holder.expandCloseTheftTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
 
         boolean isExpanded = thefts.get(position).isExpanded();
         holder.theftsExpandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);

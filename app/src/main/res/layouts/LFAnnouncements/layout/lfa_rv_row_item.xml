@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="4dp"
     android:orientation="vertical">
 
 
@@ -22,9 +21,6 @@
                 android:id="@+id/lfaExpand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +30,12 @@
                 <TextView
                     android:id="@+id/lfaTitleTV"
                     android:layout_width="match_parent"
-                    android:layout_height="32.5dp"
+                    android:layout_height="wrap_content"
                     android:background="#D88304"
+                    android:paddingStart="7dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="7dp"
+                    android:paddingBottom="5dp"
                     android:text="Announcement Title"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
@@ -139,20 +139,20 @@
                     android:layout_marginBottom="5dp">
 
                     <TextView
-                        android:id="@+id/phoneLFA"
+                        android:id="@+id/founderBuildingLFA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
-                        android:text="Founder's phone: "
+                        android:text="Founder's building: "
                         android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
-                        android:id="@+id/phoneLFAContent"
+                        android:id="@+id/founderBuildingLFAContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="03-584632"
+                        android:text="building 8"
                         android:textColor="#009688"
                         android:textSize="21sp" />
 

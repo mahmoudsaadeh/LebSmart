@@ -36,6 +36,8 @@ android {
                             'src/main/res/layouts/ServiceProviders',
                             'src/main/res/layouts/Thefts',
                             'src/main/res/layouts/About',
+                            'src/main/res/layouts/FireDetection',
+                            'src/main/res/layouts/Others',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

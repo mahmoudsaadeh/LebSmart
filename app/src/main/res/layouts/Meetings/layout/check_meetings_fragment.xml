@@ -5,9 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".ApartmentsFragments.CheckApartmentsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/meetingsRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/checkMeetingsRefreshLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/meetingsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="11dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

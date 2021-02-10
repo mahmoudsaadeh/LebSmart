@@ -22,9 +22,9 @@ public class PagerAdapterThefts extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return new ReportTheftFragment();
-            case 1:
                 return new CheckTheftsFragment();
+            case 1:
+                return new ReportTheftFragment();
             default:
                 return null;
         }

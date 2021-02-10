@@ -1,6 +1,7 @@
 package com.example.lebsmart.RandomFragments;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
@@ -10,6 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.lebsmart.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 
 public class CommonMethods {
@@ -55,13 +60,13 @@ public class CommonMethods {
                 (InputMethodManager) activity.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
+                Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
     }
 
     public static void displayLoadingScreen(ProgressDialog progressDialog) {
-        Log.i("loadingScreenShow1", "entered");
+        //Log.i("loadingScreenShow1", "entered");
         if (!progressDialog.isShowing()) {
-            Log.i("loadingScreenShow2", "entered");
+            //Log.i("loadingScreenShow2", "entered");
             try {
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
@@ -85,6 +90,12 @@ public class CommonMethods {
             // Handle or log or ignore
             e.printStackTrace();
         }
+    }
+
+    public static String getCurrentDate () {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return formatter.format(date);
     }
 
 }
