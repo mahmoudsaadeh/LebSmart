@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class AddApartmentFragment extends Fragment {
@@ -47,6 +50,10 @@ public class AddApartmentFragment extends Fragment {
 
     ProgressDialog progressDialog;
 
+    String userBuilding;
+
+    ApartmentAdd apartmentAdd;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +69,7 @@ public class AddApartmentFragment extends Fragment {
         addApartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addApartmentt();
+                addApartmentToAll();
             }
         });
 
@@ -71,7 +78,7 @@ public class AddApartmentFragment extends Fragment {
         return viewGroup;
     }
 
-    public void addApartmentt() {
+    public void addApartmentToAll() {
 
         price = priceET.getText().toString();
         area = areaET.getText().toString();
@@ -100,23 +107,24 @@ public class AddApartmentFragment extends Fragment {
         }
 
         CommonMethods.displayLoadingScreen(progressDialog);
-        ApartmentAdd apartmentAdd = new ApartmentAdd(stateString, price, area);
-        //FirebaseDatabaseMethods.insertToDB(MainScreenActivity.children, apartmentAdd, getActivity(), "Apartments");
+        apartmentAdd = new ApartmentAdd(stateString, price, area);
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Apartments");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ApartmentsAll");
         reference = reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         reference.setValue(apartmentAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Log.i("apartmentAdd", "success");
-                    Toast.makeText(getActivity(), "Apartment added successfully!", Toast.LENGTH_SHORT).show();
-                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    Log.i("apartmentAdd to all", "success");
+                    //Toast.makeText(getActivity(), "Apartment added successfully!", Toast.LENGTH_SHORT).show();
+                    //CommonMethods.dismissLoadingScreen(progressDialog);
+
+                    getCurrentUserBuilding();
                 }
                 else {
+                    Log.i("apartmentAdd to all", "failed");
                     Toast.makeText(getActivity(), "Failed to add the apartment! Please try again.", Toast.LENGTH_SHORT).show();
-                    Log.i("apartmentAdd", "failed");
                     CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
@@ -129,5 +137,55 @@ public class AddApartmentFragment extends Fragment {
         });
 
     } // end method addApartmentt
+
+    public void getCurrentUserBuilding () {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userBuilding = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("buildingChosen").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                saveToCategorizedDb();
+            }
+        }, 1555);
+
+    }
+
+    public void saveToCategorizedDb () {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ApartmentsCategorized");
+        reference = reference.child(userBuilding).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.setValue(apartmentAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.i("apartmentAdd to cat", "success");
+                    Toast.makeText(getActivity(), "Apartment added successfully!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
+                else {
+                    Log.i("apartmentAdd to cat", "failed");
+                    Toast.makeText(getActivity(), "Failed to add the apartment! Please try again.", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                CommonMethods.dismissLoadingScreen(progressDialog);
+            }
+        });
+    }
 
 }

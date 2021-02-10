@@ -1,15 +1,11 @@
 package com.example.lebsmart.ApartmentsFragments;
 
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,13 +15,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,11 +37,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
-public class CheckApartmentsFragment extends Fragment {
+public class CheckApartmentsFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnTouchListener {
 
     RecyclerView recyclerView;
     ApartmentsRecyclerViewAdapter apartmentsRecyclerViewAdapter;
@@ -69,6 +70,18 @@ public class CheckApartmentsFragment extends Fragment {
 
     public static boolean checkIfCM; // for committee fragment
 
+    //TextView showAllApartmentsTV;
+
+    Spinner spin;
+
+    boolean checkIfExist;
+
+    boolean userSelect = false;
+
+    ArrayList<String> allBuildings = new ArrayList<>();
+
+    boolean categoryMethodTriggered;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -76,60 +89,19 @@ public class CheckApartmentsFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
 
-        //Log.i("test1", "pass");
+        //showAllApartmentsTV = root.findViewById(R.id.showAllApartmentsTV);
 
-        // add person name and building name as well
+
         list = new ArrayList<>();
 
         dbCheckApartments();
-
-        /*list.add(new Apartment("rent", "500$", "100m^2", "Zohoor", "78421354", "fullname));
-        list.add(new Apartment("sale", "700$", "200m^2", "Al Burj Al Abiad", "26626267", "3rd"));
-        list.add(new Apartment("rent", "900$", "400m^2", "Tubbara", "784212424", "7th"));
-        list.add(new Apartment("sale", "200$", "300m^2", "Al Bahij", "78741258", "1st"));*/
-
-        //list.add(new Apartment("test", "test", "test", "test", "test", "t"));
-
-        // added below using a method
-        /*recyclerView = root.findViewById(R.id.recyclerView);
-        apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        recyclerView.setAdapter(apartmentsRecyclerViewAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);*/
 
         swipeRefreshLayout = root.findViewById(R.id.refreshLayoutCheckApartment);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Reload current fragment
-                /*Fragment frg = null;
-                frg = getFragmentManager().findFragmentByTag("Apartments");
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(frg);
-                ft.attach(frg);
-                ft.commit();*/
-
-                /*getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentCheckApartment,
-                        new CheckApartmentsFragment(), "Apartments").commit();*/
-
-                // giving wrong results
-                /*FragmentTransaction ft = getFragmentManager().beginTransaction();
-                if (Build.VERSION.SDK_INT >= 26) {
-                    ft.setReorderingAllowed(false);
-                }
-                ft.detach(CheckApartmentsFragment.this).attach(CheckApartmentsFragment.this).commit();*/
-
-                // giving wrong results
-                /*assert getFragmentManager() != null;
-                getFragmentManager()
-                        .beginTransaction()
-                        .detach(CheckApartmentsFragment.this)
-                        .attach(CheckApartmentsFragment.this)
-                        .commit();*/
+                // try recalling a function or so
 
                 Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ApartmentsFragment()).commit();
@@ -140,28 +112,81 @@ public class CheckApartmentsFragment extends Fragment {
 
 
 
+        spin = root.findViewById(R.id.apartmentsSpinner);
 
+        //spin.setSelection(0, false);
+
+
+        /*showAllApartmentsTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("show all", "entered");
+                dbCheckApartments();
+            }
+        });*/
 
         // Inflate the layout for this fragment
         return root;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        userSelect = true;
+        return false;
+    }
 
-    Apartment deletedApartment = null;
-    ApartmentAdd reAddDeletedApartment = null;
-    Apartment tempApartment = null;
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (userSelect) {
+            if (allBuildings.get(position).equals("All")) {
+                Log.i("show all", "entered");
+                dbCheckApartments();
+            }
+            else {
+                Toast.makeText(getActivity(), "" + allBuildings.get(position), Toast.LENGTH_SHORT).show();
+                Log.i("onItemSelected", "entered");
+                //dbCheckApartmentsCategory("b");
+                dbCheckApartmentsCategory(allBuildings.get(position));
+            }
+
+            userSelect = false;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
 
-    public void dbCheckApartments() {
+    public void dbCheckApartmentsCategory(final String chosenBuilding) {
         CommonMethods.displayLoadingScreen(progressDialog);
 
-        users.clear();
+        categoryMethodTriggered = true;
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Apartments");
+        checkIfExist = true;
+
+        users.clear();
+        state.clear();
+        area.clear();
+        price.clear();
+
+        // saved it in getUserInfo as well (can omit this maybe)
+        //allBuildings = building; // save the AL of all buildings since building is cleared below
+
+        Log.i("dbCat", "entered");
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                .getReference("ApartmentsCategorized").child(chosenBuilding);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.hasChildren()) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(getActivity(), "No apartments found in " + chosenBuilding, Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 //Log.i("1", "1");
@@ -197,7 +222,81 @@ public class CheckApartmentsFragment extends Fragment {
             @Override
             public void run() {
                 // Do this function after some time
-                getUserInfo();
+                if (checkIfExist) {
+                    getUserInfo();
+                }
+            }
+        }, 4100);
+
+    }
+
+
+    Apartment deletedApartment = null;
+    ApartmentAdd reAddDeletedApartment = null;
+    Apartment tempApartment = null;
+
+
+    public void dbCheckApartments() {
+        CommonMethods.displayLoadingScreen(progressDialog);
+
+        categoryMethodTriggered = false;
+
+        users.clear();
+        state.clear();
+        area.clear();
+        price.clear();
+
+        Log.i("dbAll", "entered");
+
+        checkIfExist = true;
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("ApartmentsAll");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(getActivity(), "No apartments found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
+                    return;
+                }
+                //Log.i("1", "1");
+                int x = 0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    //Log.i("snapshot", dataSnapshot.getValue().toString());
+                    users.add(dataSnapshot.getKey());
+                    //Log.i("key", dataSnapshot.getKey());
+                    state.add(dataSnapshot.child("state").getValue().toString());
+                    area.add(dataSnapshot.child("area").getValue().toString());
+                    price.add(dataSnapshot.child("price").getValue().toString());
+
+                    if (Objects.equals(dataSnapshot.getKey(), Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
+                        currentUserPositionInList = x;
+                    }
+                    x++;
+                }
+                //Log.i("2", "2");
+                //CommonMethods.dismissLoadingScreen(progressDialog);
+                databaseReference.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
+            }
+        });
+
+        //Log.i("3", "3");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do this function after some time
+                if (checkIfExist) {
+                    getUserInfo();
+                }
             }
         }, 4100);
 
@@ -206,16 +305,21 @@ public class CheckApartmentsFragment extends Fragment {
     public void getUserInfo() {
         CommonMethods.displayLoadingScreen(progressDialog);
 
+        building.clear();
+        ownerName.clear();
+        ownerPhone.clear();
+
+        Log.i("getUserInfo", "entered");
+
+        list.clear();
+
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                checkIfCM = false;
-                if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child("userType").getValue().equals("Committee member")) {
-                    checkIfCM = true;
-                }
+                checkIfCM = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("userType").getValue().equals("Committee member");
 
                 //Log.i("snp1", snapshot.getValue().toString());
                 //Log.i("userz", users.toString());
@@ -231,6 +335,31 @@ public class CheckApartmentsFragment extends Fragment {
                 for (int j=0; j<users.size(); j++) {
                     list.add(new Apartment(state.get(j), price.get(j), area.get(j), building.get(j), ownerPhone.get(j), ownerName.get(j)));
                 }
+
+                // only set this array when we get All apartments
+                if (!categoryMethodTriggered) {
+                    Log.i("allBuildings", "updated");
+                    allBuildings.clear();
+                    //allBuildings = building; // by reference, not what needed
+                    //Collections.copy(allBuildings, building);
+                    allBuildings = (ArrayList<String>) building.clone();
+                    allBuildings.add("All");
+
+                    Set<String> set = new HashSet<>(allBuildings);
+                    allBuildings.clear();
+                    allBuildings.addAll(set); // duplicates removed
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, allBuildings);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin.setAdapter(adapter);
+
+                    spin.setSelection(allBuildings.indexOf("All"));
+                }
+
+                Log.i("allBuilingszzz", allBuildings.toString());
+
+
+
                 CommonMethods.dismissLoadingScreen(progressDialog);
                 reference.removeEventListener(this);
                 setApartmentRV();
@@ -245,7 +374,12 @@ public class CheckApartmentsFragment extends Fragment {
     }
 
     public void setApartmentRV() {
-        //Log.i("setApartmentRv", "entered");
+
+        spin.setOnItemSelectedListener(this);
+        spin.setOnTouchListener(this);
+
+        //Log.i("setAdapter", "entered");
+
         recyclerView = root.findViewById(R.id.recyclerView);
         apartmentsRecyclerViewAdapter = new ApartmentsRecyclerViewAdapter(list, currentUserPositionInList);
 
@@ -272,9 +406,8 @@ public class CheckApartmentsFragment extends Fragment {
                     final int position = viewHolder.getAdapterPosition();
                     tempApartment = list.get(position);
 
-                    //AlertDialog d = approveDeletionAlert();
 
-                    if (direction == ItemTouchHelper.LEFT && position == currentUserPositionInList/* && approved*/) {
+                    if (direction == ItemTouchHelper.LEFT && position == currentUserPositionInList) {
                         deletedApartment = list.get(position); // used for undo action
                         reAddDeletedApartment = new ApartmentAdd(state.get(position), price.get(position),
                                 area.get(position));
@@ -283,8 +416,13 @@ public class CheckApartmentsFragment extends Fragment {
                         apartmentsRecyclerViewAdapter.notifyItemRemoved(position);
 
                         final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                .getReference("Apartments").child(users.get(position));
+                                .getReference("ApartmentsAll").child(users.get(position));
                         reference.removeValue();
+
+                        final DatabaseReference reference1 = FirebaseDatabase.getInstance()
+                                .getReference("ApartmentsCategorized")
+                                .child(building.get(position)).child(users.get(position));
+                        reference1.removeValue();
 
                         Snackbar.make(recyclerView, "Apartment advertisement removed!", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener() {
@@ -294,7 +432,7 @@ public class CheckApartmentsFragment extends Fragment {
                                         apartmentsRecyclerViewAdapter.notifyItemInserted(position);
 
                                         DatabaseReference reference1 = FirebaseDatabase.getInstance()
-                                                .getReference("Apartments").child(users.get(position));
+                                                .getReference("ApartmentsAll").child(users.get(position));
                                         reference1.setValue(reAddDeletedApartment).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -307,19 +445,30 @@ public class CheckApartmentsFragment extends Fragment {
 
                                         });
 
+                                        DatabaseReference reference2 = FirebaseDatabase.getInstance()
+                                                .getReference("ApartmentsCategorized")
+                                                .child(building.get(position)).child(users.get(position));
+                                        reference2.setValue(reAddDeletedApartment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.i("undo cat", "success");
+                                                } else {
+                                                    Log.i("undo cat", "failed");
+                                                }
+                                            }
+
+                                        });
+
                                     }
                                 }).show();
                     }
                     else {
-                        //list.add(position, deletedMovie);
                         list.remove(position);
                         apartmentsRecyclerViewAdapter.notifyItemRemoved(position);
                         list.add(position, tempApartment);
                         apartmentsRecyclerViewAdapter.notifyItemInserted(position);
                         Toast.makeText(getActivity(), "Cannot delete an apartment other than yours!", Toast.LENGTH_SHORT).show();
-                        /*if (d.isShowing()) {
-                            d.dismiss();
-                        }*/
                     }
                 }
             };
@@ -330,90 +479,6 @@ public class CheckApartmentsFragment extends Fragment {
 
     }
 
-    //boolean approved = false;
 
-    /*public AlertDialog approveDeletionAlert() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.delete_item_dialog, null);
-
-        builder.setView(view);
-
-        final AlertDialog dialog = builder.create();
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        Button cancel = view.findViewById(R.id.cancelButton);
-        Button yes = view.findViewById(R.id.yesButton);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                approved = false;
-            }
-        });
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                approved = true;
-            }
-        });
-
-        //builder.setView(view);
-        dialog.show();
-
-
-        return dialog;
-
-    }*/
-
-
-    // check if the signed in user is a committee member
-
-    /*public void checkIfCommittee () {
-        //Log.i("test", "3");
-        checkIfCM = false;
-
-        //CommonMethods.displayLoadingScreen(progressDialog);
-
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Log.i("test", "db");
-                //Log.i("test", "" + snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userType"));
-                if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child("userType").getValue().equals("Committee member")) {
-                    checkIfCM = true;
-                    //Log.i("test", "dbIf");
-                    //Log.i("test", "" + snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userType"));
-                }
-                //CommonMethods.dismissLoadingScreen(progressDialog);
-                reference.removeEventListener(this);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("dbError", error.getMessage());
-            }
-        });
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("test", "4");
-                if (checkIfCM) {
-                    setFragmentCommittee();
-                    Log.i("committee", "yes");
-                }
-                else {
-                    Log.i("committee", "no");
-                    setFragmentNotCommittee();
-                }
-            }
-        }, 2111);
-
-    }*/
 
 }
