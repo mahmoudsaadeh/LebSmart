@@ -24,16 +24,9 @@ import java.util.List;
 
 public class CheckProblemsFragment extends Fragment {
 
-    //RecyclerView recyclerViewProblems;
-    //ReportProblemRVA reportProblemRVA;
-
-    CardView elec;
-    CardView wat;
-    CardView bs;
+    CardView yourBuildingProblems, theSmartCityProblems;
 
     ViewGroup root;
-
-    //List<Problem> problems;
 
     @Nullable
     @Override
@@ -41,56 +34,28 @@ public class CheckProblemsFragment extends Fragment {
 
         root = (ViewGroup) inflater.inflate(R.layout.check_problems, container, false);
 
-        elec = root.findViewById(R.id.elecProblems);
-        wat = root.findViewById(R.id.watProblems);
-        bs = root.findViewById(R.id.bsProblems);
+        yourBuildingProblems = root.findViewById(R.id.yourBuildingProblems);
+        theSmartCityProblems = root.findViewById(R.id.theSmartCityProblems);
 
-        elec.setOnClickListener(new View.OnClickListener() {
+        yourBuildingProblems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get data from database and pass them to the activity
                 Intent intent = new Intent(getActivity(), ProblemsActivity.class);
-                intent.putExtra("problemType", "Electricity");
+                intent.putExtra("problemWithin", "Your Building");
                 startActivity(intent);
             }
         });
 
-        wat.setOnClickListener(new View.OnClickListener() {
+        theSmartCityProblems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get data from database and pass them to the activity
                 Intent intent = new Intent(getActivity(), ProblemsActivity.class);
-                intent.putExtra("problemType", "Water");
+                intent.putExtra("problemWithin", "The Smart City");
                 startActivity(intent);
             }
         });
-
-        bs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // get data from database and pass them to the activity
-                Intent intent = new Intent(getActivity(), ProblemsActivity.class);
-                intent.putExtra("problemType", "Building Services");
-                startActivity(intent);
-            }
-        });
-
-        /*problems = new ArrayList<>();
-        problems.add(new Problem("water", "3otol1", "me1", "today1"));
-        problems.add(new Problem("electricity", "3otol2", "me2", "today2"));
-        problems.add(new Problem("bs", "3otol3", "me3", "today3"));
-        problems.add(new Problem("bs", "3otol4", "me4", "today4"));
-        problems.add(new Problem("water", "3otol5", "me5", "today5"));
-
-        recyclerViewProblems = root.findViewById(R.id.problemsRecyclerView);
-        reportProblemRVA = new ReportProblemRVA(problems);
-
-        recyclerViewProblems.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        recyclerViewProblems.setAdapter(reportProblemRVA);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL);
-        recyclerViewProblems.addItemDecoration(dividerItemDecoration);*/
 
 
         return root;

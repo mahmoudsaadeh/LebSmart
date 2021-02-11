@@ -68,7 +68,9 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
 
     int currentUserPositionInList = -1;
 
-    public static boolean checkIfCM; // for committee fragment
+    public static boolean checkIfCM; // for committee and meetings fragment
+
+    public static String getUserBuilding; // for meetings fragment
 
     //TextView showAllApartmentsTV;
 
@@ -90,7 +92,7 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
         progressDialog = new ProgressDialog(getActivity());
 
         //showAllApartmentsTV = root.findViewById(R.id.showAllApartmentsTV);
-
+        getUserData(); // should be triggered in all conditions since its data is used in other fragments
 
         list = new ArrayList<>();
 
@@ -113,17 +115,6 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
 
 
         spin = root.findViewById(R.id.apartmentsSpinner);
-
-        //spin.setSelection(0, false);
-
-
-        /*showAllApartmentsTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("show all", "entered");
-                dbCheckApartments();
-            }
-        });*/
 
         // Inflate the layout for this fragment
         return root;
@@ -318,8 +309,13 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                checkIfCM = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                // added in a separate method below, since this method will not be triggered
+                // if no apartments where found, and thus causing errors and wrong results in other fragments
+                /*checkIfCM = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .child("userType").getValue().equals("Committee member");
+
+                getUserBuilding = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("buildingChosen").getValue().toString();*/
 
                 //Log.i("snp1", snapshot.getValue().toString());
                 //Log.i("userz", users.toString());
@@ -479,6 +475,22 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
 
     }
 
+    public void getUserData() {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                checkIfCM = snapshot.child("userType").getValue().equals("Committee member");
 
+                getUserBuilding = snapshot.child("buildingChosen").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error getting user data", error.getMessage());
+            }
+        });
+    }
 
 }

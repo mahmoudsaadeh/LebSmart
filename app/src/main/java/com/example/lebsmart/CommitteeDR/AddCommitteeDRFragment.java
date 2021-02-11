@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -144,7 +145,7 @@ public class AddCommitteeDRFragment extends Fragment {
         // every committee member is allowed to add only 1 reminder and 1 decision
         // there should be 3 committee members only per building
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("CommitteeDRs");
-        reference = reference.child(typeString)
+        reference = reference.child(CheckApartmentsFragment.getUserBuilding).child(typeString)
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         reference.setValue(committeeAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

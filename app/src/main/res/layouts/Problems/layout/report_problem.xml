@@ -25,6 +25,40 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/problemWithin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:padding="5dp"
+            android:text="Problem within:"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/problemWithinRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:checkedButton="@id/radioButtonYourBuilding"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonYourBuilding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:text="Your Building" />
+
+            <RadioButton
+                android:id="@+id/radioButtonSmartCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:text="The Smart City" />
+
+        </RadioGroup>
+
+        <TextView
             android:id="@+id/problemTypeTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,36 +67,88 @@
             android:text="Problem in:"
             android:textSize="18sp" />
 
-        <RadioGroup
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal"
-            android:id="@+id/problemsRadioGroup">
+            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioButtonElec"
-                android:layout_width="match_parent"
+            <RadioGroup
+                android:id="@+id/problemsWithinBuildingRadioGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="7dp"
-                android:text="Electricity" />
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/radioButtonWater"
-                android:layout_width="match_parent"
+                <RadioButton
+                    android:id="@+id/radioButtonElec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Electricity" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonWater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Water" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSanitation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Sanitation" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonBS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Building Services" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/problemsWithinSCRadioGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="7dp"
-                android:text="Water" />
+                android:layout_marginTop="7dp"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <RadioButton
-                android:id="@+id/radioButtonBS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="7dp"
-                android:text="Building Services" />
+                <RadioButton
+                    android:id="@+id/radioButtonElecSC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Electricity" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/radioButtonWaterSC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Water" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSanitationSC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Sanitation" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOtherSC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="Other (eg: road conditions...)" />
+
+            </RadioGroup>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/problemDescription"

@@ -26,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.lebsmart.ApartmentsFragments.Apartment;
 import com.example.lebsmart.ApartmentsFragments.ApartmentAdd;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -67,6 +68,8 @@ public class CheckMeetingsFragment extends Fragment {
 
     int currentUserPositionInList = -1;
 
+    boolean checkIfExist;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,12 +79,6 @@ public class CheckMeetingsFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
 
         meetings = new ArrayList<>();
-        /*meetings.add(new Meetings("11:22", "25-5-2015", "zohoor building", "an alien", "Meeting Y", "description heree!!"));
-        meetings.add(new Meetings("1:55", "25-5-2015", "zohoor building", "an alien", "Meeting X", "description heree!!"));
-        meetings.add(new Meetings("4:51", "25-5-2015", "zohoor building", "an alien", "Meeting Z", "description heree!!"));
-        meetings.add(new Meetings("2:55", "25-5-2015", "zohoor building", "an alien", "Meeting N", "description heree!!"));
-        meetings.add(new Meetings("8:02", "25-5-2015", "zohoor building", "an alien", "Meeting K", "description heree!!"));
-*/
 
         dbCheckMeetings();
 
@@ -113,16 +110,23 @@ public class CheckMeetingsFragment extends Fragment {
 
         users.clear();
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
+        checkIfExist = true;
+
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Meetings")
+                .child(CheckApartmentsFragment.getUserBuilding);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.hasChildren()) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(getActivity(), "No meetings are scheduled!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Log.i("snapshotMeetings", Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                    //Log.i("snapshotMeetings", Objects.requireNonNull(dataSnapshot.getValue()).toString());
                     users.add(dataSnapshot.getKey());
                     //Log.i("key", dataSnapshot.getKey());
                     date.add(Objects.requireNonNull(dataSnapshot.child("meetingDateAdd").getValue()).toString());
@@ -150,7 +154,9 @@ public class CheckMeetingsFragment extends Fragment {
             @Override
             public void run() {
                 // Do this function after some time
-                getUserInfoMeetings();
+                if (checkIfExist) {
+                    getUserInfoMeetings();
+                }
             }
         }, 4100);
 

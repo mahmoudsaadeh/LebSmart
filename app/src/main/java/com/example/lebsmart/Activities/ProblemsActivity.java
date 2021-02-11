@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.lebsmart.ApartmentsFragments.Apartment;
 import com.example.lebsmart.ApartmentsFragments.ApartmentAdd;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.ReportProblemsFragments.Problem;
@@ -48,7 +49,7 @@ public class ProblemsActivity extends AppCompatActivity {
 
     List<Problem> problems;
 
-    String problemType;
+    String problemWithin;
 
 
     ProgressDialog progressDialog;
@@ -64,6 +65,8 @@ public class ProblemsActivity extends AppCompatActivity {
 
     int currentUserPositionInList = -1;
 
+    boolean checkIfExist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,25 +74,17 @@ public class ProblemsActivity extends AppCompatActivity {
 
         problemTV = findViewById(R.id.reportedPrblmTV);
 
-        problemType = "";
+        problemWithin = "";
         Intent intent = getIntent();
-        problemType = intent.getStringExtra("problemType");
+        problemWithin = intent.getStringExtra("problemWithin");
 
-        problemTV.setText(problemType + " Reported Problems:");
+        problemTV.setText("Problems Within\n" + problemWithin);
 
         problems = new ArrayList<>();
 
         progressDialog = new ProgressDialog(this);
-        // get info from db and fill them here
-        // should check the type of problems clicked, and get the ones with the associated type only
-        /*problems.add(new Problem("water", "3otol1", "me1", "today1"));
-        problems.add(new Problem("electricity", "3otol2", "me2", "today2"));
-        problems.add(new Problem("bs", "3otol3", "me3", "today3"));
-        problems.add(new Problem("bs", "3otol4", "me4", "today4"));
-        problems.add(new Problem("water", "3otol5", "me5", "today5"));
-*/
 
-        dbCheckProblems();
+        //dbCheckProblems();
 
         /*swipeRefreshLayout = findViewById(R.id.);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -105,17 +100,33 @@ public class ProblemsActivity extends AppCompatActivity {
 
     }
 
+    DatabaseReference databaseReference;
+    // requires ta8yeer jazree
     public void dbCheckProblems () {
         CommonMethods.displayLoadingScreen(progressDialog);
 
         users.clear();
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("Problems").child(problemType);
+        checkIfExist = true;
+
+        if (problemWithin.equals("Your Building")) {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("Problems").child(problemWithin)
+                    .child(CheckApartmentsFragment.getUserBuilding);
+        }
+        else {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("Problems").child(problemWithin);
+        }
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
+                    Toast.makeText(ProblemsActivity.this, "No problems found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -145,7 +156,9 @@ public class ProblemsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Do this function after some time
-                getUserInfo();
+                if (checkIfExist) {
+                    getUserInfo();
+                }
             }
         }, 4100);
     }
@@ -223,9 +236,9 @@ public class ProblemsActivity extends AppCompatActivity {
                         problems.remove(position);
                         reportProblemRVA.notifyItemRemoved(position);
 
-                        final DatabaseReference reference = FirebaseDatabase.getInstance()
+                        /*final DatabaseReference reference = FirebaseDatabase.getInstance()
                                 .getReference("Problems").child(problemType).child(users.get(position));
-                        reference.removeValue();
+                        reference.removeValue();*/
 
                         Snackbar.make(recyclerViewProblems, "The problem you reported is removed!", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener() {
@@ -234,7 +247,7 @@ public class ProblemsActivity extends AppCompatActivity {
                                         problems.add(position, deletedProblem);
                                         reportProblemRVA.notifyItemInserted(position);
 
-                                        DatabaseReference reference1 = FirebaseDatabase.getInstance()
+                                        /*DatabaseReference reference1 = FirebaseDatabase.getInstance()
                                                 .getReference("Problems").child(problemType).child(users.get(position));
                                         reference1.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -246,7 +259,7 @@ public class ProblemsActivity extends AppCompatActivity {
                                                 }
                                             }
 
-                                        });
+                                        });*/
 
                                     }
                                 }).show();
