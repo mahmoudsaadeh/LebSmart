@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="4dp"
+    app:cardCornerRadius="27dp">
 
 
     <!--Electricity Section-->
@@ -37,9 +40,8 @@
                 android:id="@+id/reportNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="#009688"
-                android:paddingStart="7dp"
+                android:background="#324e7b"
+                android:paddingStart="15dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="7dp"
                 android:paddingBottom="5dp"
@@ -71,7 +73,7 @@
                         android:id="@+id/problemDescriptionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
+                        android:paddingStart="7dp"
                         android:text="Description: "
                         android:textSize="21sp"
                         android:textStyle="bold|italic" />
@@ -97,7 +99,7 @@
                         android:id="@+id/reportDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
+                        android:paddingStart="7dp"
                         android:text="Date: "
                         android:textSize="21sp"
                         android:textStyle="bold|italic" />
@@ -123,7 +125,7 @@
                         android:id="@+id/reportedByProblem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
+                        android:paddingStart="7dp"
                         android:text="Reported by: "
                         android:textSize="21sp"
                         android:textStyle="bold|italic" />
@@ -134,6 +136,31 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="2aa doonnoooo"
+                        android:textColor="#009688"
+                        android:textSize="21sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/reportersBuilding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="7dp"
+                        android:text="Reporter's building: "
+                        android:textSize="21sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/reportersBuildingContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="building name here"
                         android:textColor="#009688"
                         android:textSize="21sp" />
 
@@ -418,4 +445,4 @@
 
     -->
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

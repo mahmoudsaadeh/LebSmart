@@ -43,17 +43,25 @@
         app:layout_constraintStart_toEndOf="@+id/chooseProblemTV"
         app:layout_constraintTop_toBottomOf="@+id/reportedPrblmTV" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/problemsRecyclerView"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="11dp"
-        android:padding="6dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problemsSpinner"
-        app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/refreshLayoutProblems">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/problemsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="11dp"
+            android:padding="6dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

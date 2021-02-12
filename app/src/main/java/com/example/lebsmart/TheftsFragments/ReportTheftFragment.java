@@ -12,6 +12,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
@@ -21,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.RandomFragments.DatePickerFragment;
@@ -65,6 +69,9 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
     TextView showTime;
     TextView theftLocation;
 
+    RadioGroup theftWithinRadioGroup;
+    RadioButton radioButtonYourBuildingTheft, radioButtonSmartCityTheft;
+
     FusedLocationProviderClient fusedLocationProviderClient;
 
     double lat, lon;
@@ -74,13 +81,24 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
 
     ProgressDialog progressDialog;
 
-    String title, description, date, time, location;
+    String title, description, date, time, location, theftWithinString;
+    int theftWithin;
+
+    TheftsAdd theftsAdd;
+
+    public static final int NO_RADIO_BUTTON_SELECTED = -1;
+
+    DatabaseReference reference;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = (ViewGroup) inflater.inflate(R.layout.report_theft_fragment, container, false);
+
+        theftWithinRadioGroup = root.findViewById(R.id.theftWithinRadioGroup);
+        radioButtonYourBuildingTheft = root.findViewById(R.id.radioButtonYourBuildingTheft);
+        radioButtonSmartCityTheft = root.findViewById(R.id.radioButtonSmartCityTheft);
 
         showDate = root.findViewById(R.id.theftDateTV);
         showTime = root.findViewById(R.id.theftTimeTV);
@@ -152,12 +170,25 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
 
     public void reportTheft () {
 
+        theftWithin = theftWithinRadioGroup.getCheckedRadioButtonId();
+
         title = theftTitle.getText().toString();
         description = theftMessage.getText().toString();
 
         date = showDate.getText().toString();
         time = showTime.getText().toString();
         location = theftLocation.getText().toString();
+
+        if (theftWithin == NO_RADIO_BUTTON_SELECTED) {
+            Toast.makeText(getActivity(), "Please fill the first entry!", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            if (theftWithin == R.id.radioButtonYourBuildingTheft) {
+                theftWithinString = radioButtonYourBuildingTheft.getText().toString();
+            } else if (theftWithin == R.id.radioButtonSmartCityTheft) {
+                theftWithinString = radioButtonSmartCityTheft.getText().toString();
+            }
+        }
 
         if (title.isEmpty()) {
             CommonMethods.warning(theftTitle, "Title is required!");
@@ -185,10 +216,19 @@ public class ReportTheftFragment extends Fragment implements DatePickerDialog.On
         }
 
         CommonMethods.displayLoadingScreen(progressDialog);
-        TheftsAdd theftsAdd = new TheftsAdd(title, date, time, description, location);
+        theftsAdd = new TheftsAdd(title, date, time, description, location);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Thefts");
-        reference = reference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        reference = FirebaseDatabase.getInstance().getReference("TheftsCategorized");
+
+        if (theftWithinString.equals("Your Building")) {
+            reference = reference.child(theftWithinString).child(CheckApartmentsFragment.getUserBuilding)
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        }
+        else {
+            reference = reference.child(theftWithinString)
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        }
+
         reference.setValue(theftsAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

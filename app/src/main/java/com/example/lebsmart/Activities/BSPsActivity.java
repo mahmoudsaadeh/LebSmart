@@ -81,14 +81,6 @@ public class BSPsActivity extends AppCompatActivity {
 
         dbCheckSPs();
 
-        // get info from db and fill them here
-        // should check the type of problems clicked, and get the ones with the associated type only
-        /*bsps.add(new BSP("abo ahmad", "78-885247", "" + spCategory, "4.1", "Aramoun"));
-        bsps.add(new BSP("najii", "78-885247", "" + spCategory, "4.5", "Beirut"));
-        bsps.add(new BSP("najii2", "78-885247", "" + spCategory, "4.5", "Beirut"));
-        bsps.add(new BSP("najii5", "78-885247", "" + spCategory, "4.5", "Beirut"));
-*/
-
     }
 
 
@@ -119,7 +111,10 @@ public class BSPsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshotExists = true;
                 if (!snapshot.exists()) {
+                    Toast.makeText(BSPsActivity.this, "No SPs found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                     snapshotExists = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -157,12 +152,8 @@ public class BSPsActivity extends AppCompatActivity {
                     //getUserInfoBSPs();
                     getRatings();
                 }
-                else {
-                    Toast.makeText(BSPsActivity.this, "No SPs to display!", Toast.LENGTH_SHORT).show();
-                    CommonMethods.dismissLoadingScreen(progressDialog);
-                }
             }
-        }, 4100);
+        }, 3111);
 
     }
 
@@ -239,7 +230,7 @@ public class BSPsActivity extends AppCompatActivity {
             public void run() {
                 getUserInfoBSPs();
             }
-        }, 3777);
+        }, 2555);
 
     }
 

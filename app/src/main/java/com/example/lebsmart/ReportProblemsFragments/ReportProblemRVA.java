@@ -18,9 +18,11 @@ import java.util.List;
 public class ReportProblemRVA extends RecyclerView.Adapter<ReportProblemRVA.ViewHolder> {
 
     List<Problem> problems;
+    int currentUserPositionInList;
 
-    public ReportProblemRVA(List<Problem> problemList) {
+    public ReportProblemRVA(List<Problem> problemList, int currentUserPositionInList) {
         this.problems = problemList;
+        this.currentUserPositionInList = currentUserPositionInList;
     }
 
     @NonNull
@@ -40,6 +42,12 @@ public class ReportProblemRVA extends RecyclerView.Adapter<ReportProblemRVA.View
         holder.reportDateContent.setText(problems.get(position).getProblemReportDate());
         holder.problemReportedBy.setText(problems.get(position).getProblemReportedBy());
 
+        holder.reportersBuildingContent.setText(problems.get(position).getReportersBuilding());
+
+        if (position == currentUserPositionInList) {
+            holder.reportNumber.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_delete, 0);
+        }
+
         boolean isExpanded = problems.get(position).isExpanded();
         holder.problemExpandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
@@ -58,6 +66,8 @@ public class ReportProblemRVA extends RecyclerView.Adapter<ReportProblemRVA.View
         TextView reportDateContent;
         TextView problemReportedBy;
 
+        TextView reportersBuildingContent;
+
         TableLayout problemExpandableLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,6 +77,8 @@ public class ReportProblemRVA extends RecyclerView.Adapter<ReportProblemRVA.View
             problemDescriptionContent = itemView.findViewById(R.id.problemDescriptionContent);
             reportDateContent = itemView.findViewById(R.id.reportDateContent);
             problemReportedBy = itemView.findViewById(R.id.reportedByProblemContent);
+
+            reportersBuildingContent = itemView.findViewById(R.id.reportersBuildingContent);
 
             problemExpandableLayout = itemView.findViewById(R.id.problemsExpandableLayout);
 
