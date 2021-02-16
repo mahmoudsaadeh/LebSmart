@@ -86,8 +86,9 @@ public class CheckMeetingsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MeetingsFragment()).commit();
+                /*Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MeetingsFragment()).commit();*/
+                dbCheckMeetings();
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -109,6 +110,11 @@ public class CheckMeetingsFragment extends Fragment {
         CommonMethods.displayLoadingScreen(progressDialog);
 
         users.clear();
+        date.clear();
+        time.clear();
+        description.clear();
+        place.clear();
+        title.clear();
 
         checkIfExist = true;
 
@@ -167,6 +173,10 @@ public class CheckMeetingsFragment extends Fragment {
     public void getUserInfoMeetings() {
 
         CommonMethods.displayLoadingScreen(progressDialog);
+
+        scheduledBy.clear();
+
+        meetings.clear();
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {

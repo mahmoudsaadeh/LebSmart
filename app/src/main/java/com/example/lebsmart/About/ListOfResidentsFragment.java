@@ -68,8 +68,9 @@ public class ListOfResidentsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ListOfResidentsFragment()).commit();
+                /*Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ListOfResidentsFragment()).commit();*/
+                getCurrentUserBuilding();
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -111,6 +112,12 @@ public class ListOfResidentsFragment extends Fragment {
     public void dbGetLORs () {
 
         users.clear();
+        mails.clear();
+        fullNames.clear();
+        phones.clear();
+        userTypes.clear();
+
+        loRs.clear();
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Buildings")
                 .child(currentUserBuilding);

@@ -180,7 +180,7 @@ public class CheckTheftsFragment extends Fragment implements AdapterView.OnItemS
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.hasChildren()) {
-                    Toast.makeText(getActivity(), "No thefts reported within your building!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No reported thefts were found!", Toast.LENGTH_SHORT).show();
                     CommonMethods.dismissLoadingScreen(progressDialog);
                     checkIfExist = false;
                     databaseReference.removeEventListener(this);
@@ -311,7 +311,7 @@ public class CheckTheftsFragment extends Fragment implements AdapterView.OnItemS
                         }
                         else {
                             final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                    .getReference("TheftsCategorized").child("Your Building")
+                                    .getReference("TheftsCategorized").child("The Smart City")
                                     .child(users.get(position));
                             reference.removeValue();
                         }
@@ -342,7 +342,7 @@ public class CheckTheftsFragment extends Fragment implements AdapterView.OnItemS
                                         }
                                         else {
                                             DatabaseReference reference = FirebaseDatabase.getInstance()
-                                                    .getReference("TheftsCategorized").child("Your Building")
+                                                    .getReference("TheftsCategorized").child("The Smart City")
                                                     .child(users.get(position));
                                             reference.setValue(reAddDeletedTheft).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

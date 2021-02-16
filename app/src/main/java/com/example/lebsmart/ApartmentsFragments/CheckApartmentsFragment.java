@@ -105,8 +105,9 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
                 // Reload current fragment
                 // try recalling a function or so
 
-                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ApartmentsFragment()).commit();
+                /*Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ApartmentsFragment()).commit();*/
+                dbCheckApartments();
 
                 swipeRefreshLayout.setRefreshing(false);
             }
