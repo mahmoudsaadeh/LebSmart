@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -135,7 +136,7 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
                 dbCheckApartments();
             }
             else {
-                Toast.makeText(getActivity(), "" + allBuildings.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "" + allBuildings.get(position), Toast.LENGTH_SHORT).show();
                 Log.i("onItemSelected", "entered");
                 //dbCheckApartmentsCategory("b");
                 dbCheckApartmentsCategory(allBuildings.get(position));
@@ -241,6 +242,13 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
         Log.i("dbAll", "entered");
 
         checkIfExist = true;
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Log.i("user", "=null");
+            CommonMethods.dismissLoadingScreen(progressDialog);
+            return;
+        }
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("ApartmentsAll");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -476,22 +484,26 @@ public class CheckApartmentsFragment extends Fragment implements AdapterView.OnI
 
     }
 
-    public void getUserData() {
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                checkIfCM = snapshot.child("userType").getValue().equals("Committee member");
+    public static void getUserData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    checkIfCM = snapshot.child("userType").getValue().equals("Committee member");
 
-                getUserBuilding = snapshot.child("buildingChosen").getValue().toString();
-            }
+                    getUserBuilding = snapshot.child("buildingChosen").getValue().toString();
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("error getting user data", error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.i("error getting user data", error.getMessage());
+                }
+            });
+        }
+
     }
 
 }

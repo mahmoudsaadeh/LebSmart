@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editProfileTV">
 
         <EditText
-            android:id="@+id/usernameEP"
+            android:id="@+id/fullNameEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="17dp"
@@ -55,6 +55,7 @@
             android:ems="10"
             android:hint="Phone"
             android:inputType="phone"
+            android:maxLength="8"
             android:paddingStart="17dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
@@ -75,13 +76,27 @@
             android:paddingBottom="11dp" />
 
         <EditText
+            android:id="@+id/oldPasswordEP"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/edit_text_design"
+            android:ems="10"
+            android:hint="Old Password"
+            android:inputType="textPassword"
+            android:paddingStart="17dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="11dp" />
+
+        <EditText
             android:id="@+id/passwordEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="17dp"
             android:background="@drawable/edit_text_design"
             android:ems="10"
-            android:hint="Password"
+            android:hint="New Password"
             android:inputType="textPassword"
             android:paddingStart="17dp"
             android:paddingTop="11dp"
@@ -95,7 +110,7 @@
             android:layout_marginBottom="31dp"
             android:background="@drawable/edit_text_design"
             android:ems="10"
-            android:hint="Confirm Password"
+            android:hint="Confirm New Password"
             android:inputType="textPassword"
             android:paddingStart="17dp"
             android:paddingTop="11dp"

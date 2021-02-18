@@ -36,6 +36,7 @@ import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 public class MainScreenActivity extends AppCompatActivity {
@@ -60,9 +61,12 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // if the signed in user is the developers account, show the add building item in drawer menu
         // else, it is kept hidden
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("w1bTnJ8UP5PJyxpy4WaLF76oz9y2")) {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.add_building).setVisible(true);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("w1bTnJ8UP5PJyxpy4WaLF76oz9y2")) {
+                Menu nav_Menu = navigationView.getMenu();
+                nav_Menu.findItem(R.id.add_building).setVisible(true);
+            }
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -119,20 +123,7 @@ public class MainScreenActivity extends AppCompatActivity {
                                 new TermsNConditionsFragment()).commit();
                         break;
                     case R.id.logout:
-                        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                            FirebaseAuth.getInstance().signOut();
-                            LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
-                            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            //finishAffinity();
-
-                            startActivity(intent);
-                            //finish();
-                            //finishAndRemoveTask();
-                        }
-                        else {
-                            Toast.makeText(MainScreenActivity.this, "You're already logged out!", Toast.LENGTH_SHORT).show();
-                        }
+                        logout();
                         break;
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -175,6 +166,31 @@ public class MainScreenActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void logout() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseAuth.getInstance().signOut();
+            LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
+            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //finishAffinity();
+
+            startActivity(intent);
+            //finish();
+            //finishAndRemoveTask();
+        }
+        else {
+            Toast.makeText(MainScreenActivity.this, "You're already logged out!", Toast.LENGTH_SHORT).show();
+
+            FirebaseAuth.getInstance().signOut();
+            LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
+            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //finishAffinity();
+
+            startActivity(intent);
+        }
     }
 
     @Override
