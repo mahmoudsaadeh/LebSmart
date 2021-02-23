@@ -32,8 +32,10 @@ import com.example.lebsmart.About.RateUsFragment;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.RandomFragments.MyProfileFragment;
 import com.example.lebsmart.ReportProblemsFragments.ProblemsFragment;
+import com.example.lebsmart.Settings.SettingsFragment;
 import com.example.lebsmart.TheftsFragments.TheftFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
+import com.example.lebsmart.Weather.WeatherFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -144,6 +146,14 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.residentsList:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new ListOfResidentsFragment()).commit();
+                        break;
+                    case R.id.weather:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new WeatherFragment()).commit();
+                        break;
+                    case R.id.settings:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new SettingsFragment()).commit();
                         break;
                 }
 

@@ -45,6 +45,10 @@
             android:icon="@drawable/ic_fire"
             android:title="Fire Detection" />
         <item
+            android:id="@+id/weather"
+            android:icon="@drawable/ic_weather"
+            android:title="Weather Forecasts" />
+        <item
             android:id="@+id/add_building"
             android:icon="@drawable/ic_add_building"
             android:title="Add Building"
@@ -83,6 +87,10 @@
                     android:id="@+id/profile"
                     android:icon="@drawable/ic_profile"
                     android:title="Edit Profile" />
+                <item
+                    android:id="@+id/settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="Settings" />
                 <item
                     android:id="@+id/logout"
                     android:icon="@drawable/ic_logout"
