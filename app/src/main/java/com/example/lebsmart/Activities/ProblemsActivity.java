@@ -13,13 +13,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lebsmart.ApartmentsFragments.Apartment;
 import com.example.lebsmart.ApartmentsFragments.ApartmentAdd;
 import com.example.lebsmart.ApartmentsFragments.ApartmentsFragment;
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.ReportProblemsFragments.Problem;
@@ -36,10 +41,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-public class ProblemsActivity extends AppCompatActivity {
+public class ProblemsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener {
 
     RecyclerView recyclerViewProblems;
     ReportProblemRVA reportProblemRVA;
@@ -48,7 +55,7 @@ public class ProblemsActivity extends AppCompatActivity {
 
     List<Problem> problems;
 
-    String problemType;
+    String problemWithin;
 
 
     ProgressDialog progressDialog;
@@ -60,9 +67,25 @@ public class ProblemsActivity extends AppCompatActivity {
     ArrayList<String> problemTypeAL = new ArrayList<>();
     ArrayList<String> reportedByNames = new ArrayList<>();
 
-    //SwipeRefreshLayout swipeRefreshLayout;
+    ArrayList<String> reportersBuilding = new ArrayList<>();
+
+    SwipeRefreshLayout refreshLayoutProblems;
 
     int currentUserPositionInList = -1;
+
+    boolean checkIfExist;
+
+    Spinner problemsSpinner;
+
+    boolean userSelect = false;
+
+    ArrayList<String> allProblems = new ArrayList<>();
+
+    boolean categoryMethodTriggered;
+
+    String userSelectString;
+
+    String reporterBuilding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,51 +94,99 @@ public class ProblemsActivity extends AppCompatActivity {
 
         problemTV = findViewById(R.id.reportedPrblmTV);
 
-        problemType = "";
+        problemWithin = "";
         Intent intent = getIntent();
-        problemType = intent.getStringExtra("problemType");
+        problemWithin = intent.getStringExtra("problemWithin");
 
-        problemTV.setText(problemType + " Reported Problems:");
+        problemTV.setText("Problems Within\n" + problemWithin);
 
         problems = new ArrayList<>();
 
         progressDialog = new ProgressDialog(this);
-        // get info from db and fill them here
-        // should check the type of problems clicked, and get the ones with the associated type only
-        /*problems.add(new Problem("water", "3otol1", "me1", "today1"));
-        problems.add(new Problem("electricity", "3otol2", "me2", "today2"));
-        problems.add(new Problem("bs", "3otol3", "me3", "today3"));
-        problems.add(new Problem("bs", "3otol4", "me4", "today4"));
-        problems.add(new Problem("water", "3otol5", "me5", "today5"));
-*/
+
+        problemsSpinner = findViewById(R.id.problemsSpinner);
 
         dbCheckProblems();
 
-        /*swipeRefreshLayout = findViewById(R.id.);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayoutProblems = findViewById(R.id.refreshLayoutProblems);
+        refreshLayoutProblems.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // reload activity after db
                 // no need
+                dbCheckProblems();
 
-                swipeRefreshLayout.setRefreshing(false);
+                refreshLayoutProblems.setRefreshing(false);
             }
-        });*/
+        });
 
+
+    } // end onCreate
+
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        userSelect = true;
+        return false;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (userSelect) {
+            if (allProblems.get(position).equals("All")) {
+                Log.i("show all problems", "entered");
+                userSelectString = allProblems.get(position);
+                dbCheckProblems();
+            }
+            else {
+                Toast.makeText(ProblemsActivity.this, "" + allProblems.get(position), Toast.LENGTH_SHORT).show();
+                Log.i("onItemSelected pbs", "entered");
+                userSelectString = allProblems.get(position);
+                dbCheckProblemsCategory(allProblems.get(position));
+            }
+
+            userSelect = false;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
+    DatabaseReference databaseReference;
 
     public void dbCheckProblems () {
         CommonMethods.displayLoadingScreen(progressDialog);
 
         users.clear();
+        problemDescription.clear();
+        problemReportDate.clear();
+        problemTypeAL.clear();
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("Problems").child(problemType);
+        categoryMethodTriggered = false;
+
+        checkIfExist = true;
+
+        if (problemWithin.equals("Your Building")) {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("ProblemsAll").child(problemWithin)
+                    .child(CheckApartmentsFragment.getUserBuilding);
+        }
+        else {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("ProblemsAll").child(problemWithin);
+        }
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
+                    Toast.makeText(ProblemsActivity.this, "No problems found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -145,14 +216,93 @@ public class ProblemsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Do this function after some time
-                getUserInfo();
+                if (checkIfExist) {
+                    getUserInfo();
+                }
             }
         }, 4100);
     }
 
 
+
+    DatabaseReference databaseReferenceCategory;
+
+    public void dbCheckProblemsCategory (String chosenProblemType) {
+        CommonMethods.displayLoadingScreen(progressDialog);
+
+        categoryMethodTriggered = true;
+
+        users.clear();
+        problemDescription.clear();
+        problemReportDate.clear();
+        problemTypeAL.clear();
+
+        checkIfExist = true;
+
+        if (problemWithin.equals("Your Building")) {
+            databaseReferenceCategory = FirebaseDatabase.getInstance()
+                    .getReference("ProblemsCategorized").child(problemWithin)
+                    .child(CheckApartmentsFragment.getUserBuilding).child(chosenProblemType);
+        }
+        else {
+            databaseReferenceCategory = FirebaseDatabase.getInstance()
+                    .getReference("ProblemsCategorized").child(problemWithin)
+                    .child(chosenProblemType);
+        }
+
+        databaseReferenceCategory.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(ProblemsActivity.this, "No problems found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReferenceCategory.removeEventListener(this);
+                    return;
+                }
+                int x = 0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    users.add(dataSnapshot.getKey());
+
+                    problemDescription.add(Objects.requireNonNull(dataSnapshot.child("problemDescription").getValue()).toString());
+                    problemReportDate.add(Objects.requireNonNull(dataSnapshot.child("problemReportDate").getValue()).toString());
+                    problemTypeAL.add(Objects.requireNonNull(dataSnapshot.child("problemType").getValue()).toString());
+
+                    if (Objects.equals(dataSnapshot.getKey(), Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
+                        currentUserPositionInList = x;
+                    }
+                    x++;
+                }
+                databaseReferenceCategory.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do this function after some time
+                if (checkIfExist) {
+                    getUserInfo();
+                }
+            }
+        }, 4100);
+    }
+
+
+
     public void getUserInfo() {
         CommonMethods.displayLoadingScreen(progressDialog);
+
+        reportedByNames.clear();
+        reportersBuilding.clear();
+
+        problems.clear();
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -165,10 +315,45 @@ public class ProblemsActivity extends AppCompatActivity {
 
                 for (int i=0; i< users.size(); i++) {
                     reportedByNames.add(Objects.requireNonNull(snapshot.child(users.get(i)).child("fullName").getValue()).toString());
+                    reportersBuilding.add(Objects.requireNonNull(snapshot.child(users.get(i)).child("buildingChosen").getValue()).toString());
                 }
                 for (int j=0; j<users.size(); j++) {
-                    problems.add(new Problem(problemTypeAL.get(j), problemDescription.get(j), reportedByNames.get(j), problemReportDate.get(j)));
+                    if (reportersBuilding.get(j).equals(CheckApartmentsFragment.getUserBuilding)) {
+                        reporterBuilding = reportersBuilding.get(j) + " (Your Building)";
+                    }
+                    else {
+                        reporterBuilding = reportersBuilding.get(j);
+                    }
+                    problems.add(new Problem(problemTypeAL.get(j), problemDescription.get(j), reportedByNames.get(j)
+                            , problemReportDate.get(j), reporterBuilding));
                 }
+
+
+                // only set this array when we get All problems
+                if (!categoryMethodTriggered) {
+                    Log.i("allProblems", "updated");
+                    allProblems.clear();
+                    //allBuildings = building; // by reference, not what needed
+                    //Collections.copy(allBuildings, building);
+                    allProblems = (ArrayList<String>) problemTypeAL.clone();
+                    allProblems.add("All");
+
+                    Set<String> set = new HashSet<>(allProblems);
+                    allProblems.clear();
+                    allProblems.addAll(set); // duplicates removed
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ProblemsActivity.this, android.R.layout.simple_spinner_item, allProblems);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    problemsSpinner.setAdapter(adapter);
+
+                    problemsSpinner.setSelection(allProblems.indexOf("All"));
+
+                    userSelectString = "All";
+                }
+
+                Log.i("allProblems AL", allProblems.toString());
+
+
                 CommonMethods.dismissLoadingScreen(progressDialog);
                 reference.removeEventListener(this);
                 setProblemsRV();
@@ -189,8 +374,12 @@ public class ProblemsActivity extends AppCompatActivity {
     Problem tempProblem = null;
 
     public void setProblemsRV () {
+
+        problemsSpinner.setOnItemSelectedListener(this);
+        problemsSpinner.setOnTouchListener(this);
+
         recyclerViewProblems = findViewById(R.id.problemsRecyclerView);
-        reportProblemRVA = new ReportProblemRVA(problems);
+        reportProblemRVA = new ReportProblemRVA(problems, currentUserPositionInList);
 
         recyclerViewProblems.setLayoutManager(new LinearLayoutManager(this));
 
@@ -223,9 +412,32 @@ public class ProblemsActivity extends AppCompatActivity {
                         problems.remove(position);
                         reportProblemRVA.notifyItemRemoved(position);
 
-                        final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                .getReference("Problems").child(problemType).child(users.get(position));
-                        reference.removeValue();
+                        if (problemWithin.equals("Your Building")) {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("ProblemsAll").child(problemWithin)
+                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                    .child(users.get(position));
+                            reference.removeValue();
+
+                            final DatabaseReference reference2 = FirebaseDatabase.getInstance()
+                                    .getReference("ProblemsCategorized").child(problemWithin)
+                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                    .child(problemTypeAL.get(position))
+                                    .child(users.get(position));
+                            reference2.removeValue();
+                        }
+                        else {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("ProblemsAll").child(problemWithin)
+                                    .child(users.get(position));
+                            reference.removeValue();
+
+                            final DatabaseReference reference2 = FirebaseDatabase.getInstance()
+                                    .getReference("ProblemsCategorized").child(problemWithin)
+                                    .child(problemTypeAL.get(position))
+                                    .child(users.get(position));
+                            reference2.removeValue();
+                        }
 
                         Snackbar.make(recyclerViewProblems, "The problem you reported is removed!", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener() {
@@ -234,19 +446,68 @@ public class ProblemsActivity extends AppCompatActivity {
                                         problems.add(position, deletedProblem);
                                         reportProblemRVA.notifyItemInserted(position);
 
-                                        DatabaseReference reference1 = FirebaseDatabase.getInstance()
-                                                .getReference("Problems").child(problemType).child(users.get(position));
-                                        reference1.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Log.i("undo", "success");
-                                                } else {
-                                                    Log.i("undo", "failed");
+                                        if (problemWithin.equals("Your Building")) {
+                                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("ProblemsAll").child(problemWithin)
+                                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo1", "success");
+                                                    } else {
+                                                        Log.i("undo1", "failed");
+                                                    }
                                                 }
-                                            }
+                                            });
 
-                                        });
+                                            final DatabaseReference reference2 = FirebaseDatabase.getInstance()
+                                                    .getReference("ProblemsCategorized").child(problemWithin)
+                                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                                    .child(problemTypeAL.get(position))
+                                                    .child(users.get(position));
+                                            reference2.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo2", "success");
+                                                    } else {
+                                                        Log.i("undo2", "failed");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("ProblemsAll").child(problemWithin)
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo3", "success");
+                                                    } else {
+                                                        Log.i("undo3", "failed");
+                                                    }
+                                                }
+                                            });
+
+                                            final DatabaseReference reference2 = FirebaseDatabase.getInstance()
+                                                    .getReference("ProblemsCategorized").child(problemWithin)
+                                                    .child(problemTypeAL.get(position))
+                                                    .child(users.get(position));
+                                            reference2.setValue(reAddDeletedProblem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo4", "success");
+                                                    } else {
+                                                        Log.i("undo4", "failed");
+                                                    }
+                                                }
+                                            });
+                                        }
 
                                     }
                                 }).show();
@@ -267,5 +528,6 @@ public class ProblemsActivity extends AppCompatActivity {
 
 
     }
+
 
 }

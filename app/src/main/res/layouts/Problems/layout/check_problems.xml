@@ -16,87 +16,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/yourBuildingProblems"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            app:cardCornerRadius="11dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#324e7b"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/building" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Your Building Problems"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/theSmartCityProblems"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            app:cardCornerRadius="11dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#324e7b"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/city" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Smart City Problems"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
         <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/problemsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-        -->
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/elecProblems"
-            android:layout_width="355dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="17dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/electricity_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Electricity Problems"
-                    android:textColor="#C11717"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/watProblems"
-            android:layout_width="355dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="17dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient2"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/water_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Water Problems"
-                    android:textColor="#0E186C"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/bsProblems"
             android:layout_width="355dp"
@@ -129,6 +122,7 @@
 
 
         </androidx.cardview.widget.CardView>
+        -->
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

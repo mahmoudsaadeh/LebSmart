@@ -22,11 +22,45 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/theftWithin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:padding="5dp"
+            android:text="Theft within:"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/theftWithinRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="11dp"
+            android:checkedButton="@id/radioButtonYourBuildingTheft"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonYourBuildingTheft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:text="Your Building" />
+
+            <RadioButton
+                android:id="@+id/radioButtonSmartCityTheft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:text="The Smart City" />
+
+        </RadioGroup>
+
         <EditText
             android:id="@+id/theftTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="21dp"
             android:ems="10"
             android:hint="Title..."
             android:inputType="textPersonName"
@@ -37,7 +71,7 @@
             android:id="@+id/theftMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="21dp"
             android:ems="10"
             android:gravity="start|top"
             android:hint="Theft description message"

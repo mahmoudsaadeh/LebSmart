@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDR;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
@@ -35,13 +38,23 @@ public class AddLFAFragment extends Fragment {
 
     EditText lfaTitle, lfaDescription;
 
-    String title, description, date, foundBy;
+    String title, description, date, lfaWithinString;
+    int lfaWithin;
+
+    RadioGroup lfaWithinRadioGroup;
+    RadioButton radioButtonYourBuildingLfa, radioButtonSmartCityLfa;
+
+    public static final int NO_RADIO_BUTTON_SELECTED = -1;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = (ViewGroup) inflater.inflate(R.layout.add_lfa_fragment, container, false);
+
+        lfaWithinRadioGroup = root.findViewById(R.id.lfaWithinRadioGroup);
+        radioButtonYourBuildingLfa = root.findViewById(R.id.radioButtonYourBuildingLfa);
+        radioButtonSmartCityLfa = root.findViewById(R.id.radioButtonSmartCityLfa);
 
         addLFAButton = root.findViewById(R.id.addLFAButton);
         lfaTitle = root.findViewById(R.id.lfaTitle);
@@ -61,9 +74,23 @@ public class AddLFAFragment extends Fragment {
 
 
     public void addLFA () {
+
+        lfaWithin = lfaWithinRadioGroup.getCheckedRadioButtonId();
+
         title = lfaTitle.getText().toString();
         description = lfaDescription.getText().toString();
         date = CommonMethods.getCurrentDate();
+
+        if (lfaWithin == NO_RADIO_BUTTON_SELECTED) {
+            Toast.makeText(getActivity(), "Please fill the first entry!", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            if (lfaWithin == R.id.radioButtonYourBuildingLfa) {
+                lfaWithinString = radioButtonYourBuildingLfa.getText().toString();
+            } else if (lfaWithin == R.id.radioButtonSmartCityLfa) {
+                lfaWithinString = radioButtonSmartCityLfa.getText().toString();
+            }
+        }
 
         if (title.isEmpty()) {
             CommonMethods.warning(lfaTitle, "Title is required!");
@@ -78,8 +105,17 @@ public class AddLFAFragment extends Fragment {
         CommonMethods.displayLoadingScreen(progressDialog);
         LFAAdd lfaAdd = new LFAAdd(title, date, description);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("LFAs");
-        reference = reference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("LFAsCategorized");
+
+        if (lfaWithinString.equals("Your Building")) {
+            reference = reference.child(lfaWithinString).child(CheckApartmentsFragment.getUserBuilding)
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        }
+        else {
+            reference = reference.child(lfaWithinString)
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        }
+
         reference.setValue(lfaAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

@@ -39,7 +39,7 @@ public class ApartmentsRecyclerViewAdapter extends RecyclerView.Adapter<Apartmen
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //holder.info.setText(String.valueOf(position));
-        holder.expandCloseBN.setText(list.get(position).getBuilding());
+        holder.expandCloseBN.setText(list.get(position).getBuilding() + " - " + list.get(position).getState());
         holder.stateContent.setText(list.get(position).getState());
         holder.priceContent.setText(list.get(position).getPrice());
         holder.areaContent.setText(list.get(position).getArea());

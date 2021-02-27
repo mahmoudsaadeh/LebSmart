@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingAdd;
 import com.example.lebsmart.MeetingsFragments.Meetings;
 import com.example.lebsmart.MeetingsFragments.MeetingsFragment;
@@ -37,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CheckTheftsFragment extends Fragment {
+public class CheckTheftsFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnTouchListener {
 
     RecyclerView recyclerViewThefts;
     TheftsRVA theftsRVA;
@@ -61,30 +66,55 @@ public class CheckTheftsFragment extends Fragment {
 
     int currentUserPositionInList = -1;
 
+    Spinner spinnerThefts;
+
+    boolean checkIfExist;
+
+    boolean userSelect = false;
+
+    ArrayList<String> categories = new ArrayList<>();
+
+    DatabaseReference databaseReference;
+
+    String chosenCategory;
+
+    String reportedBy;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = (ViewGroup) inflater.inflate(R.layout.check_theft_fragment, container, false);
 
+        spinnerThefts = root.findViewById(R.id.theftsSpinner);
+
+        categories.clear();
+        categories.add("Your Building");
+        categories.add("The Smart City");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerThefts.setAdapter(adapter);
+
+        spinnerThefts.setSelection(categories.indexOf("Your Building"));
+
+        spinnerThefts.setOnItemSelectedListener(this);
+        spinnerThefts.setOnTouchListener(this);
+
         progressDialog = new ProgressDialog(getActivity());
 
         thefts = new ArrayList<>();
-        /*thefts.add(new Thefts("hadiz", "car stolen", "friday august 7th 2020", "11 : 15", "2nd car stolen in the area, one of them is mine; take care!!", "3a2isha bakkar, beirut, lebanon"));
-        thefts.add(new Thefts("khaled", "money stolen", "friday august 7th 2020", "11 : 15", "2nd car stolen in the area, one of them is mine; take care!!", "3a2isha bakkar, beirut, lebanon"));
-        thefts.add(new Thefts("ramzi", "house stolen", "friday august 7th 2020", "11 : 15", "2nd car stolen in the area, one of them is mine; take care!!", "3a2isha bakkar, beirut, lebanon"));
-        thefts.add(new Thefts("hamdi", "motorcycle stolen", "friday august 7th 2020", "11 : 15", "2nd car stolen in the area, one of them is mine; take care!!", "3a2isha bakkar, beirut, lebanon"));
-        thefts.add(new Thefts("rola", "bike stolen", "friday august 7th 2020", "11 : 15", "2nd car stolen in the area, one of them is mine; take care!!", "3a2isha bakkar, beirut, lebanon"));
-*/
 
-        dbCheckThefts();
+        dbCheckThefts("Your Building");
 
         swipeRefreshLayout = root.findViewById(R.id.checkTheftsRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TheftFragment()).commit();
+                /*Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new TheftFragment()).commit();*/
+                spinnerThefts.setSelection(categories.indexOf("Your Building"));
+                dbCheckThefts("Your Building");
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -94,16 +124,66 @@ public class CheckTheftsFragment extends Fragment {
 
     }
 
-    public void dbCheckThefts() {
+
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        userSelect = true;
+        return false;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (userSelect) {
+
+            dbCheckThefts(categories.get(position));
+
+            userSelect = false;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
+    // within the logged in user's building
+    public void dbCheckThefts(String category) {
         CommonMethods.displayLoadingScreen(progressDialog);
 
         users.clear();
+        theftTitleAL.clear();
+        theftDateAL.clear();
+        theftTimeAL.clear();
+        theftDescriptionAL.clear();
+        theftLocationAL.clear();
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Thefts");
+        checkIfExist = true;
+
+        if (category.equals("Your Building")) {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("TheftsCategorized").child("Your Building")
+                    .child(CheckApartmentsFragment.getUserBuilding);
+
+            chosenCategory = "Your Building";
+        }
+        else {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("TheftsCategorized").child("The Smart City");
+
+            chosenCategory = "The Smart City";
+        }
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.hasChildren()) {
+                    Toast.makeText(getActivity(), "No reported thefts were found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    checkIfExist = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -136,16 +216,21 @@ public class CheckTheftsFragment extends Fragment {
             @Override
             public void run() {
                 // Do this function after some time
-                getUserInfoThefts();
+                if (checkIfExist) {
+                    getUserInfoThefts();
+                }
             }
         }, 4100);
 
     }
 
 
-
     public void getUserInfoThefts() {
         CommonMethods.displayLoadingScreen(progressDialog);
+
+        reportedByNames.clear();
+
+        thefts.clear();
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -155,7 +240,13 @@ public class CheckTheftsFragment extends Fragment {
                     reportedByNames.add(Objects.requireNonNull(snapshot.child(users.get(i)).child("fullName").getValue()).toString());
                 }
                 for (int j=0; j<users.size(); j++) {
-                    thefts.add(new Thefts(reportedByNames.get(j), theftTitleAL.get(j), theftDateAL.get(j),
+                    if (users.get(j).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        reportedBy = reportedByNames.get(j) + " (You)";
+                    }
+                    else {
+                        reportedBy = reportedByNames.get(j);
+                    }
+                    thefts.add(new Thefts(reportedBy, theftTitleAL.get(j), theftDateAL.get(j),
                             theftTimeAL.get(j), theftDescriptionAL.get(j), theftLocationAL.get(j)));
                 }
                 CommonMethods.dismissLoadingScreen(progressDialog);
@@ -211,9 +302,19 @@ public class CheckTheftsFragment extends Fragment {
                         thefts.remove(position);
                         theftsRVA.notifyItemRemoved(position);
 
-                        final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                .getReference("Thefts").child(users.get(position));
-                        reference.removeValue();
+                        if (chosenCategory.equals("Your Building")) {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("TheftsCategorized").child("Your Building")
+                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                    .child(users.get(position));
+                            reference.removeValue();
+                        }
+                        else {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("TheftsCategorized").child("The Smart City")
+                                    .child(users.get(position));
+                            reference.removeValue();
+                        }
 
                         Snackbar.make(recyclerViewThefts, "Theft removed!", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener() {
@@ -222,19 +323,39 @@ public class CheckTheftsFragment extends Fragment {
                                         thefts.add(position, deletedTheft);
                                         theftsRVA.notifyItemInserted(position);
 
-                                        DatabaseReference reference1 = FirebaseDatabase.getInstance()
-                                                .getReference("Thefts").child(users.get(position));
-                                        reference1.setValue(reAddDeletedTheft).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Log.i("undo", "success");
-                                                } else {
-                                                    Log.i("undo", "failed");
+                                        if (chosenCategory.equals("Your Building")) {
+                                            DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("TheftsCategorized").child("Your Building")
+                                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedTheft).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo", "success");
+                                                    } else {
+                                                        Log.i("undo", "failed");
+                                                    }
                                                 }
-                                            }
 
-                                        });
+                                            });
+                                        }
+                                        else {
+                                            DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("TheftsCategorized").child("The Smart City")
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedTheft).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo", "success");
+                                                    } else {
+                                                        Log.i("undo", "failed");
+                                                    }
+                                                }
+
+                                            });
+                                        }
 
                                     }
                                 }).show();

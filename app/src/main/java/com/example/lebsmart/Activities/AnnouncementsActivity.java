@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.BestServiceProviders.BSP;
 import com.example.lebsmart.BestServiceProviders.BSPAdd;
 import com.example.lebsmart.CommitteeDR.CommitteeAdd;
@@ -85,12 +86,6 @@ public class AnnouncementsActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(AnnouncementsActivity.this);
 
         committeeDRList = new ArrayList<>();
-        /*committeeDRList.add(new CommitteeDR("Pay for Electricity", "Don't forget to pau in few days...!", "" + announcementType, "Friday, December 2nd, 2021"));
-        committeeDRList.add(new CommitteeDR("Pay for Water", "Don't forget to pau in few days...!", "" + announcementType, "Friday, December 2nd, 2021"));
-        committeeDRList.add(new CommitteeDR("Bring a private motor to building", "Don't forget to pau in few days...!", "" + announcementType, "Friday, December 2nd, 2021"));
-        committeeDRList.add(new CommitteeDR("Elevator Maintenance", "Don't forget to pau in few days...!", "" + announcementType, "Friday, December 2nd, 2021"));
-        committeeDRList.add(new CommitteeDR("Fix garage door", "Don't forget to pau in few days...!", "" + announcementType, "Friday, December 2nd, 2021"));
-*/
 
         getAnnouncementsFromDb();
 
@@ -102,14 +97,18 @@ public class AnnouncementsActivity extends AppCompatActivity {
     public void getAnnouncementsFromDb () {
         CommonMethods.displayLoadingScreen(progressDialog);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("CommitteeDRs");
-        databaseReference = databaseReference.child(announcementType);
+        // display announcements only within the user's building
+        databaseReference = FirebaseDatabase.getInstance().getReference("CommitteeDRs")
+                .child(CheckApartmentsFragment.getUserBuilding).child(announcementType);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshotExists = true;
                 if (!snapshot.exists()) {
+                    Toast.makeText(AnnouncementsActivity.this, "No " + announcementType + "s to display!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                     snapshotExists = false;
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -143,10 +142,6 @@ public class AnnouncementsActivity extends AppCompatActivity {
                 // Do this function after some time
                 if (snapshotExists) {
                     getUserInfo();
-                }
-                else {
-                    Toast.makeText(AnnouncementsActivity.this, "No " + announcementType + "s to display!", Toast.LENGTH_SHORT).show();
-                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
         }, 4100);

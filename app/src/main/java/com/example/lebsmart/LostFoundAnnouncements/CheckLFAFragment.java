@@ -6,8 +6,12 @@ import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.MeetingsFragments.MeetingRVA;
 import com.example.lebsmart.MeetingsFragments.Meetings;
 import com.example.lebsmart.R;
@@ -44,7 +49,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class CheckLFAFragment extends Fragment {
+public class CheckLFAFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnTouchListener {
 
     RecyclerView recyclerViewLFA;
     LFAsRVA lfaRVA;
@@ -67,6 +72,18 @@ public class CheckLFAFragment extends Fragment {
 
     int currentUserPositionInList = -1;
 
+    Spinner spinnerLFAs;
+
+    boolean userSelect = false;
+
+    ArrayList<String> categories = new ArrayList<>();
+
+    DatabaseReference databaseReference;
+
+    String chosenCategory;
+
+    String foundBy, foundersBuilding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,22 +92,34 @@ public class CheckLFAFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
 
-        lfas = new ArrayList<>();
-        /*lfas.add(new LFA("Found keys on stairs", "" + currentDate, "found 4 keys with tennis portocle", "get current user(the user that added the ann)"));
-        lfas.add(new LFA("Found money on stairs", "" + currentDate, "found 4 keys with tennis portocle", "get current user(the user that added the ann)"));
-        lfas.add(new LFA("Found bag in garage", "" + currentDate, "found 4 keys with tennis portocle", "get current user(the user that added the ann)"));
-        lfas.add(new LFA("Found ID card in eleveator", "" + currentDate, "found 4 keys with tennis portocle", "get current user(the user that added the ann)"));
-        lfas.add(new LFA("Found car keys in parking", "" + currentDate, "found 4 keys with tennis portocle", "get current user(the user that added the ann)"));
-*/
+        spinnerLFAs = root.findViewById(R.id.lfasSpinner);
 
-        dbCheckLFAs();
+        categories.clear();
+        categories.add("Your Building");
+        categories.add("The Smart City");
+
+        lfas = new ArrayList<>();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLFAs.setAdapter(adapter);
+
+        spinnerLFAs.setSelection(categories.indexOf("Your Building"));
+
+        spinnerLFAs.setOnItemSelectedListener(this);
+        spinnerLFAs.setOnTouchListener(this);
+
+        dbCheckLFAs("Your Building");
 
         swipeRefreshLayout = root.findViewById(R.id.checkLFAsRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LostFoundAnnouncementFragment()).commit();
+                /*Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LostFoundAnnouncementFragment()).commit();*/
+
+                spinnerLFAs.setSelection(categories.indexOf("Your Building"));
+                dbCheckLFAs("Your Building");
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -101,21 +130,61 @@ public class CheckLFAFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        userSelect = true;
+        return false;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (userSelect) {
+
+            dbCheckLFAs(categories.get(position));
+
+            userSelect = false;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     boolean snapshotExists;
 
-    public void dbCheckLFAs () {
+    public void dbCheckLFAs (String category) {
         CommonMethods.displayLoadingScreen(progressDialog);
 
         users.clear();
+        lfaTitleAL.clear();
+        lfaDescriptionAL.clear();
+        lfaDateAL.clear();
 
         snapshotExists = true;
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("LFAs");
+        if (category.equals("Your Building")) {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("LFAsCategorized").child("Your Building")
+                    .child(CheckApartmentsFragment.getUserBuilding);
+
+            chosenCategory = "Your Building";
+        }
+        else {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("LFAsCategorized").child("The Smart City");
+
+            chosenCategory = "The Smart City";
+        }
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
                     snapshotExists = false;
+                    Toast.makeText(getActivity(), "No LFAs were found!", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                    databaseReference.removeEventListener(this);
                     return;
                 }
                 int x = 0;
@@ -148,10 +217,6 @@ public class CheckLFAFragment extends Fragment {
                 if (snapshotExists) {
                     getUserInfoLFA();
                 }
-                else {
-                    Toast.makeText(getActivity(), "No announcements to display!", Toast.LENGTH_SHORT).show();
-                    CommonMethods.dismissLoadingScreen(progressDialog);
-                }
             }
         }, 4100);
 
@@ -160,6 +225,11 @@ public class CheckLFAFragment extends Fragment {
 
     public void getUserInfoLFA () {
         CommonMethods.displayLoadingScreen(progressDialog);
+
+        lfaFoundByAL.clear();
+        lfaFoundersBuildingAL.clear();
+
+        lfas.clear();
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -170,8 +240,16 @@ public class CheckLFAFragment extends Fragment {
                     lfaFoundersBuildingAL.add(Objects.requireNonNull(snapshot.child(users.get(i)).child("buildingChosen").getValue()).toString());
                 }
                 for (int j=0; j<users.size(); j++) {
+                    if (users.get(j).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        foundBy = lfaFoundByAL.get(j) + " (You)";
+                        foundersBuilding = lfaFoundersBuildingAL.get(j) + " (Your Building)";
+                    }
+                    else {
+                        foundBy = lfaFoundByAL.get(j);
+                        foundersBuilding = lfaFoundersBuildingAL.get(j);
+                    }
                     lfas.add(new LFA(lfaTitleAL.get(j), lfaDateAL.get(j), lfaDescriptionAL.get(j),
-                            lfaFoundByAL.get(j), lfaFoundersBuildingAL.get(j)));
+                            foundBy, foundersBuilding));
                 }
                 CommonMethods.dismissLoadingScreen(progressDialog);
                 reference.removeEventListener(this);
@@ -224,9 +302,19 @@ public class CheckLFAFragment extends Fragment {
                         lfas.remove(position);
                         lfaRVA.notifyItemRemoved(position);
 
-                        final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                .getReference("LFAs").child(users.get(position));
-                        reference.removeValue();
+                        if (chosenCategory.equals("Your Building")) {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("LFAsCategorized").child("Your Building")
+                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                    .child(users.get(position));
+                            reference.removeValue();
+                        }
+                        else {
+                            final DatabaseReference reference = FirebaseDatabase.getInstance()
+                                    .getReference("LFAsCategorized").child("The Smart City")
+                                    .child(users.get(position));
+                            reference.removeValue();
+                        }
 
                         Snackbar.make(recyclerViewLFA, "LFA removed!", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener() {
@@ -235,19 +323,39 @@ public class CheckLFAFragment extends Fragment {
                                         lfas.add(position, deletedLFA);
                                         lfaRVA.notifyItemInserted(position);
 
-                                        DatabaseReference reference1 = FirebaseDatabase.getInstance()
-                                                .getReference("LFAs").child(users.get(position));
-                                        reference1.setValue(reAddDeletedLFA).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Log.i("undo", "success");
-                                                } else {
-                                                    Log.i("undo", "failed");
+                                        if (chosenCategory.equals("Your Building")) {
+                                            DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("LFAsCategorized").child("Your Building")
+                                                    .child(CheckApartmentsFragment.getUserBuilding)
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedLFA).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo", "success");
+                                                    } else {
+                                                        Log.i("undo", "failed");
+                                                    }
                                                 }
-                                            }
 
-                                        });
+                                            });
+                                        }
+                                        else {
+                                            DatabaseReference reference = FirebaseDatabase.getInstance()
+                                                    .getReference("LFAsCategorized").child("The Smart City")
+                                                    .child(users.get(position));
+                                            reference.setValue(reAddDeletedLFA).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.i("undo", "success");
+                                                    } else {
+                                                        Log.i("undo", "failed");
+                                                    }
+                                                }
+
+                                            });
+                                        }
 
                                     }
                                 }).show();
@@ -269,5 +377,4 @@ public class CheckLFAFragment extends Fragment {
 
 
     }
-
 }

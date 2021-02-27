@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.lebsmart.Activities.BuildingsListActivity;
 import com.example.lebsmart.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,26 +51,30 @@ public class MyProfileFragment extends Fragment {
     public void getProfileInfo () {
         CommonMethods.displayLoadingScreen(progressDialog);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fullNameContent.setText(snapshot.child("fullName").getValue().toString());
-                emailContent.setText(snapshot.child("email").getValue().toString());
-                phoneMPContent.setText(snapshot.child("phone").getValue().toString());
-                buildingContent.setText(snapshot.child("buildingChosen").getValue().toString());
-                userTypeContent.setText(snapshot.child("userType").getValue().toString());
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    fullNameContent.setText(snapshot.child("fullName").getValue().toString());
+                    emailContent.setText(snapshot.child("email").getValue().toString());
+                    phoneMPContent.setText(snapshot.child("phone").getValue().toString());
+                    buildingContent.setText(snapshot.child("buildingChosen").getValue().toString());
+                    userTypeContent.setText(snapshot.child("userType").getValue().toString());
 
-                CommonMethods.dismissLoadingScreen(progressDialog);
-            }
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
 
     }
 

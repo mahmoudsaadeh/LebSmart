@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
 import com.example.lebsmart.RandomFragments.DatePickerFragment;
@@ -135,8 +136,10 @@ public class ScheduleMeetingFragment extends Fragment implements DatePickerDialo
         CommonMethods.displayLoadingScreen(progressDialog);
         MeetingAdd meetingAdd = new MeetingAdd(meetingTime, meetingDate, location, title, description);
 
+        // no need for categorization since user can all check or add meetings within his building
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Meetings");
-        reference = reference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        reference = reference.child(CheckApartmentsFragment.getUserBuilding)
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         reference.setValue(meetingAdd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

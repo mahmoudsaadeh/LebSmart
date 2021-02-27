@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="4dp"
+    app:cardCornerRadius="27dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -20,8 +23,8 @@
                 android:id="@+id/theftTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#9A2929"
-                android:paddingStart="7dp"
+                android:background="#324e7b"
+                android:paddingStart="11dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="7dp"
                 android:paddingBottom="5dp"
@@ -180,4 +183,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
