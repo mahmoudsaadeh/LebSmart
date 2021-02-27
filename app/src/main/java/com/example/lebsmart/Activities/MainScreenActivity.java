@@ -26,6 +26,7 @@ import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
+import com.example.lebsmart.Covid19.Covid19Fragment;
 import com.example.lebsmart.Database.FirebaseDatabaseMethods;
 import com.example.lebsmart.EWSourcesFragments.EWSources;
 import com.example.lebsmart.FireDetection.FireDetectionFragment;
@@ -200,6 +201,10 @@ public class MainScreenActivity extends AppCompatActivity {
                     case R.id.settings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new SettingsFragment()).commit();
+                        break;
+                    case R.id.covid_19:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new Covid19Fragment()).commit();
                         break;
                 }
 
