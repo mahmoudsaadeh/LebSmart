@@ -2,18 +2,28 @@ package com.example.lebsmart.Weather;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.lebsmart.ApartmentsFragments.CheckApartmentsFragment;
 import com.example.lebsmart.R;
 import com.example.lebsmart.RandomFragments.CommonMethods;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,6 +40,8 @@ public class WeatherFragment extends Fragment {
             , sunsetContentTV, humidityContentTV, windContentTV;
 
     ProgressDialog progressDialog;
+
+    String lat = "", lon = "";
 
     @Nullable
     @Override
@@ -48,14 +60,53 @@ public class WeatherFragment extends Fragment {
         humidityContentTV = viewGroup.findViewById(R.id.humidityContentTV);
         windContentTV = viewGroup.findViewById(R.id.windContentTV);
 
-        getWeather();
+        getUserLatLon();
 
         return viewGroup;
     }
 
+    public void getUserLatLon() {
+
+        CommonMethods.displayLoadingScreen(progressDialog);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("BuildingInfo")
+                    .child(CheckApartmentsFragment.getUserBuilding);
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        lat = snapshot.child("lat").getValue().toString();
+                        lon = snapshot.child("lon").getValue().toString();
+                    }
+                    else {
+                        Log.i("userLatLon", "failed to retrieve1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.i("error getting user data", error.getMessage());
+                }
+            });
+        }
+        else {
+            Log.i("userLatLon", "failed to retrieve2");
+            Toast.makeText(getActivity(), "Failed to load weather!", Toast.LENGTH_SHORT).show();
+            CommonMethods.dismissLoadingScreen(progressDialog);
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getWeather();
+            }
+        }, 2555);
+
+    }
 
     public void getWeather() {
-        CommonMethods.displayLoadingScreen(progressDialog);
 
         String content;
         Weather weather = new Weather();
@@ -65,7 +116,7 @@ public class WeatherFragment extends Fragment {
             //content = weather.execute("http://api.openweathermap.org/data/2.5/weather?lat=33.89&lon=35.5&appid=87fb0e0d645394e7b44118d14b0b47f7").get(); // by lat lon
             //content = weather.execute("http://api.openweathermap.org/data/2.5/weather?q=paris&appid=87fb0e0d645394e7b44118d14b0b47f7").get(); // get info by city name
             // temperature units in celsius
-            content = weather.execute("http://api.openweathermap.org/data/2.5/weather?lat=34.25&lon=35.66&appid=87fb0e0d645394e7b44118d14b0b47f7&units=metric").get();
+            content = weather.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=87fb0e0d645394e7b44118d14b0b47f7&units=metric").get();
             Log.i("content", content);
 
             JSONObject jsonObject = new JSONObject(content);
