@@ -81,6 +81,7 @@ public class LoginTabFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.contact_us_dialog, null);
 
@@ -162,6 +163,7 @@ public class LoginTabFragment extends Fragment {
     } // end onCreateView
 
     public void login() {
+        CommonMethods.hideSoftKeyboard(getActivity());
         String email2 = CommonMethods.getEmail(email);
         String pass = CommonMethods.getPassword(password);
 
