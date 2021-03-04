@@ -48,6 +48,7 @@ public class Covid19Fragment extends Fragment {
         userStatus=root.findViewById(R.id.Covid19UserStatus);
         registerAsPatient=root.findViewById(R.id.covid19Register);
         announceRecovery=root.findViewById(R.id.announceRecovery);
+
         registerAsPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
