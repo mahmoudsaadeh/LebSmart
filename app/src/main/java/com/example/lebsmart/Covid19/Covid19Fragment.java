@@ -42,15 +42,12 @@ public class Covid19Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         root = (ViewGroup) inflater.inflate(R.layout.covid19_fragment, container, false);
-        progressDialog = new ProgressDialog(getActivity());
-        CommonMethods.displayLoadingScreen(progressDialog);
+
+
         buildingStatus=root.findViewById(R.id.Covid19BuildingStatus);
         userStatus=root.findViewById(R.id.Covid19UserStatus);
         registerAsPatient=root.findViewById(R.id.covid19Register);
         announceRecovery=root.findViewById(R.id.announceRecovery);
-        getCurrentStatus();
-
-
         registerAsPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,13 +60,20 @@ public class Covid19Fragment extends Fragment {
                 updateStatus();
             }
         });
-        CommonMethods.dismissLoadingScreen(progressDialog);
+        progressDialog = new ProgressDialog(getActivity());
+        getCurrentStatus();
+
+
+
+
         return root;
     }
 
     public void getCurrentStatus() {
-       getBuildingStatus();
-       getUserStatus();
+        CommonMethods.displayLoadingScreen(progressDialog);
+        getBuildingStatus();
+        getUserStatus();
+        CommonMethods.dismissLoadingScreen(progressDialog);
 
     }
 
@@ -119,8 +123,9 @@ public class Covid19Fragment extends Fragment {
     public void registerPatient(){
         CommonMethods.displayLoadingScreen(progressDialog);
         if(userStat.equalsIgnoreCase("infected")){
-            Toast.makeText(getActivity(), "You are already registered as COVID19 patient!", Toast.LENGTH_SHORT).show();
             CommonMethods.dismissLoadingScreen(progressDialog);
+            Toast.makeText(getActivity(), "You are already registered as COVID19 patient!", Toast.LENGTH_SHORT).show();
+
         }
         else{
             addPatientToDb();
@@ -133,8 +138,10 @@ public class Covid19Fragment extends Fragment {
         ref.setValue(newStatus);
     }
     public void updateStatus(){
+        CommonMethods.displayLoadingScreen(progressDialog);
         if (userStat.equalsIgnoreCase("not infected"))
         {
+            CommonMethods.dismissLoadingScreen(progressDialog);
             Toast.makeText(getActivity(), "You are not registered as COVID19 patient!", Toast.LENGTH_SHORT).show();
         }
         else{
