@@ -3,6 +3,8 @@ package com.example.lebsmart.Covid19;
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,30 +63,28 @@ public class Covid19Fragment extends Fragment {
                 updateStatus();
             }
         });
+
+
         progressDialog = new ProgressDialog(getActivity());
-        getCurrentStatus();
 
-
+        getBuildingStatus();
 
 
         return root;
     }
 
-    public void getCurrentStatus() {
-        CommonMethods.displayLoadingScreen(progressDialog);
-        getBuildingStatus();
-        getUserStatus();
-        CommonMethods.dismissLoadingScreen(progressDialog);
 
-    }
+
 
    public void getBuildingStatus() {
+       CommonMethods.displayLoadingScreen(progressDialog);
+
        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("BuildingInfo").child(CheckApartmentsFragment.getUserBuilding);
        reference.addValueEventListener(new ValueEventListener() {
            @RequiresApi(api = Build.VERSION_CODES.O)
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               String buildingCovid19Status=snapshot.child("endemicBuilding").getValue().toString();
+               String buildingCovid19Status = snapshot.child("endemicBuilding").getValue().toString();
                if(buildingCovid19Status.equalsIgnoreCase("no")){
                    buildingStatus.setText("No");
                }
@@ -95,10 +95,21 @@ public class Covid19Fragment extends Fragment {
 
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
-
+               CommonMethods.dismissLoadingScreen(progressDialog);
+               Log.i("errorz", error.getMessage());
            }
        });
+
+       new Handler().postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               getUserStatus();
+           }
+       }, 1777);
+
     }
+
+
     public void getUserStatus(){
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Covid19Info").child(CheckApartmentsFragment.getUserBuilding).child("Infected Individuals");
 
@@ -108,19 +119,25 @@ public class Covid19Fragment extends Fragment {
                 if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).exists()) {
                     userStat="Infected";
                     userStatus.setText(userStat);
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
                 else{
                     userStat="Not Infected";
                     userStatus.setText(userStat);
+                    CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                CommonMethods.dismissLoadingScreen(progressDialog);
+                Log.i("errorz", error.getMessage());
             }
         });
     }
+
+
+
     public void registerPatient(){
         CommonMethods.displayLoadingScreen(progressDialog);
         if(userStat.equalsIgnoreCase("infected")){
@@ -133,11 +150,16 @@ public class Covid19Fragment extends Fragment {
 
 
     }}
+
+
+
     public void updateBuildingStatus(String newStatus){
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("BuildingInfo").child(CheckApartmentsFragment.getUserBuilding)
                 .child("endemicBuilding");
         ref.setValue(newStatus);
     }
+
+
     public void updateStatus(){
         CommonMethods.displayLoadingScreen(progressDialog);
         if (userStat.equalsIgnoreCase("not infected"))
@@ -153,6 +175,8 @@ public class Covid19Fragment extends Fragment {
 
         }
     }
+
+
     public void addPatientToDb() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Covid19Info").child(CheckApartmentsFragment.getUserBuilding);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,6 +218,9 @@ public class Covid19Fragment extends Fragment {
             }
         });
     }
+
+
+
     public void removePatientFromDb(){
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Covid19Info").child(CheckApartmentsFragment.getUserBuilding);
 
@@ -218,6 +245,9 @@ public class Covid19Fragment extends Fragment {
         });
 
     }
+
+
+
     public void addToRecoveredPatientsDb(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Covid19Info").child(CheckApartmentsFragment.getUserBuilding);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -262,4 +292,6 @@ public class Covid19Fragment extends Fragment {
 
 
     }
+
+
 }

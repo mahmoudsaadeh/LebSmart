@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="Endemic Building:"
+                android:text="Infested Building:"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
