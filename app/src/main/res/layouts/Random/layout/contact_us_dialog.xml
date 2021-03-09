@@ -24,7 +24,9 @@
         android:text="If you can't find your building, please contact us at the email below in order to verify your building and add it to the list:"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -35,6 +37,6 @@
         android:textAlignment="center"
         android:textColor="#FD0404"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
 
 </LinearLayout>

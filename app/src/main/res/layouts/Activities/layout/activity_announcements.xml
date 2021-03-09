@@ -13,7 +13,7 @@
         android:layout_marginTop="21dp"
         android:text="Announcement Type"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

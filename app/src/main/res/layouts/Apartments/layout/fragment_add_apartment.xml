@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:text="State:"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#324e7b"/>
 
     <RadioGroup
         android:id="@+id/apartmentRadioGrp"
@@ -30,13 +31,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="17dp"
-            android:text="Rent" />
+            android:text="Rent"
+            android:buttonTint="#324e7b"
+            android:textColor="#324e7b"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
 
         <RadioButton
             android:id="@+id/sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sale" />
+            android:text="Sale"
+            android:buttonTint="#324e7b"
+            android:textColor="#324e7b"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
 
     </RadioGroup>
 
@@ -47,16 +56,25 @@
         android:layout_marginTop="7dp"
         android:text="Price:"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#324e7b"/>
 
     <EditText
         android:id="@+id/priceET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
+
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/edit_text_design"
         android:ems="10"
-        android:hint="Enter price in USD..."
-        android:inputType="number" />
+        android:hint="Price in USD"
+        android:inputType="number"
+        android:paddingLeft="11dp"
+        android:paddingTop="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="6dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/areaTV"
@@ -65,16 +83,24 @@
         android:layout_marginTop="11dp"
         android:text="Area:"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#324e7b"/>
 
     <EditText
         android:id="@+id/areaET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/edit_text_design"
         android:ems="10"
-        android:hint="Enter apartment area in meter square..."
-        android:inputType="number" />
+        android:hint="Apartment area in meter square"
+        android:inputType="number"
+        android:paddingLeft="11dp"
+        android:paddingTop="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="6dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/addApartment"

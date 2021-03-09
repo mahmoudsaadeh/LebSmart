@@ -28,8 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:padding="5dp"
-            android:text="Theft within:"
-            android:textSize="18sp" />
+            android:text="Theft Within:"
+            android:textColor="#324e7b"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/theftWithinRadioGroup"
@@ -45,6 +47,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"
                 android:text="Your Building" />
 
             <RadioButton
@@ -52,30 +58,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="The Smart City" />
+                android:text="The Smart City"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                />
 
         </RadioGroup>
 
         <EditText
+            android:textStyle="bold"
+
             android:id="@+id/theftTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:ems="10"
-            android:hint="Title..."
+            android:hint="Title"
             android:inputType="textPersonName"
             android:maxLength="31"
-            android:textColor="#9A9999" />
+
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"/>
 
         <EditText
+            android:textStyle="bold"
+
             android:id="@+id/theftMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
             android:layout_marginTop="21dp"
+
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Theft description message"
-            android:inputType="textMultiLine" />
+            android:hint="Theft description message..."
+            android:inputType="textMultiLine"
+            android:layout_height="80dp"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"/>
 
         <TextView
             android:id="@+id/theftDateTV"
@@ -84,15 +113,19 @@
             android:layout_marginTop="31dp"
             android:text="Theft Date"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:textSize="21sp"
+            android:textStyle="italic|bold" />
 
         <Button
             android:id="@+id/setTheftDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="Set Date" />
+            android:text="Set Date"
+
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:background="@drawable/rounded_corners_light_blue"/>
 
         <TextView
             android:id="@+id/theftTimeTV"
@@ -101,15 +134,18 @@
             android:layout_marginTop="31dp"
             android:text="Theft Time"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:textSize="21sp"
+            android:textStyle="italic|bold"/>
 
         <Button
             android:id="@+id/setTheftTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="Set Time" />
+            android:text="Set Time"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:background="@drawable/rounded_corners_light_blue"/>
 
         <TextView
             android:id="@+id/theftLocationTV"
@@ -117,24 +153,34 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
             android:text="Theft Location"
+
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:textSize="21sp"
+            android:textStyle="italic|bold"
+            />
 
         <Button
             android:id="@+id/getCurrentLocationTheft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:text="Get my current Location" />
+            android:text="Get my current Location"
+            android:textSize="17sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/rounded_corners_light_blue"/>
 
         <Button
             android:id="@+id/reportTheftButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="115dp"
+            android:layout_height="53dp"
             android:layout_gravity="center"
             android:layout_marginTop="47dp"
-            android:text="Report" />
+            android:background="@drawable/rounded_corners"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:text="Report"
+ />
 
     </LinearLayout>
 

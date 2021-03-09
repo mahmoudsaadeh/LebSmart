@@ -23,12 +23,13 @@
                 android:id="@+id/theftTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#324e7b"
+
                 android:paddingStart="11dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="7dp"
                 android:paddingBottom="5dp"
                 android:text="Theft Title"
+                android:background="#324e7b"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -41,7 +42,7 @@
                 android:id="@+id/theftsExpandableLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#E0E4DB"
+                android:background="#DEF5FF"
                 android:shrinkColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +56,11 @@
 
                     <TextView
                         android:id="@+id/reportedBy"
-                        android:layout_width="wrap_content"
+                        android:layout_width="182dp"
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Reported by: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -68,8 +69,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="User's name"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -85,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Date: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -94,8 +95,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="wednesday, jan 5th , 2020"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -111,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Time: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -120,8 +121,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="11 : 21"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -137,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Description Message: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -145,9 +146,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="blaa blaaa blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:text="TEXT"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -163,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Location: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -171,9 +172,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Beirut, sabra jdhjfhjsdfhjsdfhjsf"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:text="Beirut, LEBANON TEXT TEXT"
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
 
                 </TableRow>
 

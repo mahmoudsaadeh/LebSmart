@@ -40,12 +40,12 @@
                 android:id="@+id/reportNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#324e7b"
                 android:paddingStart="15dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="7dp"
                 android:paddingBottom="5dp"
-                android:text="Report 1"
+                android:text="Problem title"
+                android:background="#324e7b"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -57,7 +57,7 @@
                 android:id="@+id/problemsExpandableLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#E0E4DB"
+                android:background="#DEF5FF"
                 android:shrinkColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,8 +84,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Problem description ..."
-                        android:textColor="#009688"
-                        android:textSize="21sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -110,8 +110,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Sunday, feb 11th , 2020"
-                        android:textColor="#009688"
-                        android:textSize="21sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -135,9 +135,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="2aa doonnoooo"
-                        android:textColor="#009688"
-                        android:textSize="21sp" />
+                        android:text="Someone"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -161,8 +161,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="building name here"
-                        android:textColor="#009688"
-                        android:textSize="21sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 

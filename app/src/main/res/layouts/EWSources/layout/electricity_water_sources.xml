@@ -31,14 +31,19 @@
             android:layout_marginTop="11dp"
             android:gravity="end"
             android:text="Electricity source shown here"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="italic|bold"
+            android:textColor="#324e7b"/>
 
         <Button
             android:id="@+id/checkElectricity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
-            android:text="Check electricity source" />
+            android:text="Check electricity source"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:background="@drawable/rounded_corners_light_blue"/>
 
         <TextView
             android:id="@+id/waterTV"
@@ -56,14 +61,19 @@
             android:layout_marginTop="11dp"
             android:gravity="end"
             android:text="Water source shown here"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="italic|bold"
+            android:textColor="#324e7b" />
 
         <Button
             android:id="@+id/checkWater"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
-            android:text="Check water source" />
+            android:text="Check water source"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:background="@drawable/rounded_corners_light_blue"/>
 
 
     </LinearLayout>

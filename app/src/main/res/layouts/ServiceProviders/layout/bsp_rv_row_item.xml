@@ -59,7 +59,7 @@
                     android:paddingEnd="7dp"
                     android:text="+961-76-888777"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_drop_down"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
                 android:id="@+id/bspExpandableLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#E0E4DB"
+                android:background="#DEF5FF"
                 android:shrinkColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Job: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -100,8 +100,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="BSP's job ..."
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Phone: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -126,8 +126,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="71-963258"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Added By: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -151,8 +151,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Someone"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
 
                 </TableRow>
 
@@ -168,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Place of Residence: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -177,8 +177,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Somewhere on earth"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Overall rating:"
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                 </TableRow>
@@ -212,8 +212,8 @@
                         android:layout_height="wrap_content"
                         android:text="Overall rating here"
                         android:textAlignment="center"
-                        android:textColor="#2196F3"
-                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
                         android:textStyle="bold|italic" />
 
                 </TableRow>
@@ -230,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="5dp"
                         android:text="Your rating:"
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                 </TableRow>

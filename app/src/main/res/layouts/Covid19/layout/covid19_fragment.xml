@@ -36,7 +36,10 @@
         android:layout_marginTop="15dp"
         android:text="Register"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterTv" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterTv"
+        android:textSize="17sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/rounded_corners_light_blue"/>
 
     <TextView
         android:id="@+id/UpdateTv"
@@ -55,11 +58,14 @@
 
     <Button
         android:id="@+id/announceRecovery"
-        android:layout_width="122dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="144dp"
+        android:layout_width="184dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="112dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_corners_light_blue"
         android:text="Announce Recovery"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UpdateTv" />
 
@@ -75,7 +81,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/userStatus"
@@ -102,7 +109,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/BuildingStatus"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/Covid19UserStatus"
@@ -114,7 +122,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/userStatus"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/tips"

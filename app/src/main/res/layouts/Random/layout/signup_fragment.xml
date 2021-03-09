@@ -16,6 +16,7 @@
 
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/fullNameSignUp"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:paddingBottom="6dp" />
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/phoneNumberSignUp"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -45,6 +47,7 @@
             android:paddingBottom="6dp" />
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/emailSignUp"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -58,6 +61,7 @@
             android:paddingBottom="6dp" />
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/passwordSignUp"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -71,6 +75,7 @@
             android:paddingBottom="6dp" />
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/confirmPassword"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -90,8 +95,8 @@
             android:layout_marginBottom="17dp"
             android:text="Select a Building"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:textSize="21sp"
+            android:textStyle="italic|bold" />
 
         <RadioGroup
             android:id="@+id/radioGroupSignUp"
@@ -104,13 +109,21 @@
                 android:id="@+id/radioButtonCommittee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Committee member" />
+                android:text="Committee member"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonNormalResident"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Normal resident" />
+                android:text="Normal resident"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
         </RadioGroup>
 
