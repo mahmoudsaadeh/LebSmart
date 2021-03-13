@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:text="List of Residents in your Building"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

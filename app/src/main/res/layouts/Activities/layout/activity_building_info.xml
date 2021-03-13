@@ -37,7 +37,9 @@
                 android:padding="5dp"
                 android:text="Al Burj Al Abiad"
                 android:textAlignment="textEnd"
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#324e7b" />
 
             <TextView
                 android:id="@+id/numberOfFloors"
@@ -55,7 +57,10 @@
                 android:padding="5dp"
                 android:text="5"
                 android:textAlignment="textEnd"
-                android:textSize="18sp" />
+
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#324e7b"/>
 
             <TextView
                 android:id="@+id/buildingLocation"
@@ -74,9 +79,9 @@
                 android:text="Aramoun, Mount Lebanon"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="#FF0404"
-                android:textSize="18sp"
-                android:textStyle="italic" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                android:textColor="#324e7b"/>
 
             <TextView
                 android:id="@+id/occupiedApartments"
@@ -94,7 +99,10 @@
                 android:padding="5dp"
                 android:text="5/15"
                 android:textAlignment="textEnd"
-                android:textSize="18sp" />
+
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#324e7b"/>
 
             <TextView
                 android:id="@+id/endemicBuilding"
@@ -112,7 +120,9 @@
                 android:padding="5dp"
                 android:text="No"
                 android:textAlignment="textEnd"
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#324e7b" />
 
             <Button
                 android:id="@+id/chooseBuilding"
@@ -120,12 +130,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="41dp"
-                android:background="@drawable/rounded_corners_only"
                 android:onClick="chooseBuilding"
                 android:padding="11dp"
                 android:text="Choose Building"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/rounded_corners"
+                android:textColor="#000"
+                android:textSize="19sp"
+                android:textStyle="bold"
+
+                />
 
 
         </LinearLayout>

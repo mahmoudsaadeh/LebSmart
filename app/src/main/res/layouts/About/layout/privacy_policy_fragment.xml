@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="11dp"
         android:text="Privacy Policy:"
-        android:textColor="#000000"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

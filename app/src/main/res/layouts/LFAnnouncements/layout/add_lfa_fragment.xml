@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
-        android:text="Add a Lost/Found announcement:"
+        android:text="Add a Lost/Found Announcement:"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -24,9 +24,9 @@
         android:layout_marginTop="17dp"
         android:padding="5dp"
         android:text="Lost/Found something within:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textColor="#324e7b"
+        android:textSize="20sp"
+        android:textStyle="bold"  />
 
     <RadioGroup
         android:id="@+id/lfaWithinRadioGroup"
@@ -42,18 +42,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="7dp"
-            android:text="Your Building" />
+            android:buttonTint="#324e7b"
+            android:textColor="#324e7b"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="Your Building"/>
 
         <RadioButton
             android:id="@+id/radioButtonSmartCityLfa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="7dp"
-            android:text="The Smart City" />
+            android:text="The Smart City"
+            android:buttonTint="#324e7b"
+            android:textColor="#324e7b"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            />
 
     </RadioGroup>
 
     <EditText
+        android:textStyle="bold
+"
         android:id="@+id/lfaTitle"
         android:layout_width="377dp"
         android:layout_height="wrap_content"
@@ -62,25 +73,43 @@
         android:ems="10"
         android:hint="Title"
         android:inputType="textPersonName"
-        android:maxLength="31" />
+        android:maxLength="31"
+        android:paddingLeft="11dp"
+        android:paddingTop="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="6dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/edit_text_design"/>
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/lfaDescription"
         android:layout_width="377dp"
-        android:layout_height="wrap_content"
+        android:layout_height="76dp"
         android:layout_gravity="center"
         android:layout_marginTop="17dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/edit_text_design"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Description"
-        android:inputType="textMultiLine" />
+        android:hint="Description..."
+        android:inputType="textMultiLine"
+        android:paddingLeft="11dp"
+        android:paddingTop="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="6dp" />
 
     <Button
         android:id="@+id/addLFAButton"
-        android:layout_width="wrap_content"
+        android:layout_width="109dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="47dp"
         android:layout_marginBottom="11dp"
-        android:text="Add LFA" />
+
+        android:text="Add LFA"
+        android:background="@drawable/rounded_corners"
+        android:textColor="#000"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 </LinearLayout>

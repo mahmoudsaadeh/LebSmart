@@ -31,7 +31,10 @@
             android:layout_marginTop="17dp"
             android:padding="5dp"
             android:text="Problem within:"
-            android:textSize="18sp" />
+
+            android:textSize="19sp"
+            android:textColor="#324e7b"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:id="@+id/problemWithinRadioGroup"
@@ -47,14 +50,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Your Building" />
+                android:text="Your Building"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonSmartCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="The Smart City" />
+                android:text="The Smart City"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
         </RadioGroup>
 
@@ -65,7 +76,9 @@
             android:layout_marginTop="17dp"
             android:padding="5dp"
             android:text="Problem in:"
-            android:textSize="18sp" />
+            android:textSize="19sp"
+            android:textColor="#324e7b"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,28 +98,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:text="Electricity" />
+                    android:text="Electricity"
+                    android:buttonTint="#324e7b"
+                    android:textColor="#324e7b"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonWater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:text="Water" />
+                    android:text="Water"
+                    android:buttonTint="#324e7b"
+                    android:textColor="#324e7b"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonSanitation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:text="Sanitation" />
+                    android:text="Sanitation"
+                    android:buttonTint="#324e7b"
+                    android:textColor="#324e7b"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonBS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:text="Building Services" />
+                    android:text="Building Services"
+                    android:buttonTint="#324e7b"
+                    android:textColor="#324e7b"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
 
             </RadioGroup>
 
@@ -157,26 +186,41 @@
             android:layout_marginTop="11dp"
             android:padding="5dp"
             android:text="Problem description:"
-            android:textSize="18sp" />
+
+            android:textSize="19sp"
+            android:textColor="#324e7b"
+            android:textStyle="bold"/>
 
         <EditText
+
             android:id="@+id/problemDescriptionET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:textStyle="bold"
+            android:background="@drawable/edit_text_design"
             android:ems="10"
             android:gravity="start|top"
             android:hint="Enter description..."
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp" />
 
         <Button
             android:id="@+id/reportProblemBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="122dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="51dp"
-            android:text="report" />
+            android:background="@drawable/rounded_corners"
+            android:text="report"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

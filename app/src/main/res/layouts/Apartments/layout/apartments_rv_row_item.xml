@@ -41,6 +41,7 @@
                 android:id="@+id/expandableLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="#DEF5FF"
                 android:shrinkColumns="0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:text="State: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -66,8 +67,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rent / Sale"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -83,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:text="Area: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -91,8 +92,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Y m^2"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
 
                 </TableRow>
 
@@ -108,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:text="Price: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -116,8 +117,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$50000"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -133,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:text="Owner's name: "
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -141,8 +142,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mahmoud Saadeh"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -158,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:text="Owner's phone:"
-                        android:textSize="18sp"
+                        android:textSize="21sp"
                         android:textStyle="bold|italic" />
 
                     <TextView
@@ -166,8 +167,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="78-888741"
-                        android:textColor="#009688"
-                        android:textSize="18sp" />
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
 
                 </TableRow>
 

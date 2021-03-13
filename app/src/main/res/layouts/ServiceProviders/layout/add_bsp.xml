@@ -30,10 +30,18 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:layout_marginBottom="11dp"
+
             android:ems="10"
             android:hint="Name"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_design"
+            android:textStyle="bold"
+            />
 
         <EditText
             android:id="@+id/spPhoneET"
@@ -44,7 +52,14 @@
             android:ems="10"
             android:hint="Phone"
             android:inputType="number"
-            android:maxLength="8" />
+            android:maxLength="8"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+
+            android:background="@drawable/edit_text_design"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/spPlaceOfResidenceET"
@@ -54,7 +69,15 @@
             android:layout_marginBottom="15dp"
             android:ems="10"
             android:hint="Place of Residence"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:paddingLeft="11dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp"
+            android:background="@drawable/edit_text_design"
+            android:textStyle="bold"
+
+            />
 
         <TextView
             android:id="@+id/spJobTV"
@@ -63,7 +86,8 @@
             android:layout_marginStart="7dp"
             android:layout_marginBottom="11dp"
             android:text="Select a Job:"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:id="@+id/spRadioGroup"
@@ -78,42 +102,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Electrician" />
+                android:text="Electrician"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonCarpenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Carpenter" />
+                android:text="Carpenter"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonPainter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Painter" />
+                android:text="Painter"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonPlumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Plumber" />
+                android:text="Plumber"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonBlacksmith"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Blacksmith" />
+                android:text="Blacksmith"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButtonOther"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="7dp"
-                android:text="Other" />
+                android:text="Other"
+                />
 
         </RadioGroup>
 
@@ -135,7 +180,8 @@
             android:layout_marginStart="7dp"
             android:layout_marginBottom="11dp"
             android:text="Rate the SP:"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <RatingBar
             android:id="@+id/spRatingBar"

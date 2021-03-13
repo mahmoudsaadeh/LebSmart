@@ -21,6 +21,7 @@
             android:layout_marginTop="17dp"
             android:switchPadding="165dp"
             android:text="Fire Notifications"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -32,6 +33,7 @@
             android:layout_marginTop="17dp"
             android:switchPadding="129dp"
             android:text="Weather Notifications"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 

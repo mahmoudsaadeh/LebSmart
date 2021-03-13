@@ -41,9 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rate us:"
-            android:textColor="#039E09"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="25sp"
+            android:textColor="#324e7b"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -58,35 +58,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="17dp"
-                android:text="1" />
+                android:text="1"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="17dp"
-                android:text="2" />
+                android:text="2"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="17dp"
-                android:text="3" />
+                android:text="3"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="17dp"
-                android:text="4" />
+                android:text="4"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <RadioButton
                 android:id="@+id/radioButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="17dp"
-                android:text="5" />
+                android:text="5"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
         </RadioGroup>
 
@@ -96,11 +117,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:text="Write a Review:"
-            android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:textColor="#324e7b" />
 
         <EditText
+            android:textStyle="bold"
             android:id="@+id/reviewET"
             android:layout_width="match_parent"
             android:layout_height="377dp"
@@ -110,7 +132,7 @@
             android:background="@drawable/edit_text_design"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Write a review"
+            android:hint="Review..."
             android:inputType="textMultiLine"
             android:paddingStart="11dp"
             android:paddingTop="7dp"
