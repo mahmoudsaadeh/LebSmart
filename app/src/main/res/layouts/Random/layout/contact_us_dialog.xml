@@ -35,7 +35,7 @@
         android:layout_marginBottom="7dp"
         android:text="lebsmart20@gmail.com"
         android:textAlignment="center"
-        android:textColor="#FD0404"
+        android:textColor="#707070"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
 
