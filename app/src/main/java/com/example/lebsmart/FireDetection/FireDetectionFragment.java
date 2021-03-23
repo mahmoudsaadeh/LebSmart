@@ -33,21 +33,23 @@ public class FireDetectionFragment extends Fragment {
 
         root = (ViewGroup) inflater.inflate(R.layout.fire_detection_fragment, container, false);
         progressDialog = new ProgressDialog(getActivity());
-        CommonMethods.displayLoadingScreen(progressDialog);
+        //CommonMethods.displayLoadingScreen(progressDialog);
         fireWithinBuilding=root.findViewById(R.id.lastFDInUrBuildingDT);
         fireWithinSmartCity=root.findViewById(R.id.lastFDWithinSCDTP);
         updateFireInfo();
-        CommonMethods.dismissLoadingScreen(progressDialog);
+        //CommonMethods.dismissLoadingScreen(progressDialog);
 
         return root;
     }
     public void updateFireInfo(){
+        CommonMethods.displayLoadingScreen(progressDialog);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Flame").child(CheckApartmentsFragment.getUserBuilding);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String lfdB=snapshot.child("last flame detected").getValue().toString();
                 fireWithinBuilding.setText(lfdB.replace("-","/"));
+                CommonMethods.dismissLoadingScreen(progressDialog);
             }
 
             @Override

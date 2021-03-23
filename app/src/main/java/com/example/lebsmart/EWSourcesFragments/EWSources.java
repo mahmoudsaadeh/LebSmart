@@ -39,14 +39,15 @@ public class EWSources extends Fragment {
         electricitySource=root.findViewById(R.id.electricitySource);
         waterSource=root.findViewById(R.id.waterSource);
         waterLevel=root.findViewById(R.id.waterLevel);
-       progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
        //CommonMethods.displayLoadingScreen(progressDialog);
         Date date = new Date(); // This object contains the current date value
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         today=formatter.format(date).split(" ",2)[0];
         getElectricitySource();
         getWaterSource();
-        //CommonMethods.dismissLoadingScreen(progressDialog);
+        //
+        // CommonMethods.dismissLoadingScreen(progressDialog);
         return root;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -109,7 +110,8 @@ public class EWSources extends Fragment {
                         governmentLevel=snapshot.child("water level").getValue().toString();
                         if(governmentExistence.equalsIgnoreCase("yes")){
                             waterLevel.setText(governmentLevel.substring(0,4)+"%");
-                            waterSource.setText("Government");}
+                            waterSource.setText("Government");
+                        }
                         else{
                             DatabaseReference reference3 = reference2.child("distributor");
                         reference3.addValueEventListener(new ValueEventListener() {
@@ -127,7 +129,8 @@ public class EWSources extends Fragment {
                                     waterLevel.setText("0.00 %");
 
                                 }
-                                CommonMethods.dismissLoadingScreen(progressDialog);}
+                                CommonMethods.dismissLoadingScreen(progressDialog);
+                            }
 
 
 
