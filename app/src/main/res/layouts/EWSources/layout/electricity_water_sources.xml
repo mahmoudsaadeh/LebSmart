@@ -35,16 +35,6 @@
             android:textStyle="italic|bold"
             android:textColor="#324e7b"/>
 
-        <Button
-            android:id="@+id/checkElectricity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:text="Check electricity source"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:background="@drawable/rounded_corners_light_blue"/>
-
         <TextView
             android:id="@+id/waterTV"
             android:layout_width="match_parent"
@@ -64,16 +54,25 @@
             android:textSize="18sp"
             android:textStyle="italic|bold"
             android:textColor="#324e7b" />
-
-        <Button
-            android:id="@+id/checkWater"
+        <TextView
+            android:id="@+id/waterLTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:text="Check water source"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:background="@drawable/rounded_corners_light_blue"/>
+            android:layout_marginTop="77dp"
+            android:text="Water Level:"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/waterLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:gravity="end"
+            android:text="Water level shown here"
+            android:textColor="#324e7b"
+            android:textSize="18sp"
+            android:textStyle="italic|bold" />
 
 
     </LinearLayout>

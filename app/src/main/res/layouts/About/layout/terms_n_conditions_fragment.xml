@@ -5,17 +5,83 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textViewz"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="11dp"
-        android:text="Terms &#38; Conditions:"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15px">
+
+            <TextView
+                android:id="@+id/termsCondsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="11dp"
+                android:text="@string/termsCondsTextView"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/termsCondsTVContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/termsCondsTVContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/termsChangesTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:paddingLeft="11dp"
+                android:text="@string/termsChangesTV"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/termsChangesTVContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/termsChangesTVContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/contactUsTCTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:paddingLeft="11dp"
+                android:text="@string/contactUsTCTV"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/contactUsTCTVContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/contactUsTCTVContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

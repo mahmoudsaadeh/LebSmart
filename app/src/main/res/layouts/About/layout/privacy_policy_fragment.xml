@@ -5,17 +5,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="11dp"
-        android:text="Privacy Policy:"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15px">
+
+            <TextView
+                android:id="@+id/privacyPolicyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="11dp"
+                android:text="@string/privacyPolicyTextView"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                />
+
+            <TextView
+                android:id="@+id/ppContentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/ppContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/securityTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:paddingLeft="11dp"
+                android:text="@string/security"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/securityContentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/securityContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/changesToPPTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:paddingLeft="11dp"
+                android:text="@string/changesToPP"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/changesToPPContentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/changesToPPContent"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/contactUsTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:paddingLeft="11dp"
+                android:text="@string/contactUs"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/contactUsContentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21px"
+                android:lineSpacingExtra="8sp"
+                android:padding="15dp"
+                android:text="@string/contactUsContent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
