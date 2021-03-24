@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.example.lebsmart.Activities.BuildingsListActivity;
+import com.example.lebsmart.Others.deleteProfileDialog;
 import com.example.lebsmart.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,9 +26,8 @@ public class MyProfileFragment extends Fragment {
     ViewGroup root;
 
     ProgressDialog progressDialog;
-
     TextView fullNameContent, emailContent, phoneMPContent, buildingContent, userTypeContent;
-
+    Button deleteProfile;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class MyProfileFragment extends Fragment {
         phoneMPContent = root.findViewById(R.id.phoneMPContent);
         buildingContent = root.findViewById(R.id.buildingContent);
         userTypeContent = root.findViewById(R.id.userTypeContent);
-
+        deleteProfile=(Button) root.findViewById(R.id.deleteProfileBtn);
         progressDialog = new ProgressDialog(getActivity());
 
         getProfileInfo();
@@ -75,7 +74,20 @@ public class MyProfileFragment extends Fragment {
             });
         }
 
+    deleteProfile.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            openDialog();
+        }
+    });
+    }
+    public void openDialog(){
+        deleteProfileDialog dialog = new deleteProfileDialog();
+
+        dialog.show(getFragmentManager(),"Delete Profile Dialog");
+
+
+
 
     }
-
 }
