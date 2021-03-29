@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.lebsmart.Activities.BuildingsListActivity;
 import com.example.lebsmart.Activities.LoginActivity;
 import com.example.lebsmart.Activities.MainScreenActivity;
+import com.example.lebsmart.Activities.ResetPasswordActivity;
 import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,7 +48,7 @@ public class LoginTabFragment extends Fragment {
     ProgressButton progressButton;
 
     FirebaseAuth mAuth;
-
+    TextView forgotPassword;
     //public static SharedPreferences sp;
 
     FloatingActionButton floatingActionButton;
@@ -61,7 +63,7 @@ public class LoginTabFragment extends Fragment {
         password = root.findViewById(R.id.passwordLogin);
         view = root.findViewById(R.id.progressButtonInclude);
         floatingActionButton = root.findViewById(R.id.floatingActionButton);
-
+        forgotPassword=root.findViewById(R.id.forgotPassword);
         email.setAlpha(alpha);
         password.setAlpha(alpha);
         view.setAlpha(alpha);
@@ -155,6 +157,14 @@ public class LoginTabFragment extends Fragment {
 
 
 
+            }
+        });
+        forgotPassword.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getActivity(), ResetPasswordActivity.class);
+                startActivity(intent1);
             }
         });
 
