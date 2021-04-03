@@ -53,6 +53,11 @@
             android:icon="@drawable/ic_add_building"
             android:title="Add Building"
             android:visible="false"/>
+        <item
+            android:id="@+id/verify_user"
+            android:icon="@drawable/ic_verify_user"
+            android:title="Verify a User"
+            android:visible="false"/>
 
 
     </group>

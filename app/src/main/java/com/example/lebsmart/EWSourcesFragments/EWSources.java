@@ -2,10 +2,12 @@ package com.example.lebsmart.EWSourcesFragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,30 +65,40 @@ public class EWSources extends Fragment {
                 reference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String source="";
-                        String government=snapshot.child("government").getValue().toString();
-                        String distributor=snapshot.child("distributor").getValue().toString();
-                        if(government.equalsIgnoreCase("on")){
-                            source="Government";
+                        if (snapshot.exists()) {
+                            String source="";
+                            String government=snapshot.child("government").getValue().toString();
+                            String distributor=snapshot.child("distributor").getValue().toString();
+                            if(government.equalsIgnoreCase("on")){
+                                source="Government";
+                            }
+                            else if(distributor.equalsIgnoreCase("on")){
+                                source="Distributor";
+                            }
+                            else source="Power Outage!";
+                            electricitySource.setText(source);
+
+                            CommonMethods.dismissLoadingScreen(progressDialog);
                         }
-                        else if(distributor.equalsIgnoreCase("on")){
-                            source="Distributor";
+                        else {
+                            Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
+                            CommonMethods.dismissLoadingScreen(progressDialog);
                         }
-                        else source="Power Outage!";
-                        electricitySource.setText(source);
 
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.i("db error", error.getMessage());
+                        CommonMethods.dismissLoadingScreen(progressDialog);
                     }
                 });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.i("db error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
             }
         });
 
@@ -105,41 +117,47 @@ public class EWSources extends Fragment {
                 reference2.child("government").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String governmentExistence,governmentLevel;
-                        governmentExistence=snapshot.child("water existence").getValue().toString();
-                        governmentLevel=snapshot.child("water level").getValue().toString();
-                        if(governmentExistence.equalsIgnoreCase("yes")){
-                            waterLevel.setText(governmentLevel.substring(0,4)+"%");
-                            waterSource.setText("Government");
+                        if (snapshot.exists()) {
+                            String governmentExistence,governmentLevel;
+                            governmentExistence=snapshot.child("water existence").getValue().toString();
+                            governmentLevel=snapshot.child("water level").getValue().toString();
+                            if(governmentExistence.equalsIgnoreCase("yes")){
+                                waterLevel.setText(governmentLevel.substring(0,4)+"%");
+                                waterSource.setText("Government");
+                            }
+                            else {
+                                DatabaseReference reference3 = reference2.child("distributor");
+                                reference3.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String distributorExistence, distributorLevel;
+                                        distributorExistence = snapshot.child("water existence").getValue().toString();
+                                        distributorLevel = snapshot.child("water level").getValue().toString();
+
+                                        if (distributorExistence.equalsIgnoreCase("yes")) {
+                                            waterSource.setText("Distributor");
+                                            waterLevel.setText(distributorLevel.substring(0, 4) + "%");
+                                        } else {
+                                            waterSource.setText("Water Outage!");
+                                            waterLevel.setText("0.00 %");
+
+                                        }
+                                        CommonMethods.dismissLoadingScreen(progressDialog);
+                                    }
+
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.i("db error", error.getMessage());
+                                    }
+                                });
+                            }
+
+                            CommonMethods.dismissLoadingScreen(progressDialog);
                         }
-                        else{
-                            DatabaseReference reference3 = reference2.child("distributor");
-                        reference3.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String distributorExistence,distributorLevel;
-                                distributorExistence=snapshot.child("water existence").getValue().toString();
-                                distributorLevel=snapshot.child("water level").getValue().toString();
-                                if(distributorExistence.equalsIgnoreCase("yes")){
-                                    waterSource.setText("Distributor");
-                                    waterLevel.setText(distributorLevel.substring(0,4)+"%");
-                                }
-                                else{
-                                    waterSource.setText("Water Outage!");
-                                    waterLevel.setText("0.00 %");
-
-                                }
-                                CommonMethods.dismissLoadingScreen(progressDialog);
-                            }
-
-
-
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        else {
+                            Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
+                            CommonMethods.dismissLoadingScreen(progressDialog);
                         }
 
                     }
@@ -147,7 +165,8 @@ public class EWSources extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.i("db error", error.getMessage());
+                        CommonMethods.dismissLoadingScreen(progressDialog);
                     }
 
                 });
@@ -157,7 +176,8 @@ public class EWSources extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.i("db error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
             }
         });
 

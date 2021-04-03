@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/editProfileTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="92dp"
-        android:text="Edit Your Profile"
-        android:textColor="#324e7b"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="11dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="17dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfileTV">
+        android:paddingTop="17dp">
+
+        <TextView
+            android:id="@+id/editProfileTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:text="Edit Your Profile"
+            android:textColor="#324e7b"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/fullNameEP"
@@ -47,7 +35,7 @@
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
             android:paddingBottom="11dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/phoneEP"
@@ -63,10 +51,9 @@
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
             android:paddingBottom="11dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
-            android:textStyle="bold"
             android:id="@+id/emailEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
@@ -78,10 +65,10 @@
             android:paddingStart="17dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
-            android:paddingBottom="11dp" />
+            android:paddingBottom="11dp"
+            android:textStyle="bold" />
 
         <EditText
-            android:textStyle="bold"
             android:id="@+id/oldPasswordEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
@@ -93,10 +80,10 @@
             android:paddingStart="17dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
-            android:paddingBottom="11dp" />
+            android:paddingBottom="11dp"
+            android:textStyle="bold" />
 
         <EditText
-            android:textStyle="bold"
             android:id="@+id/passwordEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
@@ -108,10 +95,10 @@
             android:paddingStart="17dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
-            android:paddingBottom="11dp" />
+            android:paddingBottom="11dp"
+            android:textStyle="bold" />
 
         <EditText
-            android:textStyle="bold"
             android:id="@+id/confirmPasswordEP"
             android:layout_width="355dp"
             android:layout_height="wrap_content"
@@ -123,7 +110,8 @@
             android:paddingStart="17dp"
             android:paddingTop="11dp"
             android:paddingEnd="5dp"
-            android:paddingBottom="11dp" />
+            android:paddingBottom="11dp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/radioGroupEditProfile"
@@ -136,21 +124,21 @@
                 android:id="@+id/radioButtonCommitteeEP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Committee member"
                 android:buttonTint="#324e7b"
+                android:text="Committee member"
                 android:textColor="#324e7b"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/radioButtonNormalResidentEP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Normal resident"
                 android:buttonTint="#324e7b"
+                android:text="Normal resident"
                 android:textColor="#324e7b"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </RadioGroup>
 
@@ -160,13 +148,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="11dp"
 
-            android:padding="11dp"
-            android:text="Edit Profile"
-
             android:background="@drawable/rounded_corners"
+            android:padding="11dp"
+
+            android:text="Edit Profile"
             android:textColor="#000"
             android:textSize="19sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

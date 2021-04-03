@@ -2,10 +2,12 @@ package com.example.lebsmart.FireDetection;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,28 +49,44 @@ public class FireDetectionFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String lfdB=snapshot.child("last flame detected").getValue().toString();
-                fireWithinBuilding.setText(lfdB.replace("-","/"));
-                CommonMethods.dismissLoadingScreen(progressDialog);
+                if (snapshot.exists()) {
+                    String lfdB=snapshot.child("last flame detected").getValue().toString();
+                    fireWithinBuilding.setText(lfdB.replace("-","/"));
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
+                else {
+                    Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.i("db error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
             }
         });
+
+
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Flame").child("last flame detected");
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String building=snapshot.child("building").getValue().toString();
-                String date=snapshot.child("date").getValue().toString().replace("-","/");
-                fireWithinSmartCity.setText(building+" building, \non "+date);
+                if (snapshot.exists()) {
+                    String building=snapshot.child("building").getValue().toString();
+                    String date=snapshot.child("date").getValue().toString().replace("-","/");
+                    fireWithinSmartCity.setText(building+" building, \non "+date);
+                }
+                else {
+                    Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
+                    CommonMethods.dismissLoadingScreen(progressDialog);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.i("db error", error.getMessage());
+                CommonMethods.dismissLoadingScreen(progressDialog);
             }
         });
 
