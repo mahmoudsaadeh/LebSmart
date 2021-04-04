@@ -24,14 +24,21 @@
             android:layout_marginBottom="17dp"
             android:text="Your account is not verified yet! For any issues, please do not hesitate to contact us at lebsmart20@gmail.com in order to verify your account and thus to benefit from our services."
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="12pt"
+            android:textStyle="bold|italic"
+            android:paddingBottom="50px"
+            />
 
         <Button
             android:id="@+id/logoutNV"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="Logout" />
+
+            android:background="@drawable/rounded_corners"
+            android:text="Logout"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

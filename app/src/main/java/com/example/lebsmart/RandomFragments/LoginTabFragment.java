@@ -89,7 +89,7 @@ public class LoginTabFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CommonMethods.hideSoftKeyboard(getActivity());
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.contact_us_dialog, null);
 
@@ -118,6 +118,7 @@ public class LoginTabFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommonMethods.hideSoftKeyboard(getActivity());
                 progressButton = new ProgressButton(getContext(), view);
                 progressButton.buttonActivated();
 
