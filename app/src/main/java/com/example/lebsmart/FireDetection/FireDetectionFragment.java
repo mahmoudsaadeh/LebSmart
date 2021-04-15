@@ -55,6 +55,7 @@ public class FireDetectionFragment extends Fragment {
                     CommonMethods.dismissLoadingScreen(progressDialog);
                 }
                 else {
+                    fireWithinBuilding.setText("There was no fire detected!");
                     Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
                     CommonMethods.dismissLoadingScreen(progressDialog);
                 }
@@ -79,6 +80,7 @@ public class FireDetectionFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(getActivity(), "No data found.", Toast.LENGTH_SHORT).show();
+                    fireWithinSmartCity.setText("There was no fire detected!");
                     CommonMethods.dismissLoadingScreen(progressDialog);
                 }
             }
