@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
+
         android:paddingTop="5dp"
         android:paddingBottom="3dp"
         android:text="Welcome to LebSmart!"
@@ -26,8 +26,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="7dp"
-        android:text="lebsmart20@gmail.com" />
+
+        android:text="lebsmart20@gmail.com"
+        android:textStyle="bold|italic" />
 
 
 </LinearLayout>

@@ -67,7 +67,9 @@
             android:layout_marginStart="7dp"
             android:layout_marginBottom="11dp"
             android:text="Announcement Type:"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
         <RadioGroup
             android:id="@+id/committeeRadioGroup"

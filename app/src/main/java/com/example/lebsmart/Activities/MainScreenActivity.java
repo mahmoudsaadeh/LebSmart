@@ -24,6 +24,7 @@ import com.example.lebsmart.About.EditProfileFragment;
 import com.example.lebsmart.About.ListOfResidentsFragment;
 import com.example.lebsmart.About.PrivacyPolicyFragment;
 import com.example.lebsmart.About.TermsNConditionsFragment;
+import com.example.lebsmart.About.VerifyUserFragment;
 import com.example.lebsmart.BestServiceProviders.BSPFragment;
 import com.example.lebsmart.CommitteeDR.CommitteeDRsFragment;
 import com.example.lebsmart.Covid19.Covid19Fragment;
@@ -95,6 +96,7 @@ public class MainScreenActivity extends AppCompatActivity {
             if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("w1bTnJ8UP5PJyxpy4WaLF76oz9y2")) {
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.add_building).setVisible(true);
+                nav_Menu.findItem(R.id.verify_user).setVisible(true);
             }
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications")
@@ -190,6 +192,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new AddBuildingFragment()).commit();
                         break;
+                    case R.id.verify_user:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new VerifyUserFragment()).commit();
+                        break;
                     case R.id.residentsList:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new ListOfResidentsFragment()).commit();
@@ -238,7 +244,7 @@ public class MainScreenActivity extends AppCompatActivity {
             //finishAffinity();
 
             startActivity(intent);
-            //finish();
+            finish();
             //finishAndRemoveTask();
         }
         else {
@@ -251,6 +257,7 @@ public class MainScreenActivity extends AppCompatActivity {
             //finishAffinity();
 
             startActivity(intent);
+            finish();
         }
     }
 

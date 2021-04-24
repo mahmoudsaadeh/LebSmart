@@ -252,8 +252,6 @@ public class SignUpTabFragment extends Fragment {
             setPersonType(personType);
         }
 
-
-
         if (personTypeString.equals("Committee member")) {
             Log.i("1", "entered");
             checkNumberOfCommitteeMembers();

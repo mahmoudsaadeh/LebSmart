@@ -217,7 +217,9 @@ public class AnnouncementsActivity extends AppCompatActivity {
                         committeeRVA.notifyItemRemoved(position);
 
                         final DatabaseReference reference = FirebaseDatabase.getInstance()
-                                .getReference("CommitteeDRs").child(announcementType)
+                                .getReference("CommitteeDRs")
+                                .child(CheckApartmentsFragment.getUserBuilding)
+                                .child(announcementType)
                                 .child(addedBy.get(position));
                         reference.removeValue();
 
@@ -230,7 +232,9 @@ public class AnnouncementsActivity extends AppCompatActivity {
 
                                         DatabaseReference reference1 = FirebaseDatabase.getInstance()
                                                 .getReference("CommitteeDRs")
-                                                .child(announcementType).child(addedBy.get(position));
+                                                .child(CheckApartmentsFragment.getUserBuilding)
+                                                .child(announcementType)
+                                                .child(addedBy.get(position));
                                         reference1.setValue(reAddDeletedDR).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

@@ -158,6 +158,10 @@
                 android:layout_height="wrap_content"
                 android:padding="7dp"
                 android:text="Other"
+                android:buttonTint="#324e7b"
+                android:textColor="#324e7b"
+                android:textStyle="bold"
+                android:textSize="15sp"
                 />
 
         </RadioGroup>

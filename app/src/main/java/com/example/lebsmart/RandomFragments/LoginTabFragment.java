@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.lebsmart.Activities.BuildingsListActivity;
 import com.example.lebsmart.Activities.LoginActivity;
 import com.example.lebsmart.Activities.MainScreenActivity;
+import com.example.lebsmart.Activities.NotVerifiedUserActivity;
 import com.example.lebsmart.Activities.ResetPasswordActivity;
 import com.example.lebsmart.Others.ProgressButton;
 import com.example.lebsmart.R;
@@ -32,6 +33,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -83,7 +89,7 @@ public class LoginTabFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CommonMethods.hideSoftKeyboard(getActivity());
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.contact_us_dialog, null);
 
@@ -112,6 +118,7 @@ public class LoginTabFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommonMethods.hideSoftKeyboard(getActivity());
                 progressButton = new ProgressButton(getContext(), view);
                 progressButton.buttonActivated();
 
@@ -172,10 +179,12 @@ public class LoginTabFragment extends Fragment {
 
     } // end onCreateView
 
+    String email2, pass;
+
     public void login() {
-        CommonMethods.hideSoftKeyboard(getActivity());
-        String email2 = CommonMethods.getEmail(email);
-        String pass = CommonMethods.getPassword(password);
+        //CommonMethods.hideSoftKeyboard(getActivity());
+        email2 = CommonMethods.getEmail(email);
+        pass = CommonMethods.getPassword(password);
 
         if(CommonMethods.checkIfEmpty(email2)) {
             CommonMethods.warning(email, "Email is required!");
@@ -209,35 +218,51 @@ public class LoginTabFragment extends Fragment {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email2, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        /*checkIfUserVerified();
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    assert user != null;
-                    //if (user.isEmailVerified()) {
-                        progressButton.buttonFinished();
+            public void run() {
+                if (userVerified) {*/
+                    mAuth.signInWithEmailAndPassword(email2, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                assert user != null;
 
-                        // add the option where the user should choose a building when signing up
-                        // he can add only one additional building in case he didn't find his
-                        //
+                                if (user.isEmailVerified()) {
+                                    progressButton.buttonFinished();
 
-                    goToMainActivity();
-                    LoginActivity.sp.edit().putBoolean("loggedin",true).apply();
-                    //}
-                    /*else {
-                        user.sendEmailVerification();
-                        Toast.makeText(getActivity(), "Please check your email to verify your account.", Toast.LENGTH_SHORT).show();
-                    }*/
-                }
+                                    checkIfUserVerified(user);
+
+                                    /*goToMainActivity();
+                                    LoginActivity.sp.edit().putBoolean("loggedin",true).apply();*/
+                                }
+                                else {
+                                    user.sendEmailVerification();
+                                    Toast.makeText(getActivity(), "Please check your email to verify your account.", Toast.LENGTH_SHORT).show();
+                                    progressButton.resetDesign("Login");
+                                    view.setEnabled(true);
+                                }
+                            }
+                            else {
+                                Toast.makeText(getActivity(), "Failed to login! Please check your credentials.", Toast.LENGTH_SHORT).show();
+                                progressButton.resetDesign("Login");
+                                view.setEnabled(true);
+                            }
+                        }
+                    });
+                /*}
                 else {
-                    Toast.makeText(getActivity(), "Failed to login! Please check your credentials.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    Toast.makeText(getActivity(), "Your account is not verified yet!", Toast.LENGTH_SHORT).show();
+                }*/
+           /* }
+        }, 2777);*/
 
-        progressButton.resetDesign("Login");
-        view.setEnabled(true);
+
+
+        /*progressButton.resetDesign("Login");
+        view.setEnabled(true);*/
 
     } // end login method
 
@@ -246,6 +271,65 @@ public class LoginTabFragment extends Fragment {
         //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         getActivity().finish();
+    }
+
+    public void goToNotVerifiedUserActivity() {
+        Intent intent = new Intent(getActivity(), NotVerifiedUserActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+
+    //boolean userVerified;
+
+    public void checkIfUserVerified(final FirebaseUser user1) {
+        //userVerified = false;
+        if (user1 != null) {
+            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("VerifiedUsers");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.child(user1.getUid()).exists()) {
+                        //userVerified = true;
+                        goToMainActivity();
+                        LoginActivity.sp.edit().putBoolean("loggedin",true).apply();
+
+                        progressButton.resetDesign("Login");
+                        view.setEnabled(true);
+                    }
+                    else {
+                        goToNotVerifiedUserActivity();
+                        LoginActivity.sp.edit().putBoolean("loggedin", false).apply();
+
+                        progressButton.resetDesign("Login");
+                        view.setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.i("error getting user data", error.getMessage());
+
+                    progressButton.resetDesign("Login");
+                    view.setEnabled(true);
+                }
+            });
+        }
+
+        else {
+            progressButton.resetDesign("Login");
+            view.setEnabled(true);
+
+            Toast.makeText(getActivity(), "User does not exist!", Toast.LENGTH_SHORT).show();
+        }
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 2111);*/
+
     }
 
 }

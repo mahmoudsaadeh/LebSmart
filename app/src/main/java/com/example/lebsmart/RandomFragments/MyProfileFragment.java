@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.lebsmart.Others.deleteProfileDialog;
+import com.example.lebsmart.Others.DeleteProfileDialog;
 import com.example.lebsmart.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,7 +81,7 @@ public class MyProfileFragment extends Fragment {
     });
     }
     public void openDialog(){
-        deleteProfileDialog dialog = new deleteProfileDialog();
+        DeleteProfileDialog dialog = new DeleteProfileDialog();
 
         dialog.show(getFragmentManager(),"Delete Profile Dialog");
 
