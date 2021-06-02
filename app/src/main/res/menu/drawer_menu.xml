@@ -15,7 +15,7 @@
         <item
             android:id="@+id/elec_water_src"
             android:icon="@drawable/ic_elec_water_src"
-            android:title="Electricity/Water source" />
+            android:title="Electricity/Water Sources" />
         <item
             android:id="@+id/meetings"
             android:icon="@drawable/ic_meetings"
