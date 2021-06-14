@@ -67,7 +67,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     NavigationView navigationView;
 
-    Notifications notifications;
+    //Notifications notifications;
 
     //Switch fireNotificationsSwitch, weatherNotificationsSwitch;
     public static String fireNotis, weatherNotis;
@@ -78,9 +78,9 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         /*fireNotificationsSwitch = findViewById(R.id.fireNotificationsSwitch);
-        weatherNotificationsSwitch = findViewById(R.id.weatherNotificationsSwitch);*/
+        weatherNotificationsSwitch = findViewById(R.id.weatherNotificationsSwitch);
         fireNotis = "";
-        weatherNotis = "";
+        weatherNotis = "";*/
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,7 +99,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 nav_Menu.findItem(R.id.verify_user).setVisible(true);
             }
 
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications")
+            /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications")
                     .child(user.getUid());
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -117,7 +117,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                     Log.i("error", error.getMessage());
                 }
-            });
+            });*/
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -261,7 +261,7 @@ public class MainScreenActivity extends AppCompatActivity {
         }
     }
 
-    public void checkNotificationsDb() {
+    /*public void checkNotificationsDb() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
         reference = reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -293,8 +293,8 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void createNotificationsDb() {
+*/
+  /*  public void createNotificationsDb() {
         // all notis are on by default
         notifications = new Notifications("on", "on");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
@@ -304,8 +304,8 @@ public class MainScreenActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Log.i("notis", "created in db");
-                    /*fireNotificationsSwitch.setChecked(true);
-                    weatherNotificationsSwitch.setChecked(true);*/
+                    //fireNotificationsSwitch.setChecked(true);
+                    //weatherNotificationsSwitch.setChecked(true);
                     weatherNotis = "on";
                     fireNotis = "on";
 
@@ -314,15 +314,15 @@ public class MainScreenActivity extends AppCompatActivity {
                 }
                 else {
                     Log.i("notis", "not created in db!!!");
-                    /*fireNotificationsSwitch.setChecked(false);
-                    weatherNotificationsSwitch.setChecked(false);*/
+                    //fireNotificationsSwitch.setChecked(false);
+                    //weatherNotificationsSwitch.setChecked(false);
                     weatherNotis = "off";
                     fireNotis = "off";
                 }
             }
         });
     }
-
+*/
     /*public void setRepeatingAlarm(String reminderTitle, String reminderContent, int requestCode, int uniqueNotificationId) {
         Intent intent = new Intent(MainScreenActivity.this, NotificationReceiver.class);
         intent.putExtra("reminderTitle", reminderTitle);
