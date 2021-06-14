@@ -204,10 +204,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new WeatherFragment()).commit();
                         break;
-                    case R.id.settings:
+                    /*case R.id.settings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new SettingsFragment()).commit();
-                        break;
+                        break;*/
                     case R.id.covid_19:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new Covid19Fragment()).commit();

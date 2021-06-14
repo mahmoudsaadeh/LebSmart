@@ -58,7 +58,7 @@ public class AddBSPFragment extends Fragment {
 
     ProgressDialog progressDialog;
 
-    String spName, spPhone, spPOR, spJobString, other;
+    String spName, spPhone, spPOR, spJobString, spJobStringOther, other;
     int spJob;
     float spRating;
 
@@ -181,7 +181,7 @@ public class AddBSPFragment extends Fragment {
         spJob = spRadioGroup.getCheckedRadioButtonId();
         spRating = spRatingBar.getRating();
 
-        other = otherET.getText().toString();
+        other = otherET.getText().toString(); // get the type of the SPs job
 
         if (spName.isEmpty()) {
             CommonMethods.warning(spNameET, "SP name is required!");
@@ -240,7 +240,8 @@ public class AddBSPFragment extends Fragment {
                     return;
                 }
                 else {
-                    spJobString = other;
+                    spJobString = "Other";
+                    spJobStringOther = other;
                 }
             }
         }
@@ -302,8 +303,14 @@ public class AddBSPFragment extends Fragment {
     }
 
     public void addSPToDb () {
+        BSPAdd bspAdd;
 
-        BSPAdd bspAdd = new BSPAdd(spName, spPhone, spJobString, spPOR, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        if (spJob == R.id.radioButtonOther) {
+            bspAdd = new BSPAdd(spName, spPhone, spJobStringOther, spPOR, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        }
+        else {
+            bspAdd = new BSPAdd(spName, spPhone, spJobString, spPOR, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        }
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SPs");
         reference = reference.child(spJobString).child(spPhone);
